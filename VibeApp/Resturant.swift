@@ -379,6 +379,21 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
         self.restCollectionView.reloadData()
         return resturantDetails;
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let resturantVC = segue.destination as! ResturantsViewController
+        
+        if segue.identifier == "breakfast"{
+            resturantVC.category = ResturantCategory.breakfast.rawValue
+        }else if segue.identifier == "lunch" {
+            resturantVC.category = ResturantCategory.lunch.rawValue
+        }else if segue.identifier == "dinner" {
+            resturantVC.category = ResturantCategory.dinner.rawValue
+        }
+        else{
+            resturantVC.category = ResturantCategory.coffee.rawValue
+        }
+    }
 }
 
 

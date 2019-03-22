@@ -13,10 +13,20 @@ import MapKit
 import Alamofire
 import FoursquareAPIClient
 import Async
-
+import SVProgressHUD
+enum ResturantCategory: String {
+    case breakfast = "breakfast"
+    case lunch = "lunch"
+    case dinner = "dineer"
+    case coffee = "coffee"
+}
 
 class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate,CLLocationManagerDelegate  {
 
+
+    
+    var category: String?
+    
     @IBOutlet weak var mapview: MKMapView!
     var spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
@@ -41,6 +51,7 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupNavigationBarTitle()
         searchTextField.layer.cornerRadius = 8
         searchTextField.layer.borderWidth = 1
         searchTextField.layer.borderColor = UIColor.black.cgColor
@@ -76,10 +87,36 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         searchTextField.contentVerticalAlignment = .center
        
           //self.secondstimer = Timer.scheduledTimer(timeInterval:5, target: self, selector: #selector(self.UpdateSecondsTimer), userInfo: nil, repeats: true)
-        
-        //self.findNearestResturantsForSquareApi(name:"lunch")
+        SVProgressHUD.show()
+        self.findNearestResturantsForSquareApi(name: category ?? "lunch") {
+            DispatchQueue.main.async {
+                 self.tableView.reloadData()
+                 SVProgressHUD.dismiss()
+            }
+           
+        }
     }
     
+    func setupNavigationBarTitle() {
+        var navTitle = ""
+        switch category {
+        case ResturantCategory.breakfast.rawValue:
+            navTitle = "الإفطار"
+        case ResturantCategory.lunch.rawValue:
+            navTitle = "الغداء"
+        case ResturantCategory.dinner.rawValue:
+            navTitle = "العشاء"
+        case ResturantCategory.coffee.rawValue:
+            navTitle = "المقاهي"
+        default:
+            break
+    }
+     self.title = navTitle
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
     func numberOfSections(in tableView: UITableView) -> Int {
         
         return 1
@@ -88,52 +125,53 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     
     //Set the coordinates to the location and update the pins
     func setupForCurrentLocation(location:CLLocation){
-        
-        let region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_ZOOM_LEVEL, MAP_ZOOM_LEVEL))
-        mapview.setRegion(region, animated: true)
-        
-        var reviewsTexts : String = ""
-        var finalData: [Details] = []
-        combineData(location: location) { (detail) in
-            for items in detail  {
-                
-                reviewsTexts = items.reviewsText
-                
-                let url = "http://services.analysisserver.xyz:8000/?text="+"\(reviewsTexts)"
-                
-                guard let str = url.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed) else {return}
-                guard let data = URLSession.shared.query(address: str) else {return}
-                if let dict = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
-                    //                    print(String(data: data!, encoding: .utf8)!)
-                    let sentiment =  dict!.value(forKey: "sentiment") as! String
-                    //let confidence = dict!.value(forKey: "confidence") as! String
-                    
-                    finalData.append(Details(resturantName: items.resturantName, resturantRating: items.resturantRating, totalRating:items.totalRating, reviewsText: "\(items.reviewsText + "  sentiment: \(sentiment)")", photoLink:items.photoLink))
-                    //print(finalData)
-                    //self.textVew.text = "\(finalData)"
-                    //print(finalData)
-                    DispatchQueue.main.async {
-                        
-                        
-                        do {
-                            let encoder = JSONEncoder()
-                            encoder.outputFormatting = .prettyPrinted
-                            let data = try encoder.encode(finalData)
-                            let final  = (String(data: data, encoding: .utf8)!)
-                            //print(final)
-                            //self.textVew.text = "\(final)"
-                            
-                        } catch let error {
-                            print("error converting to json: \(error)")
-                            
-                        }
-                    }
-                }
-            }
-        }
+     
+//        let region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_ZOOM_LEVEL, MAP_ZOOM_LEVEL))
+//        mapview.setRegion(region, animated: true)
+//
+//        var reviewsTexts : String = ""
+//        var finalData: [Details] = []
+//        combineData(location: location) { (detail) in
+//            for items in detail  {
+//
+//                reviewsTexts = items.reviewsText
+//
+//                let url = "http://services.analysisserver.xyz:8000/?text="+"\(reviewsTexts)"
+//
+//                guard let str = url.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed) else {return}
+//                guard let data = URLSession.shared.query(address: str) else {return}
+//                if let dict = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
+//                    //                    print(String(data: data!, encoding: .utf8)!)
+//                    let sentiment =  dict!.value(forKey: "sentiment") as! String
+//                    //let confidence = dict!.value(forKey: "confidence") as! String
+//
+//                    finalData.append(Details(resturantName: items.resturantName, resturantRating: items.resturantRating, totalRating:items.totalRating, reviewsText: "\(items.reviewsText + "  sentiment: \(sentiment)")", photoLink:items.photoLink))
+//                    //print(finalData)
+//                    //self.textVew.text = "\(finalData)"
+//                    //print(finalData)
+//                    DispatchQueue.main.async {
+//
+//
+//                        do {
+//                            let encoder = JSONEncoder()
+//                            encoder.outputFormatting = .prettyPrinted
+//                            let data = try encoder.encode(finalData)
+//                            let final  = (String(data: data, encoding: .utf8)!)
+//                            //print(final)
+//                            //self.textVew.text = "\(final)"
+//
+//                        } catch let error {
+//                            print("error converting to json: \(error)")
+//
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
    var resturantNamesArray = [String]()
     var logoImages = [String]()
+    /*
     func combineData(location:CLLocation, completetion: @escaping ([Details])->Void){
         
         var dataArray:[Details] = []
@@ -141,7 +179,8 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         guard let searchText = searchTextField.text else {return}
         DispatchQueue.global(qos: .background).async {
             
-            dataArray = self.findNearestResturantsForSquareApi(name:searchText)
+
+            dataArray = self.findNearestResturantsForSquareApi(name:searchText, completion: <#() -> Void#>)
             //print(dataArray)
             dataArray1 = self.findNearestResturantsByGooglePlaces(coord: (location.coordinate))
             
@@ -167,6 +206,7 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
             }
         }
     }
+    */
     
     //Remove all last pins if there and setup new pins
     func setUpPins(locations:[Location])
@@ -278,7 +318,7 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     }
     
     
-    func findNearestResturantsForSquareApi(name:String) -> [Details] {
+    func findNearestResturantsForSquareApi(name:String, completion: @escaping ()-> Void) {
         
         var fName:String = ""
         var fRatingz:Double = 0.0
@@ -286,11 +326,14 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         var fReviewText:String = ""
         var fPhoto:String = ""
         var coordn = CLLocationCoordinate2D()
-        coordn.latitude =  CLLocationDegrees(exactly: 24.770837)!
-        coordn.longitude = CLLocationDegrees(exactly:46.679192)!
+        
+        let currentLocation = locationManager.location
+        coordn.latitude =  CLLocationDegrees(exactly: currentLocation?.coordinate.latitude ?? 24.770837)!
+        coordn.longitude = CLLocationDegrees(exactly:currentLocation?.coordinate.longitude ?? 46.679192)!
         
         
         let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.latitude),\(coordn.longitude)&section=food&v=20160607&intent=\(name)&limit=20&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
+        DispatchQueue.global(qos: .background).async {
         
         let data = URLSession.shared.query(address: url)
         
@@ -362,9 +405,10 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
                 }
             }
         }
-        
+            completion()
+        }
         //print(resturantDetails)
-        return resturantDetails;
+        
     }
     
     
@@ -520,20 +564,20 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return resturantNamesArray.count
+        return resturantDetails.count
     }
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 300
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 200
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RestDetailsCell
         //cell.configureCell(resturant: filtereRes[indexPath.row])
-        cell.resturantName.text = resturantNamesArray[indexPath.row]
-        cell.restBGImage.sd_setImage(with: URL(string: logoImages[indexPath.row]), placeholderImage: UIImage(named: "wao.png"))
+        cell.resturantName.text = resturantDetails[indexPath.row].resturantName
+//        cell.restBGImage.sd_setImage(with: URL(string: logoImages[indexPath.row]), placeholderImage: UIImage(named: "wao.png"))
         return cell
     }
     
