@@ -104,83 +104,83 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
             if CGFloat(last.distance(from: locations[0])) > UPDATE_RESTURANT_RATE          //calculate distance
             {
                 lastLocation = locations[0]
-                setupForCurrentLocation(location: (locations[0]))                       //set up the camera ,pins
+                //setupForCurrentLocation(location: (locations[0]))                       //set up the camera ,pins
             }
             
         }
         else{
-            setupForCurrentLocation(location: (locations[0]))
+           // setupForCurrentLocation(location: (locations[0]))
             lastLocation = locations[0]
         }
         
     }
     
     
-    //Set the coordinates to the location and update the pins
-    func setupForCurrentLocation(location:CLLocation){
-        
-        let region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_ZOOM_LEVEL, MAP_ZOOM_LEVEL))
-        mapview.setRegion(region, animated: true)
-        
-        var reviewsTexts : String = ""
-        var finalData: [Details] = []
-        combineData(location: location) { (detail) in
-            for items in detail  {
-                
-                reviewsTexts = items.reviewsText
-                
-                let url = "http://services.analysisserver.xyz:8000/?text="+"\(reviewsTexts)"
-                
-                guard let str = url.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed) else {return}
-                guard let data = URLSession.shared.query(address: str) else {return}
-                if let dict = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
-                    //                    print(String(data: data!, encoding: .utf8)!)
-                    let sentiment =  dict!.value(forKey: "sentiment") as! String
-                    //let confidence = dict!.value(forKey: "confidence") as! String
-                    
-                    finalData.append(Details(resturantName: items.resturantName, resturantRating: items.resturantRating, totalRating:items.totalRating, reviewsText: "\(items.reviewsText + "  sentiment: \(sentiment)")", photoLink:items.photoLink))
-                    //print(finalData)
-                    //self.textVew.text = "\(finalData)"
-                    //print(finalData)
-                    DispatchQueue.main.async {
-                        
-                        
-                        do {
-                            let encoder = JSONEncoder()
-                            encoder.outputFormatting = .prettyPrinted
-                            let data = try encoder.encode(finalData)
-                            let final  = (String(data: data, encoding: .utf8)!)
-                            
-                            //print(final)
-                            self.textVew.text = "\(final)"
-                            
-                        } catch let error {
-                            print("error converting to json: \(error)")
-                            
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    //Set the coordinates to the location and update the pins
+//    func setupForCurrentLocation(location:CLLocation){
+//
+//        let region = MKCoordinateRegionMake(location.coordinate, MKCoordinateSpanMake(MAP_ZOOM_LEVEL, MAP_ZOOM_LEVEL))
+//        mapview.setRegion(region, animated: true)
+//
+//        var reviewsTexts : String = ""
+//        var finalData: [Details] = []
+//        combineData(location: location) { (detail) in
+//            for items in detail  {
+//
+//                reviewsTexts = items.reviewsText
+//
+//                let url = "http://services.analysisserver.xyz:8000/?text="+"\(reviewsTexts)"
+//
+//                guard let str = url.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed) else {return}
+//                guard let data = URLSession.shared.query(address: str) else {return}
+//                if let dict = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
+//                    //                    print(String(data: data!, encoding: .utf8)!)
+//                    let sentiment =  dict!.value(forKey: "sentiment") as! String
+//                    //let confidence = dict!.value(forKey: "confidence") as! String
+//
+//                    finalData.append(Details(resturantName: items.resturantName, resturantRating: items.resturantRating, totalRating:items.totalRating, reviewsText: "\(items.reviewsText + "  sentiment: \(sentiment)")", photoLink:items.photoLink))
+//                    //print(finalData)
+//                    //self.textVew.text = "\(finalData)"
+//                    //print(finalData)
+//                    DispatchQueue.main.async {
+//
+//                        
+//                        do {
+//                            let encoder = JSONEncoder()
+//                            encoder.outputFormatting = .prettyPrinted
+//                            let data = try encoder.encode(finalData)
+//                            let final  = (String(data: data, encoding: .utf8)!)
+//
+//                            //print(final)
+//                            self.textVew.text = "\(final)"
+//
+//                        } catch let error {
+//                            print("error converting to json: \(error)")
+//
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
     
-    func combineData(location:CLLocation, completetion: @escaping ([Details])->Void){
-        
-        var dataArray:[Details] = []
-        var dataArray1:[Details] = []
-        
-        DispatchQueue.global(qos: .background).async {
-            
-            dataArray = self.findNearestResturantsForSquareApi(coord: (location.coordinate))
-            dataArray1 = self.findNearestResturantsByGooglePlaces(coord: (location.coordinate))
-            
-            dataArray.append(contentsOf: dataArray1)
-            //print(dataArray)
-            completetion(dataArray)
-            
-        }
-    }
-    
+//    func combineData(location:CLLocation, completetion: @escaping ([Details])->Void){
+//        
+//        var dataArray:[Details] = []
+//        var dataArray1:[Details] = []
+//        
+//        DispatchQueue.global(qos: .background).async {
+//            
+//            dataArray = self.findNearestResturantsForSquareApi(coord: (location.coordinate))
+//            dataArray1 = self.findNearestResturantsByGooglePlaces(coord: (location.coordinate))
+//            
+//            dataArray.append(contentsOf: dataArray1)
+//            //print(dataArray)
+//            completetion(dataArray)
+//            
+//        }
+//    }
+//    
     
     //Remove all last pins if there and setup new pins
     func setUpPins(locations:[Location])
@@ -204,97 +204,98 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
         
     }
     
-    func findNearestResturantsByGooglePlaces(coord:CLLocationCoordinate2D) -> [Details]
-    {
-        var resturantDetails:[Details] = []
-        
-        
-        let url = getUrlForResturants(coord: coord)       //get the google places javascript url for the location
-        var locations = [Location]()
-        
-        
-        let data = URLSession.shared.query(address: url)
-        //        print(String(data: data!, encoding: .utf8)!)
-        
-        if data == nil {
-            let alert = UIAlertController(title: NSLocalizedString("Error!", comment: ""), message: NSLocalizedString("There is a problem during fetching info or internet issue.", comment: ""), preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel) { (action) in
-            }
-            
-        }else {
-            
-            if let dict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? Dictionary<String,AnyObject> {
-                
-                if let results = dict?["results"] as? [Dictionary<String,AnyObject>]
-                {
-                    
-                    for result in results
-                    {
-                        
-                        if let geometry = result["geometry"] as? Dictionary<String,AnyObject>,let name = result["name"] as? String,let descr = result["vicinity"] as? String,let rating = result["rating"] as? Double,let totalRatings = result["user_ratings_total"] as? Int,let placeID = result["place_id"] as? String {
-                            
-                            let place_id = placeID
-                            let urlString = "\(DETAILS_PLACE_URL)placeid=\(place_id)&key=\(GOOGLE_API_KEY)"
-                            
-                            let data = URLSession.shared.query(address: urlString)
-                            //print(String(data: data!, encoding: .utf8)!)
-                            if let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
-                                //print(jsonDict)
-                                var textReview:String = ""
-                                if let actorDict = jsonDict!.value(forKey: "result") as? NSDictionary {
-                                    if let actorArray = actorDict.value(forKey: "reviews") as? NSArray {
-                                        
-                                        for i in actorArray{
-                                            if let actorDict1 = i as? NSDictionary {
-                                                if let reviewText = actorDict1.value(forKey: "text") as? String{
-                                                    
-                                                    textReview = reviewText
-                                                }
-                                            }
-                                        }
-                                    }
-                                    //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=PHOT0_REFRENCE_HERE&key=YOUR_API_KEY
-                                    
-                                    if let photos = actorDict.value(forKey: "photos") as? NSArray {
-                                        for i in photos{
-                                            if let dict = i as? NSDictionary {
-                                                if let photoRefrence = dict.value(forKey: "photo_reference") {
-                                                    //print(photoRefrence)
-                                                    
-                                                    let photoURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=\(photoRefrence)&key=\(GOOGLE_API_KEY)"
-                                                    
-                                                    resturantDetails.append(Details(resturantName: name, resturantRating: rating, totalRating: totalRatings, reviewsText: textReview, photoLink: photoURL))
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            if let coord = geometry["location"] as? Dictionary<String,CGFloat>
-                            {
-                                locations.append(Location(title: name,coord: CLLocationCoordinate2D(latitude: CLLocationDegrees(CGFloat(coord["lat"]!)),longitude: CLLocationDegrees(CGFloat(coord["lng"]!))), desc: descr))
-                            }
-                        }
-                    }
-                }
-                //self.setUpPins(locations: locations)
-            }
-            
-            
-        }
-        
-        
-        
-        //print(resturantDetails)
-        return resturantDetails;
-    }
+//    func findNearestResturantsByGooglePlaces(coord:CLLocationCoordinate2D) -> [Details]
+//    {
+//        var resturantDetails:[Details] = []
+//
+//
+//        let url = getUrlForResturants(coord: coord)       //get the google places javascript url for the location
+//        var locations = [Location]()
+//
+//
+//        let data = URLSession.shared.query(address: url)
+//        //        print(String(data: data!, encoding: .utf8)!)
+//
+//        if data == nil {
+//            let alert = UIAlertController(title: NSLocalizedString("Error!", comment: ""), message: NSLocalizedString("There is a problem during fetching info or internet issue.", comment: ""), preferredStyle: .alert)
+//
+//            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel) { (action) in
+//            }
+//
+//        }else {
+//
+//            if let dict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? Dictionary<String,AnyObject> {
+//
+//                if let results = dict?["results"] as? [Dictionary<String,AnyObject>]
+//                {
+//
+//                    for result in results
+//                    {
+//
+//                        if let geometry = result["geometry"] as? Dictionary<String,AnyObject>,let name = result["name"] as? String,let descr = result["vicinity"] as? String,let rating = result["rating"] as? Double,let totalRatings = result["user_ratings_total"] as? Int,let placeID = result["place_id"] as? String {
+//
+//                            let place_id = placeID
+//                            let urlString = "\(DETAILS_PLACE_URL)placeid=\(place_id)&key=\(GOOGLE_API_KEY)"
+//
+//                            let data = URLSession.shared.query(address: urlString)
+//                            //print(String(data: data!, encoding: .utf8)!)
+//                            if let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
+//                                //print(jsonDict)
+//                                var textReview:String = ""
+//                                if let actorDict = jsonDict!.value(forKey: "result") as? NSDictionary {
+//                                    if let actorArray = actorDict.value(forKey: "reviews") as? NSArray {
+//
+//                                        for i in actorArray{
+//                                            if let actorDict1 = i as? NSDictionary {
+//                                                if let reviewText = actorDict1.value(forKey: "text") as? String{
+//
+//                                                    textReview = reviewText
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                    //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=PHOT0_REFRENCE_HERE&key=YOUR_API_KEY
+//
+//                                    if let photos = actorDict.value(forKey: "photos") as? NSArray {
+//                                        for i in photos{
+//                                            if let dict = i as? NSDictionary {
+//                                                if let photoRefrence = dict.value(forKey: "photo_reference") {
+//                                                    //print(photoRefrence)
+//
+//                                                    let photoURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=\(photoRefrence)&key=\(GOOGLE_API_KEY)"
+//
+//                                                    resturantDetails.append(Details(resturantName: name, resturantRating: rating, totalRating: totalRatings, reviewsText: textReview, photoLink: photoURL))
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                            if let coord = geometry["location"] as? Dictionary<String,CGFloat>
+//                            {
+//                                locations.append(Location(title: name,coord: CLLocationCoordinate2D(latitude: CLLocationDegrees(CGFloat(coord["lat"]!)),longitude: CLLocationDegrees(CGFloat(coord["lng"]!))), desc: descr))
+//                            }
+//                        }
+//                    }
+//                }
+//                //self.setUpPins(locations: locations)
+//            }
+//
+//
+//        }
+//
     
+        
+//        //print(resturantDetails)
+//        return resturantDetails;
+//    }
+//    
     
     func findNearestResturantsForSquareApi(coord:CLLocationCoordinate2D) -> [Details] {
         
         var fName:String = ""
+        var fType:String = ""
         var fRatingz:Double = 0.0
         var fTotalRatings:Int = 0
         var fReviewText:String = ""
@@ -330,6 +331,18 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
                                             fName = name
                                             
                                         }
+                                        if let categories = venue.value(forKey: "categories") as? NSArray{
+                                            
+                                            if let details = categories[0] as? NSDictionary{
+                                                if let type = details.value(forKey: "pluralName") as? String{
+                                                    fType = type
+                                                    
+                                                }
+                                            }
+                                            
+                                            
+                                        }
+
                                         
                                         if let rating = venue.value(forKey: "rating") as? Double {
                                             fRatingz = Double(rating/2)
@@ -364,7 +377,7 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
                                             let photoUrl = "https://igx.4sqi.net/img/general/300x500\(suffixx)"
                                             fPhoto = photoUrl
                                             
-                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto))
+                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType))
                                         }
                                     }
                                 }

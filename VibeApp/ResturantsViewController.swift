@@ -170,43 +170,43 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
 //        }
     }
    var resturantNamesArray = [String]()
-    var logoImages = [String]()
-    /*
-    func combineData(location:CLLocation, completetion: @escaping ([Details])->Void){
-        
-        var dataArray:[Details] = []
-        var dataArray1:[Details] = []
-        guard let searchText = searchTextField.text else {return}
-        DispatchQueue.global(qos: .background).async {
-            
-
-            dataArray = self.findNearestResturantsForSquareApi(name:searchText, completion: <#() -> Void#>)
-            //print(dataArray)
-            dataArray1 = self.findNearestResturantsByGooglePlaces(coord: (location.coordinate))
-            
-            dataArray.append(contentsOf: dataArray1)
-            print(dataArray)
-            completetion(dataArray)
-            
-            
-            
-            
-            for i in dataArray {
-                self.resturantNamesArray.append(i.resturantName)
-                self.logoImages.append(i.photoLink)
-                
-                
-                DispatchQueue.main.async {
-                    
-                   self.tableView.reloadData()
-                }
-                
-                
-                //print(i.resturantName)
-            }
-        }
-    }
-    */
+    var logoImages = [UIImage]()
+    
+//    func combineData(location:CLLocation, completetion: @escaping ([Details])->Void){
+//
+//        var dataArray:[Details] = []
+//        var dataArray1:[Details] = []
+//        guard let searchText = searchTextField.text else {return}
+//        DispatchQueue.global(qos: .background).async {
+//
+//
+//            dataArray = self.findNearestResturantsForSquareApi(name:searchText, completion: <#() -> Void#>)
+//            //print(dataArray)
+//            dataArray1 = self.findNearestResturantsByGooglePlaces(coord: (location.coordinate))
+//
+//            dataArray.append(contentsOf: dataArray1)
+//            print(dataArray)
+//            completetion(dataArray)
+//
+//
+//
+//
+//            for i in dataArray {
+//                self.resturantNamesArray.append(i.resturantName)
+//                self.logoImages.append(i.photoLink)
+//
+//
+//                DispatchQueue.main.async {
+//
+//                   self.tableView.reloadData()
+//                }
+//
+//
+//                //print(i.resturantName)
+//            }
+//        }
+//    }
+    
     
     //Remove all last pins if there and setup new pins
     func setUpPins(locations:[Location])
@@ -230,97 +230,98 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         
     }
     
-    func findNearestResturantsByGooglePlaces(coord:CLLocationCoordinate2D) -> [Details]
-    {
-        var resturantDetails:[Details] = []
-        
-        
-        let url = getUrlForResturants(coord: coord)       //get the google places javascript url for the location
-        var locations = [Location]()
-        
-        
-        let data = URLSession.shared.query(address: url)
-        //        print(String(data: data!, encoding: .utf8)!)
-        
-        if data == nil {
-            let alert = UIAlertController(title: NSLocalizedString("Error!", comment: ""), message: NSLocalizedString("There is a problem during fetching info or internet issue.", comment: ""), preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel) { (action) in
-            }
-            
-        }else {
-            
-            if let dict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? Dictionary<String,AnyObject> {
-                
-                if let results = dict?["results"] as? [Dictionary<String,AnyObject>]
-                {
-                    
-                    for result in results
-                    {
-                        
-                        if let geometry = result["geometry"] as? Dictionary<String,AnyObject>,let name = result["name"] as? String,let descr = result["vicinity"] as? String,let rating = result["rating"] as? Double,let totalRatings = result["user_ratings_total"] as? Int,let placeID = result["place_id"] as? String {
-                            
-                            let place_id = placeID
-                            let urlString = "\(DETAILS_PLACE_URL)placeid=\(place_id)&key=\(GOOGLE_API_KEY)"
-                            
-                            let data = URLSession.shared.query(address: urlString)
-                            //print(String(data: data!, encoding: .utf8)!)
-                            if let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
-                                //print(jsonDict)
-                                var textReview:String = ""
-                                if let actorDict = jsonDict!.value(forKey: "result") as? NSDictionary {
-                                    if let actorArray = actorDict.value(forKey: "reviews") as? NSArray {
-                                        
-                                        for i in actorArray{
-                                            if let actorDict1 = i as? NSDictionary {
-                                                if let reviewText = actorDict1.value(forKey: "text") as? String{
-                                                    
-                                                    textReview = reviewText
-                                                }
-                                            }
-                                        }
-                                    }
-                                    //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=PHOT0_REFRENCE_HERE&key=YOUR_API_KEY
-                                    
-                                    if let photos = actorDict.value(forKey: "photos") as? NSArray {
-                                        for i in photos{
-                                            if let dict = i as? NSDictionary {
-                                                if let photoRefrence = dict.value(forKey: "photo_reference") {
-                                                    //print(photoRefrence)
-                                                    
-                                                    let photoURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=\(photoRefrence)&key=\(GOOGLE_API_KEY)"
-                                                    
-                                                    resturantDetails.append(Details(resturantName: name, resturantRating: rating, totalRating: totalRatings, reviewsText: textReview, photoLink: photoURL))
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            
-                            if let coord = geometry["location"] as? Dictionary<String,CGFloat>
-                            {
-                                locations.append(Location(title: name,coord: CLLocationCoordinate2D(latitude: CLLocationDegrees(CGFloat(coord["lat"]!)),longitude: CLLocationDegrees(CGFloat(coord["lng"]!))), desc: descr))
-                            }
-                        }
-                    }
-                }
-                //self.setUpPins(locations: locations)
-            }
-            
-            
-        }
-        
-        
-        
-        //print(resturantDetails)
-        return resturantDetails;
-    }
-    
-    
+//    func findNearestResturantsByGooglePlaces(coord:CLLocationCoordinate2D) -> [Details]
+//    {
+//        var resturantDetails:[Details] = []
+//
+//
+//        let url = getUrlForResturants(coord: coord)       //get the google places javascript url for the location
+//        var locations = [Location]()
+//
+//
+//        let data = URLSession.shared.query(address: url)
+//        //        print(String(data: data!, encoding: .utf8)!)
+//
+//        if data == nil {
+//            let alert = UIAlertController(title: NSLocalizedString("Error!", comment: ""), message: NSLocalizedString("There is a problem during fetching info or internet issue.", comment: ""), preferredStyle: .alert)
+//
+//            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel) { (action) in
+//            }
+//
+//        }else {
+//
+//            if let dict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? Dictionary<String,AnyObject> {
+//
+//                if let results = dict?["results"] as? [Dictionary<String,AnyObject>]
+//                {
+//
+//                    for result in results
+//                    {
+//
+//                        if let geometry = result["geometry"] as? Dictionary<String,AnyObject>,let name = result["name"] as? String,let descr = result["vicinity"] as? String,let rating = result["rating"] as? Double,let totalRatings = result["user_ratings_total"] as? Int,let placeID = result["place_id"] as? String {
+//
+//                            let place_id = placeID
+//                            let urlString = "\(DETAILS_PLACE_URL)placeid=\(place_id)&key=\(GOOGLE_API_KEY)"
+//
+//                            let data = URLSession.shared.query(address: urlString)
+//                            //print(String(data: data!, encoding: .utf8)!)
+//                            if let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
+//                                //print(jsonDict)
+//                                var textReview:String = ""
+//                                if let actorDict = jsonDict!.value(forKey: "result") as? NSDictionary {
+//                                    if let actorArray = actorDict.value(forKey: "reviews") as? NSArray {
+//
+//                                        for i in actorArray{
+//                                            if let actorDict1 = i as? NSDictionary {
+//                                                if let reviewText = actorDict1.value(forKey: "text") as? String{
+//
+//                                                    textReview = reviewText
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                    //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=PHOT0_REFRENCE_HERE&key=YOUR_API_KEY
+//
+//                                    if let photos = actorDict.value(forKey: "photos") as? NSArray {
+//                                        for i in photos{
+//                                            if let dict = i as? NSDictionary {
+//                                                if let photoRefrence = dict.value(forKey: "photo_reference") {
+//                                                    //print(photoRefrence)
+//
+//                                                    let photoURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=\(photoRefrence)&key=\(GOOGLE_API_KEY)"
+//
+//                                                    resturantDetails.append(Details(resturantName: name, resturantRating: rating, totalRating: totalRatings, reviewsText: textReview, photoLink: photoURL))
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//                                }
+//                            }
+//
+//                            if let coord = geometry["location"] as? Dictionary<String,CGFloat>
+//                            {
+//                                locations.append(Location(title: name,coord: CLLocationCoordinate2D(latitude: CLLocationDegrees(CGFloat(coord["lat"]!)),longitude: CLLocationDegrees(CGFloat(coord["lng"]!))), desc: descr))
+//                            }
+//                        }
+//                    }
+//                }
+//                //self.setUpPins(locations: locations)
+//            }
+//
+//
+//        }
+//
+//
+//
+//        //print(resturantDetails)
+//        return resturantDetails;
+//    }
+//
+//
     func findNearestResturantsForSquareApi(name:String, completion: @escaping ()-> Void) {
         
         var fName:String = ""
+        var fType:String = ""
         var fRatingz:Double = 0.0
         var fTotalRatings:Int = 0
         var fReviewText:String = ""
@@ -331,7 +332,8 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         coordn.latitude =  CLLocationDegrees(exactly: currentLocation?.coordinate.latitude ?? 24.770837)!
         coordn.longitude = CLLocationDegrees(exactly:currentLocation?.coordinate.longitude ?? 46.679192)!
         
-        
+        print("latitude \(coordn.latitude)")
+        print("longitude \(coordn.longitude)")
         let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.latitude),\(coordn.longitude)&section=food&v=20160607&intent=\(name)&limit=20&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
         DispatchQueue.global(qos: .background).async {
         
@@ -361,7 +363,17 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
                                             fName = name
                                             
                                         }
-                                        
+                                        if let categories = venue.value(forKey: "categories") as? NSArray{
+                                            
+                                            if let details = categories[0] as? NSDictionary{
+                                                if let type = details.value(forKey: "pluralName") as? String{
+                                                    fType = type
+                                                    
+                                                }
+                                            }
+                                            
+                                            
+                                        }
                                         if let rating = venue.value(forKey: "rating") as? Double {
                                             fRatingz = Double(rating/2)
                                         }
@@ -392,10 +404,20 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
                                             let suffixx = suffix.replacingOccurrences(of: "\\", with: "")
                                             //print(suffixx)
                                             //https://igx.4sqi.net/img/general/300x500\(suffixx)
-                                            let photoUrl = "https://igx.4sqi.net/img/general/300x500\(suffixx)"
+                                            let photoUrl = "https://igx.4sqi.net/img/general/414x176\(suffixx)"
                                             fPhoto = photoUrl
                                             
-                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto))
+                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType))
+                                            let imageData = URLSession.shared.query(address:fPhoto)
+                                            if let imageData = imageData {
+                                                if let image = UIImage(data: imageData){
+                                                    self.logoImages.append(image)
+                                                }
+                                                
+                                            }else {
+                                               self.logoImages.append(UIImage(named: "logo")!)
+                                            }
+                                            
                                         }
                                     }
                                 }
@@ -575,14 +597,26 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! RestDetailsCell
+        cell.contentView.layer.cornerRadius = 5
+        cell.contentView.layer.masksToBounds = true
         //cell.configureCell(resturant: filtereRes[indexPath.row])
         cell.resturantName.text = resturantDetails[indexPath.row].resturantName
 //        cell.restBGImage.sd_setImage(with: URL(string: logoImages[indexPath.row]), placeholderImage: UIImage(named: "wao.png"))
+        cell.restBGImage.image = logoImages[indexPath.row]
+        cell.typeOfRest.text = resturantDetails[indexPath.row].resturantType
+            
+        
+        print(self.resturantDetails[indexPath.row].photoLink)
         return cell
     }
     
 
-
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // this will turn on `masksToBounds` just before showing the cell
+        cell.contentView.layer.masksToBounds = true
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
+    }
     
     
 }
@@ -597,4 +631,5 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
 }

@@ -45,6 +45,7 @@ struct Details: Codable {
     var totalRating:Int
     var reviewsText:String
     var photoLink:String
+    var resturantType: String
 }
 
 
