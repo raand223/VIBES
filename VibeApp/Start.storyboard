@@ -908,7 +908,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0R8-nh-VIc">
-                                <rect key="frame" x="0.0" y="199" width="414" height="697"/>
+                                <rect key="frame" x="0.0" y="137" width="414" height="759"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="بحث" id="FlC-Ij-Hhb">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -1023,77 +1023,27 @@
                                 <rect key="frame" x="10" y="160" width="8" height="9"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="BEl-8a-rbl">
-                                <rect key="frame" x="88.666666666666686" y="96" width="237" height="95"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fIH-Ua-iT2">
-                                        <rect key="frame" x="0.0" y="0.0" width="65" height="95"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HFH-RD-hV9">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="65" id="QsN-eP-Zdr"/>
-                                                    <constraint firstAttribute="height" constant="65" id="dPd-aw-Vam"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="relax"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nq3-r4-sow">
-                                                <rect key="frame" x="0.0" y="65" width="65" height="30"/>
-                                                <state key="normal" title="مرتاح">
-                                                    <color key="titleColor" red="0.76078431369999999" green="0.83529411760000005" blue="0.85490196080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bgC-1W-PA3">
-                                        <rect key="frame" x="85.999999999999986" y="0.0" width="65.000000000000014" height="95"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTD-cx-kgu">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="65" id="35Y-hR-gae"/>
-                                                    <constraint firstAttribute="height" constant="65" id="BEc-Ee-4Ra"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="happy"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfs-Uq-mf3">
-                                                <rect key="frame" x="7" y="65" width="51" height="30"/>
-                                                <state key="normal" title="مستانس">
-                                                    <color key="titleColor" red="0.94901960780000005" green="0.76862745099999996" blue="0.59215686270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zGZ-eE-1bQ">
-                                        <rect key="frame" x="172" y="0.0" width="65" height="95"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SHc-1g-CXT">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="65" id="RuP-z7-508"/>
-                                                    <constraint firstAttribute="height" constant="65" id="XnK-ng-MaW"/>
-                                                </constraints>
-                                                <state key="normal" title="Button" image="wow"/>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ms-Zm-Hzk">
-                                                <rect key="frame" x="16.333333333333314" y="65" width="32" height="30"/>
-                                                <state key="normal" title="منبهر">
-                                                    <color key="titleColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="h43-B2-UYn">
+                                <rect key="frame" x="67" y="99" width="280" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="IPz-eI-3gI"/>
+                                    <constraint firstAttribute="height" constant="30" id="P2r-dO-7vt"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="" image="relaxation"/>
+                                    <segment title="" image="love"/>
+                                    <segment title="" image="sohappy"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="0R8-nh-VIc" firstAttribute="top" secondItem="BEl-8a-rbl" secondAttribute="bottom" constant="8" id="9Mh-5P-YjE"/>
-                            <constraint firstAttribute="bottom" secondItem="0R8-nh-VIc" secondAttribute="bottom" id="TbG-zj-ay3"/>
-                            <constraint firstItem="0R8-nh-VIc" firstAttribute="leading" secondItem="3jM-VQ-EXn" secondAttribute="leading" id="VSN-vA-HQR"/>
-                            <constraint firstItem="BEl-8a-rbl" firstAttribute="centerX" secondItem="FjU-kX-N1R" secondAttribute="centerX" id="ZPv-73-Stx"/>
-                            <constraint firstItem="BEl-8a-rbl" firstAttribute="top" secondItem="3jM-VQ-EXn" secondAttribute="top" constant="8" id="heZ-OC-E9e"/>
-                            <constraint firstItem="0R8-nh-VIc" firstAttribute="trailing" secondItem="3jM-VQ-EXn" secondAttribute="trailing" id="zN8-bh-gqd"/>
+                            <constraint firstItem="0R8-nh-VIc" firstAttribute="leading" secondItem="3jM-VQ-EXn" secondAttribute="leading" id="HZC-in-iKf"/>
+                            <constraint firstItem="0R8-nh-VIc" firstAttribute="top" secondItem="h43-B2-UYn" secondAttribute="bottom" constant="8" id="LQb-vE-Wtr"/>
+                            <constraint firstItem="h43-B2-UYn" firstAttribute="centerX" secondItem="FjU-kX-N1R" secondAttribute="centerX" id="Vh5-ad-uoG"/>
+                            <constraint firstAttribute="bottom" secondItem="0R8-nh-VIc" secondAttribute="bottom" id="srk-8r-LPy"/>
+                            <constraint firstItem="0R8-nh-VIc" firstAttribute="trailing" secondItem="3jM-VQ-EXn" secondAttribute="trailing" id="tK5-hL-uAp"/>
+                            <constraint firstItem="h43-B2-UYn" firstAttribute="top" secondItem="3jM-VQ-EXn" secondAttribute="top" constant="11" id="vre-wL-Tcm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3jM-VQ-EXn"/>
                     </view>
@@ -1101,6 +1051,7 @@
                     <connections>
                         <outlet property="mapview" destination="VhR-Xe-Eoy" id="8dz-pz-RuI"/>
                         <outlet property="searchBar" destination="FlC-Ij-Hhb" id="An3-6z-loX"/>
+                        <outlet property="segmentedControl" destination="h43-B2-UYn" id="6Ld-9P-EVs"/>
                         <outlet property="tableView" destination="0R8-nh-VIc" id="zUO-l3-wRy"/>
                     </connections>
                 </viewController>
@@ -1528,14 +1479,15 @@
         <image name="instagram" width="399" height="399"/>
         <image name="login" width="482.5" height="719"/>
         <image name="logo" width="282" height="415"/>
+        <image name="love" width="25" height="25"/>
         <image name="orangeTwitter" width="405" height="405"/>
         <image name="profile" width="25" height="25"/>
         <image name="redTwitter" width="441" height="441"/>
-        <image name="relax" width="189" height="180"/>
+        <image name="relaxation" width="25" height="23"/>
+        <image name="sohappy" width="25" height="25"/>
         <image name="tweet" width="256" height="256"/>
         <image name="website" width="288" height="279"/>
         <image name="welc" width="482.5" height="719"/>
-        <image name="wow" width="198" height="183"/>
         <image name="yellowTwitter" width="450" height="450"/>
     </resources>
     <inferredMetricsTieBreakers>

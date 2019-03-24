@@ -47,11 +47,13 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     var isFiltered = false
     
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationBarTitle()
+        setupSegmentController()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundView = spinner
@@ -88,6 +90,16 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         }
     }
     
+    func setupSegmentController() {
+        let relaxImage = UIImage.textEmbededImage(image: UIImage(named: "relaxation")!, string: "مرتاح", color: UIColor.black)
+        segmentedControl.setImage(relaxImage, forSegmentAt: 0)
+        
+        let loveImage = UIImage.textEmbededImage(image: UIImage(named: "love")!, string: "منبهر", color: UIColor.black)
+        segmentedControl.setImage(loveImage, forSegmentAt: 1)
+        
+        let happyImage = UIImage.textEmbededImage(image: UIImage(named: "sohappy")!, string: "مستانس", color: UIColor.black)
+        segmentedControl.setImage(happyImage, forSegmentAt: 2)
+    }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard !searchText.isEmpty else {
             isFiltered = false
@@ -649,4 +661,30 @@ extension UIViewController {
     //    func getRateObject(name: String) -> Rating {
     //    }
     
+}
+
+extension UIImage {
+    
+    class func textEmbededImage(image: UIImage, string: String, color:UIColor, imageAlignment: Int = 0, segFont: UIFont? = nil) -> UIImage {
+        let font = segFont ?? UIFont.systemFont(ofSize: 16.0)
+        let expectedTextSize: CGSize = (string as NSString).size(withAttributes: [NSAttributedStringKey.font: font])
+        let width: CGFloat = expectedTextSize.width + image.size.width + 5.0
+        let height: CGFloat = max(expectedTextSize.height, image.size.width)
+        let size: CGSize = CGSize(width: width, height: height)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        let context: CGContext = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        let fontTopPosition: CGFloat = (height - expectedTextSize.height) / 2.0
+        let textOrigin: CGFloat = (imageAlignment == 0) ? image.size.width + 5 : 0
+        let textPoint: CGPoint = CGPoint.init(x: textOrigin, y: fontTopPosition)
+        string.draw(at: textPoint, withAttributes: [NSAttributedStringKey.font: font])
+        let flipVertical: CGAffineTransform = CGAffineTransform(a: 1, b: 0, c: 0, d: -1, tx: 0, ty: size.height)
+        context.concatenate(flipVertical)
+        let alignment: CGFloat =  (imageAlignment == 0) ? 0.0 : expectedTextSize.width + 5.0
+        context.draw(image.cgImage!, in: CGRect.init(x: alignment, y: ((height - image.size.height) / 2.0), width: image.size.width, height: image.size.height))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
 }
