@@ -14,6 +14,7 @@ import Alamofire
 import FoursquareAPIClient
 import Async
 import SVProgressHUD
+
 enum ResturantCategory: String {
     case breakfast = "breakfast"
     case lunch = "lunch"
@@ -441,8 +442,11 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
                                                         finalImage = image
                                                     }
                                                 }
+                                                let dataRate = URLSession.shared.query(address: self.getRateUrl(name: fName))
+                                                let rating = self.getRating(data: dataRate!)
                                                 
-                                                self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance,photo:finalImage ))
+                                                self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance,photo:finalImage, tweetRating: rating))
+                                                print(fName)
                                                 
                                             }
                                         }
@@ -645,6 +649,24 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         NSAttributedString.Key.foregroundColor: UIColor.black,
         NSAttributedString.Key.strokeWidth: 0
     ]
+    
+    func getRateUrl(name: String) -> String{
+        if let newName  = name.slice(from: "(", to: ")") {
+            
+            let encodedString = newName.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]{} ").inverted) as! String
+            return "https://imyazeed.pythonanywhere.com/getRate/\(encodedString)"
+        }else{
+            
+            let encodedString = name.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "!*'();:@&=+$,|./?%#[]{} ").inverted) as! String
+            print(encodedString)
+            return "https://imyazeed.pythonanywhere.com/getRate/\(encodedString)"
+        }
+    }
+    func getRating(data: Data) -> Rating{
+        let decoder = JSONDecoder()
+        let rating = try! decoder.decode(Rating.self, from: data)
+        return rating
+    }
 }
 // Put this piece of code anywhere you like
 extension UIViewController {
@@ -658,8 +680,7 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-    //    func getRateObject(name: String) -> Rating {
-    //    }
+
     
 }
 
@@ -686,5 +707,17 @@ extension UIImage {
         UIGraphicsEndImageContext()
         
         return newImage!
+    }
+}
+
+extension String {
+    
+    func slice(from: String, to: String) -> String? {
+        
+        return (range(of: from)?.upperBound).flatMap { substringFrom in
+            (range(of: to, range: substringFrom..<endIndex)?.lowerBound).map { substringTo in
+                String(self[substringFrom..<substringTo])
+            }
+        }
     }
 }

@@ -10,11 +10,11 @@ import Foundation
 
 
 struct Rating:Codable {
-    var angry:Int
-    var comfortable:Int
-    var contirition:Int
-    var happy:Int
-    var impressed:Int
-    var sad:Int
+    var angry:Double
+    var comfortable:Double
+    var contirition:Double
+    var happy:Double
+    var impressed:Double
+    var sad:Double
 }
 

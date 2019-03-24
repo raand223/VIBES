@@ -927,7 +927,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="176"/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="8oD-2e-Bsx">
-                                                    <rect key="frame" x="48" y="10.000000000000004" width="358.33333333333331" height="46.333333333333343"/>
+                                                    <rect key="frame" x="48" y="10" width="358.33333333333331" height="72.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اسم المطعم" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbF-dI-XxX">
                                                             <rect key="frame" x="0.0" y="0.0" width="358.33333333333331" height="20.333333333333332"/>
@@ -939,12 +939,23 @@
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الشعور العام" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HV-er-7Iw">
-                                                            <rect key="frame" x="0.0" y="46.333333333333336" width="358.33333333333331" height="0.0"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g1Q-Dd-U7p">
+                                                            <rect key="frame" x="0.0" y="55.333333333333329" width="358.33333333333331" height="17"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="result" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bff-33-UXL">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="270.66666666666669" height="17"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="الشعور العام :" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HV-er-7Iw">
+                                                                    <rect key="frame" x="275.66666666666669" y="0.0" width="82.666666666666686" height="17"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0c-Q8-JIu">
@@ -983,7 +994,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happy" translatesAutoresizingMaskIntoConstraints="NO" id="cAJ-lD-fFn">
-                                                    <rect key="frame" x="344" y="78" width="50" height="50"/>
+                                                    <rect key="frame" x="344" y="104" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="H66-MC-4N6"/>
                                                         <constraint firstAttribute="width" constant="50" id="zo4-hO-d7a"/>
@@ -1009,8 +1020,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="RatingResult" destination="Bff-33-UXL" id="dht-Em-tXi"/>
                                             <outlet property="distanceLbl" destination="OqW-Bg-reB" id="pcN-1y-Wxk"/>
                                             <outlet property="feelingLbl" destination="3HV-er-7Iw" id="bKG-r5-fmk"/>
+                                            <outlet property="ratePercent" destination="c0b-CO-IWX" id="Dt1-JN-hSv"/>
                                             <outlet property="restBGImage" destination="Uc0-Df-Lig" id="b8K-I4-vqe"/>
                                             <outlet property="resturantName" destination="sbF-dI-XxX" id="sdf-b8-Xhj"/>
                                             <outlet property="typeOfRest" destination="13K-zK-bFY" id="OIb-Z1-36h"/>
@@ -1023,16 +1036,16 @@
                                 <rect key="frame" x="10" y="160" width="8" height="9"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="h43-B2-UYn">
-                                <rect key="frame" x="67" y="99" width="280" height="31"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="h43-B2-UYn">
+                                <rect key="frame" x="16" y="99" width="382" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="280" id="IPz-eI-3gI"/>
                                     <constraint firstAttribute="height" constant="30" id="P2r-dO-7vt"/>
                                 </constraints>
                                 <segments>
                                     <segment title="" image="relaxation"/>
                                     <segment title="" image="love"/>
                                     <segment title="" image="sohappy"/>
+                                    <segment title="الكل"/>
                                 </segments>
                             </segmentedControl>
                         </subviews>
@@ -1041,6 +1054,8 @@
                             <constraint firstItem="0R8-nh-VIc" firstAttribute="leading" secondItem="3jM-VQ-EXn" secondAttribute="leading" id="HZC-in-iKf"/>
                             <constraint firstItem="0R8-nh-VIc" firstAttribute="top" secondItem="h43-B2-UYn" secondAttribute="bottom" constant="8" id="LQb-vE-Wtr"/>
                             <constraint firstItem="h43-B2-UYn" firstAttribute="centerX" secondItem="FjU-kX-N1R" secondAttribute="centerX" id="Vh5-ad-uoG"/>
+                            <constraint firstItem="3jM-VQ-EXn" firstAttribute="trailing" secondItem="h43-B2-UYn" secondAttribute="trailing" constant="16" id="fpb-Ea-cuu"/>
+                            <constraint firstItem="h43-B2-UYn" firstAttribute="leading" secondItem="3jM-VQ-EXn" secondAttribute="leading" constant="16" id="iKP-9J-gmh"/>
                             <constraint firstAttribute="bottom" secondItem="0R8-nh-VIc" secondAttribute="bottom" id="srk-8r-LPy"/>
                             <constraint firstItem="0R8-nh-VIc" firstAttribute="trailing" secondItem="3jM-VQ-EXn" secondAttribute="trailing" id="tK5-hL-uAp"/>
                             <constraint firstItem="h43-B2-UYn" firstAttribute="top" secondItem="3jM-VQ-EXn" secondAttribute="top" constant="11" id="vre-wL-Tcm"/>

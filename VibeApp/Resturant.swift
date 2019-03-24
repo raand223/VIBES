@@ -384,7 +384,7 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
                                             let photoUrl = "https://igx.4sqi.net/img/general/300x500\(suffixx)"
                                             fPhoto = photoUrl
                                             
-                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType,  distance: fDistance,photo: nil))
+                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType,  distance: fDistance,photo: nil,tweetRating: nil))
                                         }
                                     }
                                 }

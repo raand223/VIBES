@@ -48,6 +48,7 @@ struct Details {
     var resturantType: String
     var distance: Double
     var photo: UIImage?
+    var tweetRating: Rating?
 }
 
 
@@ -60,6 +61,7 @@ extension URLSession{
         let semaphore = DispatchSemaphore(value: 0)
         
         var result: Data?
+        
         let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
             result = data
             semaphore.signal()

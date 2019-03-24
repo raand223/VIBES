@@ -31,6 +31,7 @@
 		96A284972237B9A10031A547 /* ResturantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A284962237B9A10031A547 /* ResturantsViewController.swift */; };
 		96A284992237B9F40031A547 /* RestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A284982237B9F40031A547 /* RestDetailsCell.swift */; };
 		BB34131D224700D8002EC6A6 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34131C224700D8002EC6A6 /* Rating.swift */; };
+		BB341321224753FF002EC6A6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB341323224753FF002EC6A6 /* Localizable.strings */; };
 		F0013DBB2222C3F40087E1CB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0013DBA2222C3F40087E1CB /* SplashViewController.swift */; };
 		F03743362223CDE600E10344 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03743352223CDE600E10344 /* HomeViewController.swift */; };
 		F037433A2223EFDB00E10344 /* resturantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03743392223EFDB00E10344 /* resturantCell.swift */; };
@@ -71,6 +72,10 @@
 		96A284982237B9F40031A547 /* RestDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestDetailsCell.swift; sourceTree = "<group>"; };
 		991E1C84722D73658903F369 /* Pods-VibeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeApp.debug.xcconfig"; path = "Target Support Files/Pods-VibeApp/Pods-VibeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BB34131C224700D8002EC6A6 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
+		BB34131E2247539F002EC6A6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		BB341322224753FF002EC6A6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BB34132522475510002EC6A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		BB34132622475519002EC6A6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F0013DBA2222C3F40087E1CB /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F03743352223CDE600E10344 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F03743392223EFDB00E10344 /* resturantCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resturantCell.swift; sourceTree = "<group>"; };
@@ -146,6 +151,7 @@
 				F0EB6BF22222AC00002037E8 /* GoogleService-Info.plist */,
 				52A8D792221B3ECD00E9BF77 /* users.swift */,
 				BB34131C224700D8002EC6A6 /* Rating.swift */,
+				BB341323224753FF002EC6A6 /* Localizable.strings */,
 			);
 			path = VibeApp;
 			sourceTree = "<group>";
@@ -246,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52A8D76C2216FCCD00E9BF77 /* LaunchScreen.storyboard in Resources */,
+				BB341321224753FF002EC6A6 /* Localizable.strings in Resources */,
 				F0EB6BF32222AC00002037E8 /* GoogleService-Info.plist in Resources */,
 				52A8D7692216FCCD00E9BF77 /* Assets.xcassets in Resources */,
 				52A8D7742216FCE700E9BF77 /* Start.storyboard in Resources */,
@@ -356,8 +363,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				52A8D76B2216FCCD00E9BF77 /* Base */,
+				BB34131E2247539F002EC6A6 /* ar */,
+				BB34132522475510002EC6A6 /* en */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		BB341323224753FF002EC6A6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BB341322224753FF002EC6A6 /* ar */,
+				BB34132622475519002EC6A6 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -367,6 +385,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -427,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
