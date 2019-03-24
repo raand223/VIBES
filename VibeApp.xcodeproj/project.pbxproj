@@ -30,6 +30,7 @@
 		96A284952237B9980031A547 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A284922237B9980031A547 /* TwitterKit.framework */; };
 		96A284972237B9A10031A547 /* ResturantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A284962237B9A10031A547 /* ResturantsViewController.swift */; };
 		96A284992237B9F40031A547 /* RestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A284982237B9F40031A547 /* RestDetailsCell.swift */; };
+		BB34131D224700D8002EC6A6 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34131C224700D8002EC6A6 /* Rating.swift */; };
 		F0013DBB2222C3F40087E1CB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0013DBA2222C3F40087E1CB /* SplashViewController.swift */; };
 		F03743362223CDE600E10344 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03743352223CDE600E10344 /* HomeViewController.swift */; };
 		F037433A2223EFDB00E10344 /* resturantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03743392223EFDB00E10344 /* resturantCell.swift */; };
@@ -69,6 +70,7 @@
 		96A284962237B9A10031A547 /* ResturantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResturantsViewController.swift; sourceTree = "<group>"; };
 		96A284982237B9F40031A547 /* RestDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestDetailsCell.swift; sourceTree = "<group>"; };
 		991E1C84722D73658903F369 /* Pods-VibeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeApp.debug.xcconfig"; path = "Target Support Files/Pods-VibeApp/Pods-VibeApp.debug.xcconfig"; sourceTree = "<group>"; };
+		BB34131C224700D8002EC6A6 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		F0013DBA2222C3F40087E1CB /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F03743352223CDE600E10344 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F03743392223EFDB00E10344 /* resturantCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resturantCell.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 				52A8D76D2216FCCD00E9BF77 /* Info.plist */,
 				F0EB6BF22222AC00002037E8 /* GoogleService-Info.plist */,
 				52A8D792221B3ECD00E9BF77 /* users.swift */,
+				BB34131C224700D8002EC6A6 /* Rating.swift */,
 			);
 			path = VibeApp;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				52A8D7622216FCCD00E9BF77 /* AppDelegate.swift in Sources */,
 				96A2848F2237B64B0031A547 /* Constants.swift in Sources */,
 				52A8D7862217226F00E9BF77 /* AuthModel.swift in Sources */,
+				BB34131D224700D8002EC6A6 /* Rating.swift in Sources */,
 				F0013DBB2222C3F40087E1CB /* SplashViewController.swift in Sources */,
 				F037433E2223F6EC00E10344 /* ResturantTableViewController.swift in Sources */,
 				96A2848D2237B61B0031A547 /* RestListCell.swift in Sources */,

@@ -39,13 +39,15 @@ func getUrlForResturants(coord:CLLocationCoordinate2D)->String
 {
     return "\(FIND_PLCAE_URL)?location=\(coord.latitude),\(coord.longitude)&radius=\(SHEARCH_DISTANCE)&type=restaurant&key=\(GOOGLE_API_KEY)"
 }
-struct Details: Codable {
+struct Details {
     var resturantName:String
     var resturantRating:Double
     var totalRating:Int
     var reviewsText:String
     var photoLink:String
     var resturantType: String
+    var distance: Double
+    var photo: UIImage?
 }
 
 

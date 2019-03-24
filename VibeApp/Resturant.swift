@@ -99,7 +99,7 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
         if let last = lastLocation
             //if last location is there then calculate the distance from last position to new postion if value is greater than certain then update the nearest libraries
         {
-            print(CGFloat(last.distance(from: locations[0])))
+           // print(CGFloat(last.distance(from: locations[0])))
             
             if CGFloat(last.distance(from: locations[0])) > UPDATE_RESTURANT_RATE          //calculate distance
             {
@@ -165,22 +165,22 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
 //    }
     
 //    func combineData(location:CLLocation, completetion: @escaping ([Details])->Void){
-//        
+//
 //        var dataArray:[Details] = []
 //        var dataArray1:[Details] = []
-//        
+//
 //        DispatchQueue.global(qos: .background).async {
-//            
+//
 //            dataArray = self.findNearestResturantsForSquareApi(coord: (location.coordinate))
 //            dataArray1 = self.findNearestResturantsByGooglePlaces(coord: (location.coordinate))
-//            
+//
 //            dataArray.append(contentsOf: dataArray1)
 //            //print(dataArray)
 //            completetion(dataArray)
-//            
+//
 //        }
 //    }
-//    
+//
     
     //Remove all last pins if there and setup new pins
     func setUpPins(locations:[Location])
@@ -296,6 +296,7 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
         
         var fName:String = ""
         var fType:String = ""
+        var fDistance:Double = 0.0
         var fRatingz:Double = 0.0
         var fTotalRatings:Int = 0
         var fReviewText:String = ""
@@ -330,6 +331,12 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
                                         if let name = venue.value(forKey: "name") as? String{
                                             fName = name
                                             
+                                        }
+                                        if let location = venue.value(forKey: "location") as? NSDictionary {
+                                            
+                                            if let distance = location.value(forKey: "distance") as? Double {
+                                                fDistance = distance/1000
+                                            }
                                         }
                                         if let categories = venue.value(forKey: "categories") as? NSArray{
                                             
@@ -377,7 +384,7 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
                                             let photoUrl = "https://igx.4sqi.net/img/general/300x500\(suffixx)"
                                             fPhoto = photoUrl
                                             
-                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType))
+                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType,  distance: fDistance,photo: nil))
                                         }
                                     }
                                 }
