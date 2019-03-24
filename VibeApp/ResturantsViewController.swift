@@ -73,7 +73,6 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         
         mapview.delegate = self
         
-        
         self.hideKeyboardWhenTappedAround()
         
         let leftView = UILabel(frame: CGRect(x: 10, y: 0, width: 7, height: 26))
@@ -92,21 +91,23 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     }
     
     func setupSegmentController() {
-        let relaxImage = UIImage.textEmbededImage(image: UIImage(named: "relaxation")!, string: "مرتاح", color: UIColor.black)
+        let relaxImage = UIImage.textEmbededImage(image: UIImage(named: "مريح")!, string: "مرتاح", color: UIColor.black)
         segmentedControl.setImage(relaxImage, forSegmentAt: 0)
         
-        let loveImage = UIImage.textEmbededImage(image: UIImage(named: "love")!, string: "منبهر", color: UIColor.black)
+        let loveImage = UIImage.textEmbededImage(image: UIImage(named: "منبهر")!, string: "منبهر", color: UIColor.black)
         segmentedControl.setImage(loveImage, forSegmentAt: 1)
         
-        let happyImage = UIImage.textEmbededImage(image: UIImage(named: "sohappy")!, string: "مستانس", color: UIColor.black)
+        let happyImage = UIImage.textEmbededImage(image: UIImage(named: "سعيد")!, string: "مستانس", color: UIColor.black)
         segmentedControl.setImage(happyImage, forSegmentAt: 2)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        segmentedControl.selectedSegmentIndex = 3
         guard !searchText.isEmpty else {
             isFiltered = false
             tableView.reloadData()
             return
         }
+        
         filtereResturant = resturantDetails.filter { resturnat -> Bool in
             resturnat.resturantName.lowercased().contains(searchText.lowercased())
         }
@@ -669,6 +670,33 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         return rating
     }
     
+    @IBAction func segmentAction(_ sender: Any) {
+        searchBar.text = ""
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 3:
+        isFiltered = false
+       
+        case 2:
+        isFiltered = true
+       filtereResturant = resturantDetails.filter {  resturant -> Bool in
+            resturant.feeling == "سعيد"
+            }
+        case 1:
+            isFiltered = true
+           filtereResturant =  resturantDetails.filter {  resturant -> Bool in
+                resturant.feeling == "منبهر"
+            }
+        case 0:
+            isFiltered = true
+            filtereResturant =  resturantDetails.filter {  resturant -> Bool in
+            resturant.feeling == "مريح"
+            }
+        default:
+            break
+        }
+         tableView.reloadData()
+    }
     
 }
 

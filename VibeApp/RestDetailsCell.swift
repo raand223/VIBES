@@ -20,6 +20,7 @@ class RestDetailsCell: UITableViewCell {
     @IBOutlet weak var resturantName: UILabel!
     @IBOutlet weak var ratePercent: UILabel!
     @IBOutlet weak var RatingResult: UILabel!
+    @IBOutlet weak var FeelingEmoji: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,6 +50,26 @@ class RestDetailsCell: UITableViewCell {
         distanceLbl.attributedText = NSMutableAttributedString(string: "\(String(round(resturant.distance * 10) / 10)) كم", attributes: LabelTextAttributes)
         RatingResult.text = resturant.feeling
         ratePercent.text = "\(String(resturant.feelingRating))%"
+        
+        switch resturant.feeling {
+        case "منبهر":
+            FeelingEmoji.text = "😍"
+        case "سعيد":
+            FeelingEmoji.text = "😂"
+        case "مريح":
+            FeelingEmoji.text = "😌"
+        case "نادم":
+            FeelingEmoji.text = "🙁"
+        case "حزين":
+            FeelingEmoji.text = "😢"
+        case "غاضب":
+            FeelingEmoji.text = "😡"
+        default:
+            break
+        }
+        if resturant.feeling == "منبهر" || resturant.feeling == "سعيد" || resturant.feeling == "مريح" {
+            
+        }
     }
     
     let LabelTextAttributes: [NSAttributedString.Key: Any] = [
@@ -57,5 +78,5 @@ class RestDetailsCell: UITableViewCell {
         NSAttributedString.Key.strokeWidth: 0
     ]
     
-
+    
 }

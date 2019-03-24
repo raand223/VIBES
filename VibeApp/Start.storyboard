@@ -927,7 +927,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="176"/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="8oD-2e-Bsx">
-                                                    <rect key="frame" x="48" y="10" width="358.33333333333331" height="72.333333333333329"/>
+                                                    <rect key="frame" x="48" y="9.9999999999999929" width="358.33333333333331" height="111.33333333333331"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اسم المطعم" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sbF-dI-XxX">
                                                             <rect key="frame" x="0.0" y="0.0" width="358.33333333333331" height="20.333333333333332"/>
@@ -956,6 +956,11 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😐" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGI-Qn-c9J">
+                                                            <rect key="frame" x="0.0" y="81.333333333333329" width="358.33333333333331" height="30"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0c-Q8-JIu">
@@ -993,16 +998,8 @@
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="happy" translatesAutoresizingMaskIntoConstraints="NO" id="cAJ-lD-fFn">
-                                                    <rect key="frame" x="344" y="104" width="50" height="50"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="H66-MC-4N6"/>
-                                                        <constraint firstAttribute="width" constant="50" id="zo4-hO-d7a"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cAJ-lD-fFn" firstAttribute="trailing" secondItem="xVq-37-8cQ" secondAttribute="trailingMargin" id="2mD-Sx-pEn"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="OqW-Bg-reB" secondAttribute="bottom" id="5kb-jS-t1m"/>
                                                 <constraint firstItem="M0c-Q8-JIu" firstAttribute="leading" secondItem="xVq-37-8cQ" secondAttribute="leading" constant="15" id="8XT-jN-ZYA"/>
                                                 <constraint firstItem="8oD-2e-Bsx" firstAttribute="leading" secondItem="M0c-Q8-JIu" secondAttribute="trailing" constant="8" id="Ku7-sn-5qE"/>
@@ -1013,13 +1010,13 @@
                                                 <constraint firstAttribute="trailing" secondItem="8oD-2e-Bsx" secondAttribute="trailing" constant="7.6699999999999999" id="csl-BL-BHE"/>
                                                 <constraint firstItem="Uc0-Df-Lig" firstAttribute="top" secondItem="xVq-37-8cQ" secondAttribute="top" id="iJv-gh-m0U"/>
                                                 <constraint firstItem="M0c-Q8-JIu" firstAttribute="top" secondItem="xVq-37-8cQ" secondAttribute="top" constant="11" id="mMO-M1-KvG"/>
-                                                <constraint firstItem="cAJ-lD-fFn" firstAttribute="top" secondItem="8oD-2e-Bsx" secondAttribute="bottom" constant="21.670000000000002" id="o87-Wk-DCR"/>
                                                 <constraint firstItem="143-dH-mB4" firstAttribute="leading" secondItem="xVq-37-8cQ" secondAttribute="leading" constant="15" id="oyh-rn-vwa"/>
                                                 <constraint firstAttribute="trailing" secondItem="Uc0-Df-Lig" secondAttribute="trailing" id="twv-H6-MEl"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="OqW-Bg-reB" secondAttribute="trailing" id="uXH-D9-wHy"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="FeelingEmoji" destination="FGI-Qn-c9J" id="ccu-x4-AzC"/>
                                             <outlet property="RatingResult" destination="Bff-33-UXL" id="dht-Em-tXi"/>
                                             <outlet property="distanceLbl" destination="OqW-Bg-reB" id="pcN-1y-Wxk"/>
                                             <outlet property="feelingLbl" destination="3HV-er-7Iw" id="bKG-r5-fmk"/>
@@ -1042,11 +1039,14 @@
                                     <constraint firstAttribute="height" constant="30" id="P2r-dO-7vt"/>
                                 </constraints>
                                 <segments>
-                                    <segment title="" image="relaxation"/>
-                                    <segment title="" image="love"/>
-                                    <segment title="" image="sohappy"/>
+                                    <segment title="" image="مريح"/>
+                                    <segment title="" image="منبهر"/>
+                                    <segment title="" image="سعيد"/>
                                     <segment title="الكل"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentAction:" destination="2P7-p6-2U6" eventType="valueChanged" id="WuU-Yg-pGm"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1489,21 +1489,20 @@
         <image name="favorite" width="25" height="25"/>
         <image name="googleMaps" width="324" height="324"/>
         <image name="greenTwitter" width="441" height="441"/>
-        <image name="happy" width="222" height="198"/>
         <image name="home-1" width="25" height="25"/>
         <image name="instagram" width="399" height="399"/>
         <image name="login" width="482.5" height="719"/>
         <image name="logo" width="282" height="415"/>
-        <image name="love" width="25" height="25"/>
         <image name="orangeTwitter" width="405" height="405"/>
         <image name="profile" width="25" height="25"/>
         <image name="redTwitter" width="441" height="441"/>
-        <image name="relaxation" width="25" height="23"/>
-        <image name="sohappy" width="25" height="25"/>
         <image name="tweet" width="256" height="256"/>
         <image name="website" width="288" height="279"/>
         <image name="welc" width="482.5" height="719"/>
         <image name="yellowTwitter" width="450" height="450"/>
+        <image name="سعيد" width="25" height="25"/>
+        <image name="مريح" width="25" height="23"/>
+        <image name="منبهر" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vpo-oX-JyW"/>
