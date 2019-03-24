@@ -30,6 +30,16 @@ class RestDetailsCell: UITableViewCell {
         contentView.layer.cornerRadius = 10
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        restBGImage.image = nil
+        distanceLbl.text = nil
+        typeOfRest.text = nil
+        resturantName.text = nil
+        ratePercent.text = nil
+        RatingResult.text = nil
+        FeelingEmoji.text = nil
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -65,6 +75,7 @@ class RestDetailsCell: UITableViewCell {
         case "غاضب":
             FeelingEmoji.text = "😡"
         default:
+            FeelingEmoji.text = "😐"
             break
         }
         if resturant.feeling == "منبهر" || resturant.feeling == "سعيد" || resturant.feeling == "مريح" {
@@ -80,3 +91,7 @@ class RestDetailsCell: UITableViewCell {
     
     
 }
+
+
+
+

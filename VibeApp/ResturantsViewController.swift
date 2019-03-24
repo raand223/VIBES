@@ -80,7 +80,7 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         
         
         //self.secondstimer = Timer.scheduledTimer(timeInterval:5, target: self, selector: #selector(self.UpdateSecondsTimer), userInfo: nil, repeats: true)
-        SVProgressHUD.show()
+        SVProgressHUD.show(withStatus: "إنتظر قليلًا...")
         self.findNearestResturantsForSquareApi(name: category ?? "lunch") {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -696,6 +696,10 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
             break
         }
          tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        SVProgressHUD.dismiss()
     }
     
 }
