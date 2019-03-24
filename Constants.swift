@@ -39,8 +39,8 @@ func getUrlForResturants(coord:CLLocationCoordinate2D)->String
 {
     return "\(FIND_PLCAE_URL)?location=\(coord.latitude),\(coord.longitude)&radius=\(SHEARCH_DISTANCE)&type=restaurant&key=\(GOOGLE_API_KEY)"
 }
-struct Details {
-    var resturantName:String
+class Details {
+    var resturantName:String = ""
     var resturantRating:Double
     var totalRating:Int
     var reviewsText:String
@@ -49,6 +49,50 @@ struct Details {
     var distance: Double
     var photo: UIImage?
     var tweetRating: Rating?
+    var feeling: String?
+    var feelingRating: Int
+    
+    init(resturantName: String, resturantRating: Double, totalRating: Int, reviewsText: String, photoLink: String, resturantType: String,  distance: Double,photo: UIImage?,tweetRating: Rating?,feeling: String){
+        self.resturantName = resturantName
+        self.resturantRating = resturantRating
+        self.totalRating = totalRating
+        self.reviewsText = reviewsText
+        self.photoLink = photoLink
+        self.resturantType = resturantType
+        self.distance = distance
+        self.photo = photo
+        self.tweetRating = tweetRating
+        self.feeling = feeling
+        self.feelingRating = 0
+        getFeeling()
+    }
+    
+    func getFeeling(){
+        
+        guard let rating = tweetRating else {
+            self.feeling = "عادي"
+            self.feelingRating = 50
+            return
+        }
+        let dic: [String:Double] = ["angry":rating.angry,"comfortable":rating.comfortable,"contirition":rating.contirition,"happy":rating.happy,"impressed":rating.impressed,"sad":rating.sad]
+        let totalRate = rating.angry+rating.comfortable+rating.contirition+rating.happy+rating.impressed+rating.sad
+        
+        if let generalFeeling =  dic.max(by: { a, b in a.value < b.value }) {
+            if totalRate == 0 {
+                self.feeling = "عادي"
+                self.feelingRating = 50
+               
+            }else{
+                self.feeling = NSLocalizedString(generalFeeling.key, comment: "")
+                self.feelingRating = Int(generalFeeling.value/totalRate * 100)
+                
+            }
+            
+        }
+        
+        
+    }
+    
 }
 
 

@@ -47,7 +47,8 @@ class RestDetailsCell: UITableViewCell {
         restBGImage.image = resturant.photo
         typeOfRest.attributedText = NSMutableAttributedString(string: resturant.resturantType, attributes: LabelTextAttributes)
         distanceLbl.attributedText = NSMutableAttributedString(string: "\(String(round(resturant.distance * 10) / 10)) كم", attributes: LabelTextAttributes)
-        extractRate(rating: resturant.tweetRating)
+        RatingResult.text = resturant.feeling
+        ratePercent.text = "\(String(resturant.feelingRating))%"
     }
     
     let LabelTextAttributes: [NSAttributedString.Key: Any] = [
@@ -56,31 +57,5 @@ class RestDetailsCell: UITableViewCell {
         NSAttributedString.Key.strokeWidth: 0
     ]
     
-
-
-func extractRate(rating: Rating?){
-    
-    guard let rating = rating else {
-        feelingLbl.text = "happy"
-         ratePercent.text = "50%"
-        return
-    }
-    let dic: [String:Double] = ["angry":rating.angry,"comfortable":rating.comfortable,"contirition":rating.contirition,"happy":rating.happy,"impressed":rating.impressed,"sad":rating.sad]
-    let totalRate = rating.angry+rating.comfortable+rating.contirition+rating.happy+rating.impressed+rating.sad
-
-    if let generalFeeling =  dic.max(by: { a, b in a.value < b.value }) {
-        if totalRate == 0 {
-            ratePercent.text = "50%"
-            RatingResult.text = "عادي"
-        }else{
-
-    ratePercent.text = "\(String(Int(generalFeeling.value/totalRate * 100)))%"
-    RatingResult.text = NSLocalizedString(generalFeeling.key, comment: "")
-        }
-        
-    }
-    
-    
-}
 
 }

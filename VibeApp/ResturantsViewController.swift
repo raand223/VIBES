@@ -445,8 +445,9 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
                                                 let dataRate = URLSession.shared.query(address: self.getRateUrl(name: fName))
                                                 let rating = self.getRating(data: dataRate!)
                                                 
-                                                self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance,photo:finalImage, tweetRating: rating))
-                                                print(fName)
+                                                self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: finalImage, tweetRating: rating, feeling: ""))
+                                                
+                                               
                                                 
                                             }
                                         }
@@ -667,7 +668,10 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         let rating = try! decoder.decode(Rating.self, from: data)
         return rating
     }
+    
+    
 }
+
 // Put this piece of code anywhere you like
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
