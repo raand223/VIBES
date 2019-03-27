@@ -15,6 +15,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     
     var resturant:Details!
     weak var headerImageView: UIView?
+    @IBOutlet weak var phoneNumberLabel: UILabel!
     
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var resturantNameLabel: UILabel!
@@ -25,6 +26,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     @IBOutlet weak var chickInNumberLabel: UILabel!
     @IBOutlet weak var resturantReview: UITextView!
     @IBOutlet weak var openingHourLabel: UILabel!
+    @IBOutlet weak var phoneCell: UITableViewCell!
     var haveOpeningHour = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,8 +98,16 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         chickInNumberLabel.text = String(resturant.checkInCount)
         resturantReview.text = resturant.reviewsText
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
+        if let phoneNumber = resturant.contactNumber {
+            if phoneNumber != "" {
+            phoneNumberLabel.text = phoneNumber
+                 phoneCell.selectionStyle = .default
+            }else {
+                phoneNumberLabel.text = "لايوجد"
+                phoneNumberLabel.textColor = UIColor.black
+                 phoneCell.selectionStyle = .none
+            }
+        }
         
     }
     
@@ -106,8 +116,10 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
             
             if resturantStartDate != "" {
               openingHourLabel.text = getTimeFormat()
+               
             }else{
                 openingHourLabel.text = "لا يوجد"
+               
             }
         }
     }
@@ -224,7 +236,22 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
                 "comgooglemaps://?saddr=&daddr=\(resturant.langtitude),\(resturant.longtitude)&directionsmode=driving")! as URL, options: [:], completionHandler: nil)
     
             
-            tableView.deselectRow(at: indexPath, animated: true)
+           
         }
+        
+        if indexPath.section == 4 && indexPath.row == 0 && phoneNumberLabel.text != "لايوجد"{
+            if let url = URL(string: "tel://\(phoneNumberLabel.text!)"),
+                UIApplication.shared.canOpenURL(url) {
+                if #available(iOS 10, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler:nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            } else {
+                // add error message here
+            }
+        }
+        
+         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
