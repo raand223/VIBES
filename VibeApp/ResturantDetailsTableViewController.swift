@@ -9,24 +9,76 @@
 import UIKit
 import ParallaxHeader
 import SnapKit
+import SVProgressHUD
 class ResturantDetailsTableViewController: UITableViewController {
-
+    
     var resturant:Details!
     weak var headerImageView: UIView?
     
     @IBOutlet weak var resturantNameLabel: UILabel!
     @IBOutlet weak var resturantTypeLabel: UILabel!
-    
+    @IBOutlet weak var FeelingLAbel: UILabel!
+    @IBOutlet weak var feelingPercentage: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var chickInNumberLabel: UILabel!
+    @IBOutlet weak var resturantReview: UITextView!
+    @IBOutlet weak var openingHourLabel: UILabel!
+    var haveOpeningHour = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
-     setupHeaderImage()
-        updateContents()
+        
+        setupHeaderImage()
+         self.updateContents()
+        DispatchQueue.global(qos: .background).async {
+        self.getHour {
+            DispatchQueue.main.async {
+                self.UpdateOpeningHour()
+            }
+        }
+        }
+        
     }
-
+    
     func updateContents() {
         resturantNameLabel.text = resturant.resturantName
         resturantTypeLabel.text = resturant.resturantType
+        
+        switch resturant.feeling {
+        case "منبهر":
+            FeelingLAbel.text = "\(resturant.feeling!) 😍"
+        case "سعيد":
+            FeelingLAbel.text = "\(resturant.feeling!) 😂"
+        case "مريح":
+            FeelingLAbel.text = "\(resturant.feeling!) 😌"
+        case "نادم":
+            FeelingLAbel.text = "\(resturant.feeling!) 🙁"
+        case "حزين":
+            FeelingLAbel.text = "\(resturant.feeling!) 😢"
+        case "غاضب":
+            FeelingLAbel.text = "\(resturant.feeling!) 😡"
+        default:
+            FeelingLAbel.text = "\(resturant.feeling!) 😐"
+            break
+        }
+        feelingPercentage.text = "\(resturant.feelingRating)%"
+        priceLabel.text = NSLocalizedString(resturant.currency, comment: "")
+        chickInNumberLabel.text = String(resturant.checkInCount)
+        resturantReview.text = resturant.reviewsText
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        
+    }
+    
+    func UpdateOpeningHour() {
+        if let resturantStartDate = resturant.startHours {
+            
+            if resturantStartDate != "" {
+              openingHourLabel.text = getTimeFormat()
+            }else{
+                openingHourLabel.text = "لا يوجد"
+            }
+        }
     }
     func setupHeaderImage() {
         
@@ -38,7 +90,7 @@ class ResturantDetailsTableViewController: UITableViewController {
         //setup blur vibrant view
         imageView.blurView.setup(style: UIBlurEffectStyle.dark, alpha: 1).enable()
         
-       // headerImageView = imageView
+        // headerImageView = imageView
         
         tableView.parallaxHeader.view = imageView
         tableView.parallaxHeader.height =  176
@@ -62,8 +114,77 @@ class ResturantDetailsTableViewController: UITableViewController {
             make.edges.equalToSuperview()
         }
         
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func getHour(completion: ()-> Void) {
         
+        var fStartHour = ""
+        var fEndHour = ""
         
+        let hourData = URLSession.shared.query(address: "https://api.foursquare.com/v2/venues/\(resturant.resturantId)/hours?v=20160607&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L")
         
+        if let HourjsonDict = try? JSONSerialization.jsonObject(with: hourData!, options: .allowFragments) as? NSDictionary {
+            
+            if let response = HourjsonDict!.value(forKey: "response") as? NSDictionary {
+                
+                
+                if let hours = response.value(forKey: "hours") as? NSDictionary {
+                    
+                    if let timeFrame = hours.value(forKey: "timeframes") as? NSArray {
+                        if let frame = timeFrame[0] as? NSDictionary{
+                            if let open = frame.value(forKey: "open") as? NSArray{
+                                
+                                
+                                
+                                if let finalHour = open[0] as? NSDictionary {
+                                    if let start = finalHour.value(forKey: "start") as? String{
+                                        
+                                        fStartHour = start
+                                    }
+                                    if let end = finalHour.value(forKey: "end") as? String{
+                                        
+                                        fEndHour = end
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        if fStartHour != "" {
+            resturant.startHours = fStartHour
+        }
+        if fEndHour != "" {
+            resturant.EndHours = fEndHour
+        }
+        
+        completion()
+        
+    }
+    
+    func getTimeFormat() -> String {
+    
+        var startHours = resturant.startHours!
+        var endHours = resturant.EndHours!
+        
+        if startHours.first == "+" {
+            startHours.removeFirst()
+        }
+        if endHours.first == "+" {
+            endHours.removeFirst()
+        }
+        
+        startHours.insert(":", at: startHours.index(startHours.startIndex, offsetBy: 2))
+        endHours.insert(":", at: endHours.index(endHours.startIndex, offsetBy: 2))
+    
+        return "\(startHours) - \(endHours)"
     }
 }

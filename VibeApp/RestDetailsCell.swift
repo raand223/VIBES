@@ -78,9 +78,6 @@ class RestDetailsCell: UITableViewCell {
             FeelingEmoji.text = "😐"
             break
         }
-        if resturant.feeling == "منبهر" || resturant.feeling == "سعيد" || resturant.feeling == "مريح" {
-            
-        }
     }
     
     let LabelTextAttributes: [NSAttributedString.Key: Any] = [

@@ -356,8 +356,7 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         var fCurrency = ""
         var fTwitterAccount = ""
         var fPhoneNumber = ""
-        var fStartHour = ""
-        var fEndHour = ""
+      
         var coordn = CLLocationCoordinate2D()
         let currentLocation = locationManager.location
         coordn.latitude =  CLLocationDegrees(exactly: currentLocation?.coordinate.latitude ?? 24.770837)!
@@ -410,12 +409,12 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
                                                     fPhoneNumber = phoneNumber
                                                 }
                                             }
-                                             if let status = venue.value(forKey: "stats") as? NSDictionary{
+                                            if let status = venue.value(forKey: "stats") as? NSDictionary{
                                                 
                                                 if let checkInCount = status.value(forKey: "checkinsCount") as? Int {
                                                     fCheckInCount = checkInCount
                                                 }
-                                              }
+                                            }
                                             
                                             
                                             if let price = venue.value(forKey: "price") as? NSDictionary{
@@ -493,45 +492,54 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
                                                 let rating = self.getRating(data: dataRate!)
                                                 
                                                 
-//                                                let hourData = URLSession.shared.query(address: "https://api.foursquare.com/v2/venues/\(fResturantID)/hours?v=20160607&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L")
-//
-//                                                 if let HourjsonDict = try? JSONSerialization.jsonObject(with: hourData!, options: .allowFragments) as? NSDictionary {
-//
-//                                                     if let response = HourjsonDict!.value(forKey: "response") as? NSDictionary {
-//
-//
-//                                                        if let hours = response.value(forKey: "hours") as? NSDictionary {
-//
-//                                                            if let timeFrame = hours.value(forKey: "timeframes") as? NSArray {
-//                                                                if let frame = timeFrame[0] as? NSDictionary{
-//                                                                    if let open = frame.value(forKey: "open") as? NSArray{
-//
-//
-//
-//                                                                        if let finalHour = open[0] as? NSDictionary {
-//                                                                            if let start = finalHour.value(forKey: "start") as? String{
-//
-//                                                                                fStartHour = start
-//                                                                            }
-//                                                                            if let end = finalHour.value(forKey: "end") as? String{
-//
-//                                                                                fEndHour = end
-//                                                                            }
-//                                                                        }
-//
-//                                                                    }
-//                                                                }
-//                                                            }
-//                                                        }
-//                                                    }
-//
-//                                                }
+                                                //                                                let hourData = URLSession.shared.query(address: "https://api.foursquare.com/v2/venues/\(fResturantID)/hours?v=20160607&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L")
+                                                //
+                                                //                                                 if let HourjsonDict = try? JSONSerialization.jsonObject(with: hourData!, options: .allowFragments) as? NSDictionary {
+                                                //
+                                                //                                                     if let response = HourjsonDict!.value(forKey: "response") as? NSDictionary {
+                                                //
+                                                //
+                                                //                                                        if let hours = response.value(forKey: "hours") as? NSDictionary {
+                                                //
+                                                //                                                            if let timeFrame = hours.value(forKey: "timeframes") as? NSArray {
+                                                //                                                                if let frame = timeFrame[0] as? NSDictionary{
+                                                //                                                                    if let open = frame.value(forKey: "open") as? NSArray{
+                                                //
+                                                //
+                                                //
+                                                //                                                                        if let finalHour = open[0] as? NSDictionary {
+                                                //                                                                            if let start = finalHour.value(forKey: "start") as? String{
+                                                //
+                                                //                                                                                fStartHour = start
+                                                //                                                                            }
+                                                //                                                                            if let end = finalHour.value(forKey: "end") as? String{
+                                                //
+                                                //                                                                                fEndHour = end
+                                                //                                                                            }
+                                                //                                                                        }
+                                                //
+                                                //                                                                    }
+                                                //                                                                }
+                                                //                                                            }
+                                                //                                                        }
+                                                //                                                    }
+                                                //
+                                                //                                                }
                                                 
-
                                                 
-                                                self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: finalImage, tweetRating: rating, feeling: "", langtitude: fLatitude, longtitude: fLongtitude, checkInCount: fCheckInCount, currency: fCurrency, resturantID: fResturantID))
                                                 
-                                               
+                                                
+                                                let resturant = Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: finalImage, tweetRating: rating, feeling: "", langtitude: fLatitude, longtitude: fLongtitude, checkInCount: fCheckInCount, currency: fCurrency, resturantID: fResturantID)
+                                                
+                                                if fTwitterAccount != "" {
+                                                    resturant.twitterAccount = fTwitterAccount
+                                                }
+                                                if fPhoneNumber != "" {
+                                                    resturant.contactNumber = fPhoneNumber
+                                                }
+                                                self.resturantDetails.append(resturant)
+                                                
+                                                
                                                 
                                             }
                                         }
@@ -758,27 +766,27 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         switch segmentedControl.selectedSegmentIndex
         {
         case 3:
-        isFiltered = false
-       
+            isFiltered = false
+            
         case 2:
-        isFiltered = true
-       filtereResturant = resturantDetails.filter {  resturant -> Bool in
-            resturant.feeling == "سعيد"
+            isFiltered = true
+            filtereResturant = resturantDetails.filter {  resturant -> Bool in
+                resturant.feeling == "سعيد"
             }
         case 1:
             isFiltered = true
-           filtereResturant =  resturantDetails.filter {  resturant -> Bool in
+            filtereResturant =  resturantDetails.filter {  resturant -> Bool in
                 resturant.feeling == "منبهر"
             }
         case 0:
             isFiltered = true
             filtereResturant =  resturantDetails.filter {  resturant -> Bool in
-            resturant.feeling == "مريح"
+                resturant.feeling == "مريح"
             }
         default:
             break
         }
-         tableView.reloadData()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -807,7 +815,7 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-
+    
     
 }
 
