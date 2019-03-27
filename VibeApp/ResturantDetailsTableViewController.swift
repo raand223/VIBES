@@ -254,4 +254,12 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         
          tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showRate"{
+            let ratingVC = segue.destination as! RatingViewController
+            
+            ratingVC.resturantRating = resturant.tweetRating
+        }
+    }
 }
