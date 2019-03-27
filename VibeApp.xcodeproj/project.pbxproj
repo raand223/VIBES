@@ -30,6 +30,8 @@
 		96A284952237B9980031A547 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A284922237B9980031A547 /* TwitterKit.framework */; };
 		96A284972237B9A10031A547 /* ResturantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A284962237B9A10031A547 /* ResturantsViewController.swift */; };
 		96A284992237B9F40031A547 /* RestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A284982237B9F40031A547 /* RestDetailsCell.swift */; };
+		BB2AE0AA224AAA1200998D93 /* ResturantDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2AE0A9224AAA1200998D93 /* ResturantDetailsTableViewController.swift */; };
+		BB2AE0AC224AAD0200998D93 /* UIView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2AE0AB224AAD0200998D93 /* UIView+Blur.swift */; };
 		BB34131D224700D8002EC6A6 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34131C224700D8002EC6A6 /* Rating.swift */; };
 		BB341321224753FF002EC6A6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BB341323224753FF002EC6A6 /* Localizable.strings */; };
 		F0013DBB2222C3F40087E1CB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0013DBA2222C3F40087E1CB /* SplashViewController.swift */; };
@@ -71,6 +73,8 @@
 		96A284962237B9A10031A547 /* ResturantsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResturantsViewController.swift; sourceTree = "<group>"; };
 		96A284982237B9F40031A547 /* RestDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestDetailsCell.swift; sourceTree = "<group>"; };
 		991E1C84722D73658903F369 /* Pods-VibeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeApp.debug.xcconfig"; path = "Target Support Files/Pods-VibeApp/Pods-VibeApp.debug.xcconfig"; sourceTree = "<group>"; };
+		BB2AE0A9224AAA1200998D93 /* ResturantDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantDetailsTableViewController.swift; sourceTree = "<group>"; };
+		BB2AE0AB224AAD0200998D93 /* UIView+Blur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Blur.swift"; sourceTree = "<group>"; };
 		BB34131C224700D8002EC6A6 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
 		BB34131E2247539F002EC6A6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BB341322224753FF002EC6A6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 		52A8D7602216FCCD00E9BF77 /* VibeApp */ = {
 			isa = PBXGroup;
 			children = (
+				BB2AE0AB224AAD0200998D93 /* UIView+Blur.swift */,
 				52A8D7852217226F00E9BF77 /* AuthModel.swift */,
 				7726A0C52225AB9D0065A425 /* ListModel */,
 				52A8D791221B37BC00E9BF77 /* Post Model */,
@@ -152,6 +157,7 @@
 				52A8D792221B3ECD00E9BF77 /* users.swift */,
 				BB34131C224700D8002EC6A6 /* Rating.swift */,
 				BB341323224753FF002EC6A6 /* Localizable.strings */,
+				BB2AE0A9224AAA1200998D93 /* ResturantDetailsTableViewController.swift */,
 			);
 			path = VibeApp;
 			sourceTree = "<group>";
@@ -271,14 +277,16 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-VibeApp/Pods-VibeApp-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-VibeApp/Pods-VibeApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AsyncSwift/Async.framework",
 				"${BUILT_PRODUCTS_DIR}/FoursquareAPIClient/FoursquareAPIClient.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -291,14 +299,16 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FoursquareAPIClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ParallaxHeader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VibeApp/Pods-VibeApp-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VibeApp/Pods-VibeApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		8CDE3AF32AEE04A1C8A23AE9 /* [CP] Check Pods Manifest.lock */ = {
@@ -331,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52A8D77A2216FF7700E9BF77 /* HomeVC.swift in Sources */,
+				BB2AE0AA224AAA1200998D93 /* ResturantDetailsTableViewController.swift in Sources */,
 				52A8D793221B3ECD00E9BF77 /* users.swift in Sources */,
 				7726A0C3222579150065A425 /* ListTableViewController.swift in Sources */,
 				77D2DF74222D32740035AB14 /* ProfileVC.swift in Sources */,
@@ -345,6 +356,7 @@
 				F03743422223F6F700E10344 /* Location.swift in Sources */,
 				52A8D78E221B2CDF00E9BF77 /* PostModel.swift in Sources */,
 				F03743402223F6F200E10344 /* Resturant.swift in Sources */,
+				BB2AE0AC224AAD0200998D93 /* UIView+Blur.swift in Sources */,
 				52A8D7782216FF0600E9BF77 /* SingUpVC.swift in Sources */,
 				52A8D7622216FCCD00E9BF77 /* AppDelegate.swift in Sources */,
 				96A2848F2237B64B0031A547 /* Constants.swift in Sources */,
@@ -522,7 +534,7 @@
 		};
 		52A8D7722216FCCD00E9BF77 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8EB002D19674F6D192EA9510 /* Pods-VibeApp.release.xcconfig */;
+			baseConfigurationReference = 263B6C9A5429759AC4521DFE /* Pods-VibeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -301,6 +301,7 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
         var fTotalRatings:Int = 0
         var fReviewText:String = ""
         var fPhoto:String = ""
+        var fResturantID:String = ""
         var coordn = CLLocationCoordinate2D()
         coordn.latitude =  CLLocationDegrees(exactly: 24.770837)!
         coordn.longitude = CLLocationDegrees(exactly:46.679192)!
@@ -328,6 +329,11 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
                             for i in itmes{
                                 if let actorDict = i as? NSDictionary {
                                     if let venue = actorDict.value(forKey: "venue") as? NSDictionary {
+                                        
+                                        if let resturantID = venue.value(forKey: "id") as? String{
+                                            fResturantID = resturantID
+                                            
+                                        }
                                         if let name = venue.value(forKey: "name") as? String{
                                             fName = name
                                             
@@ -384,7 +390,7 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
                                             let photoUrl = "https://igx.4sqi.net/img/general/300x500\(suffixx)"
                                             fPhoto = photoUrl
                                             
-                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: nil, tweetRating: nil, feeling: ""))
+                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: nil, tweetRating: nil, feeling: "", langtitude: 0.0, longtitude: 0.0, checkInCount: 1, currency: "", resturantID: fResturantID))
                                             
                                         }
                                     }

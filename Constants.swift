@@ -40,6 +40,7 @@ func getUrlForResturants(coord:CLLocationCoordinate2D)->String
     return "\(FIND_PLCAE_URL)?location=\(coord.latitude),\(coord.longitude)&radius=\(SHEARCH_DISTANCE)&type=restaurant&key=\(GOOGLE_API_KEY)"
 }
 class Details {
+    var resturantId:String
     var resturantName:String = ""
     var resturantRating:Double
     var totalRating:Int
@@ -51,8 +52,19 @@ class Details {
     var tweetRating: Rating?
     var feeling: String?
     var feelingRating: Int
+    var contactNumber: String?
+    var twitterAccount:String?
+    var langtitude:Double
+    var longtitude:Double
+    var checkInCount:Int
+    var currency:String
+    var startHours:String?
+    var EndHours:String?
+
+
     
-    init(resturantName: String, resturantRating: Double, totalRating: Int, reviewsText: String, photoLink: String, resturantType: String,  distance: Double,photo: UIImage?,tweetRating: Rating?,feeling: String){
+    init(resturantName: String, resturantRating: Double, totalRating: Int, reviewsText: String, photoLink: String, resturantType: String,  distance: Double,photo: UIImage?,tweetRating: Rating?,feeling: String, langtitude: Double, longtitude: Double,checkInCount: Int,currency: String,resturantID: String){
+        self.resturantId = resturantID
         self.resturantName = resturantName
         self.resturantRating = resturantRating
         self.totalRating = totalRating
@@ -63,6 +75,14 @@ class Details {
         self.photo = photo
         self.tweetRating = tweetRating
         self.feeling = feeling
+        self.contactNumber = ""
+        self.twitterAccount = ""
+        self.langtitude = langtitude
+        self.longtitude = longtitude
+        self.checkInCount = checkInCount
+        self.currency = currency
+        self.startHours = ""
+        self.EndHours = ""
         self.feelingRating = 0
         getFeeling()
     }

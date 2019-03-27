@@ -343,12 +343,21 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     func findNearestResturantsForSquareApi(name:String, completion: @escaping ()-> Void) {
         
         var fName:String = ""
+        var fResturantID = ""
         var fType:String = ""
         var fDistance:Double = 0.0
         var fRatingz:Double = 0.0
         var fTotalRatings:Int = 0
         var fReviewText:String = ""
         var fPhoto:String = ""
+        var fLongtitude = 0.0
+        var fLatitude = 0.0
+        var fCheckInCount = 0
+        var fCurrency = ""
+        var fTwitterAccount = ""
+        var fPhoneNumber = ""
+        var fStartHour = ""
+        var fEndHour = ""
         var coordn = CLLocationCoordinate2D()
         let currentLocation = locationManager.location
         coordn.latitude =  CLLocationDegrees(exactly: currentLocation?.coordinate.latitude ?? 24.770837)!
@@ -356,7 +365,7 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         
         print("latitude \(coordn.latitude)")
         print("longitude \(coordn.longitude)")
-        let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.latitude),\(coordn.longitude)&section=food&v=20160607&intent=\(name)&limit=20&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
+        let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.latitude),\(coordn.longitude)&section=food&v=20160607&intent=\(name)&limit=2&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
         DispatchQueue.global(qos: .background).async {
             
             let data = URLSession.shared.query(address: url)
@@ -385,10 +394,47 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
                                                 fName = name
                                                 
                                             }
+                                            
+                                            if let resturantID = venue.value(forKey: "id") as? String{
+                                                fResturantID = resturantID
+                                                
+                                            }
+                                            
+                                            if let contact = venue.value(forKey: "contact") as? NSDictionary{
+                                                
+                                                if let twitterAccount = contact.value(forKey: "twitter") as? String {
+                                                    fTwitterAccount = twitterAccount
+                                                }
+                                                
+                                                if let phoneNumber = contact.value(forKey: "phone") as? String {
+                                                    fPhoneNumber = phoneNumber
+                                                }
+                                            }
+                                             if let status = venue.value(forKey: "stats") as? NSDictionary{
+                                                
+                                                if let checkInCount = status.value(forKey: "checkinsCount") as? Int {
+                                                    fCheckInCount = checkInCount
+                                                }
+                                              }
+                                            
+                                            
+                                            if let price = venue.value(forKey: "price") as? NSDictionary{
+                                                
+                                                if let priceMessege = price.value(forKey: "message") as? String {
+                                                    fCurrency = priceMessege
+                                                }
+                                            }
+                                            
                                             if let location = venue.value(forKey: "location") as? NSDictionary {
                                                 
                                                 if let distance = location.value(forKey: "distance") as? Double {
                                                     fDistance = distance/1000
+                                                }
+                                                if let latitude = location.value(forKey: "lat") as? Double {
+                                                    fLatitude = latitude
+                                                }
+                                                if let longtitude = location.value(forKey: "lng") as? Double {
+                                                    fLongtitude = longtitude
                                                 }
                                             }
                                             if let categories = venue.value(forKey: "categories") as? NSArray{
@@ -446,7 +492,44 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
                                                 let dataRate = URLSession.shared.query(address: self.getRateUrl(name: fName))
                                                 let rating = self.getRating(data: dataRate!)
                                                 
-                                                self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: finalImage, tweetRating: rating, feeling: ""))
+                                                
+//                                                let hourData = URLSession.shared.query(address: "https://api.foursquare.com/v2/venues/\(fResturantID)/hours?v=20160607&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L")
+//
+//                                                 if let HourjsonDict = try? JSONSerialization.jsonObject(with: hourData!, options: .allowFragments) as? NSDictionary {
+//
+//                                                     if let response = HourjsonDict!.value(forKey: "response") as? NSDictionary {
+//
+//
+//                                                        if let hours = response.value(forKey: "hours") as? NSDictionary {
+//
+//                                                            if let timeFrame = hours.value(forKey: "timeframes") as? NSArray {
+//                                                                if let frame = timeFrame[0] as? NSDictionary{
+//                                                                    if let open = frame.value(forKey: "open") as? NSArray{
+//
+//
+//
+//                                                                        if let finalHour = open[0] as? NSDictionary {
+//                                                                            if let start = finalHour.value(forKey: "start") as? String{
+//
+//                                                                                fStartHour = start
+//                                                                            }
+//                                                                            if let end = finalHour.value(forKey: "end") as? String{
+//
+//                                                                                fEndHour = end
+//                                                                            }
+//                                                                        }
+//
+//                                                                    }
+//                                                                }
+//                                                            }
+//                                                        }
+//                                                    }
+//
+//                                                }
+                                                
+
+                                                
+                                                self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: finalImage, tweetRating: rating, feeling: "", langtitude: fLatitude, longtitude: fLongtitude, checkInCount: fCheckInCount, currency: fCurrency, resturantID: fResturantID))
                                                 
                                                
                                                 
@@ -700,6 +783,14 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     
     override func viewWillDisappear(_ animated: Bool) {
         SVProgressHUD.dismiss()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "restDetailsID"{
+            let restDetailsVC = segue.destination as! ResturantDetailsTableViewController
+            
+            restDetailsVC.resturant = resturantDetails[tableView.indexPathForSelectedRow!.row]
+        }
     }
     
 }
