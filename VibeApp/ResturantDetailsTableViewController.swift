@@ -51,6 +51,23 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
 //        annotation.subtitle = mediaURL
         annotations.append(annotation)
         self.map.addAnnotations(annotations)
+        
+        
+        let latitude:CLLocationDegrees = resturant.langtitude
+        
+        let longitude:CLLocationDegrees = resturant.longtitude
+        
+        let latDelta:CLLocationDegrees = 0.05
+        
+        let lonDelta:CLLocationDegrees = 0.05
+        
+        let span = MKCoordinateSpanMake(latDelta, lonDelta)
+        
+        let location = CLLocationCoordinate2DMake(latitude, longitude)
+        
+        let region = MKCoordinateRegionMake(location, span)
+        
+        map.setRegion(region, animated: false)
     }
     
     func updateContents() {
