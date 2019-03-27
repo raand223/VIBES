@@ -1086,7 +1086,7 @@
                             <tableViewSection headerTitle="عام" id="D0O-1p-ON7">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="73" id="N39-KP-Ewf">
-                                        <rect key="frame" x="0.0" y="55.333333333333343" width="414" height="73"/>
+                                        <rect key="frame" x="0.0" y="55.333333333333336" width="414" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N39-KP-Ewf" id="79h-IW-Q8f">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="72.666666666666671"/>
@@ -1318,22 +1318,43 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="الموقع" id="uVp-Ay-9uo">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="158" id="U2U-nb-4nU">
-                                        <rect key="frame" x="0.0" y="675.33333333333337" width="414" height="158"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="250" id="U2U-nb-4nU">
+                                        <rect key="frame" x="0.0" y="675.33333333333337" width="414" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U2U-nb-4nU" id="d2V-NT-RVE">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="157.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="249.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ch-xC-qL0">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="157.66666666666666"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="249.66666666666666"/>
                                                 </mapView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="7ch-xC-qL0" firstAttribute="top" secondItem="d2V-NT-RVE" secondAttribute="top" id="H3o-Y2-0fe"/>
-                                                <constraint firstAttribute="trailing" secondItem="7ch-xC-qL0" secondAttribute="trailing" id="Pm5-yr-JDs"/>
-                                                <constraint firstAttribute="bottom" secondItem="7ch-xC-qL0" secondAttribute="bottom" id="RmK-Wn-WuP"/>
-                                                <constraint firstItem="7ch-xC-qL0" firstAttribute="leading" secondItem="d2V-NT-RVE" secondAttribute="leading" id="kOc-vq-b80"/>
+                                                <constraint firstAttribute="bottom" secondItem="7ch-xC-qL0" secondAttribute="bottom" id="DV1-fX-G7c"/>
+                                                <constraint firstAttribute="trailing" secondItem="7ch-xC-qL0" secondAttribute="trailing" id="Jrm-hJ-8iK"/>
+                                                <constraint firstItem="7ch-xC-qL0" firstAttribute="leading" secondItem="d2V-NT-RVE" secondAttribute="leading" id="Xgl-e3-Ucb"/>
+                                                <constraint firstItem="7ch-xC-qL0" firstAttribute="top" secondItem="d2V-NT-RVE" secondAttribute="top" id="iPO-0H-ktc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="50" id="afe-KP-P9S">
+                                        <rect key="frame" x="0.0" y="925.33333333333337" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="afe-KP-P9S" id="UaI-cM-whS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="49.666666666666664"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="فتح بواسطة Google Maps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7F-gN-Yzm">
+                                                    <rect key="frame" x="114.66666666666667" y="11.333333333333336" width="184.66666666666663" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.1843137255" green="0.4823529412" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="O7F-gN-Yzm" firstAttribute="centerY" secondItem="UaI-cM-whS" secondAttribute="centerY" id="Ofz-L0-p63"/>
+                                                <constraint firstItem="O7F-gN-Yzm" firstAttribute="centerX" secondItem="UaI-cM-whS" secondAttribute="centerX" id="sef-DA-oT3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1350,6 +1371,7 @@
                         <outlet property="FeelingLAbel" destination="tBZ-IA-Thq" id="VxF-BK-mje"/>
                         <outlet property="chickInNumberLabel" destination="l0v-vU-z9F" id="7Bb-XU-YXe"/>
                         <outlet property="feelingPercentage" destination="hAK-q3-EPk" id="v9s-Xm-Gke"/>
+                        <outlet property="map" destination="7ch-xC-qL0" id="H08-CV-VNl"/>
                         <outlet property="openingHourLabel" destination="PX9-nN-pUa" id="7bG-2P-nOv"/>
                         <outlet property="priceLabel" destination="8Lo-mr-OEW" id="NAP-Pe-80h"/>
                         <outlet property="resturantNameLabel" destination="f0P-TF-wiM" id="OIp-8f-fCG"/>

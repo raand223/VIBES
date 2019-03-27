@@ -10,11 +10,13 @@ import UIKit
 import ParallaxHeader
 import SnapKit
 import SVProgressHUD
-class ResturantDetailsTableViewController: UITableViewController {
+import MapKit
+class ResturantDetailsTableViewController: UITableViewController, MKMapViewDelegate {
     
     var resturant:Details!
     weak var headerImageView: UIView?
     
+    @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var resturantNameLabel: UILabel!
     @IBOutlet weak var resturantTypeLabel: UILabel!
     @IBOutlet weak var FeelingLAbel: UILabel!
@@ -37,6 +39,18 @@ class ResturantDetailsTableViewController: UITableViewController {
         }
         }
         
+        var annotations = [MKPointAnnotation]()
+        let lat = CLLocationDegrees(resturant.langtitude)
+        let long = CLLocationDegrees(resturant.longtitude)
+        
+         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = resturant.resturantName
+//        annotation.subtitle = mediaURL
+        annotations.append(annotation)
+        self.map.addAnnotations(annotations)
     }
     
     func updateContents() {
@@ -116,10 +130,6 @@ class ResturantDetailsTableViewController: UITableViewController {
         
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
     func getHour(completion: ()-> Void) {
         
         var fStartHour = ""
@@ -186,5 +196,18 @@ class ResturantDetailsTableViewController: UITableViewController {
         endHours.insert(":", at: endHours.index(endHours.startIndex, offsetBy: 2))
     
         return "\(startHours) - \(endHours)"
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 3 && indexPath.row == 1 {
+            
+            
+            UIApplication.shared.open(NSURL(string:
+                "comgooglemaps://?saddr=&daddr=\(resturant.langtitude),\(resturant.longtitude)&directionsmode=driving")! as URL, options: [:], completionHandler: nil)
+    
+            
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 }
