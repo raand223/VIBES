@@ -303,8 +303,9 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
         var fPhoto:String = ""
         var fResturantID:String = ""
         var coordn = CLLocationCoordinate2D()
-        coordn.latitude =  CLLocationDegrees(exactly: 24.770837)!
-        coordn.longitude = CLLocationDegrees(exactly:46.679192)!
+        let currentLocation = locationManager.location
+        coordn.latitude =  CLLocationDegrees(exactly: currentLocation?.coordinate.latitude ?? 24.770837)!
+        coordn.longitude = CLLocationDegrees(exactly:currentLocation?.coordinate.longitude ?? 46.679192)!
         let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.latitude),\(coordn.longitude)&section=food&v=20160607&intent=coffee&limit=20&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
         
         let data = URLSession.shared.query(address: url)

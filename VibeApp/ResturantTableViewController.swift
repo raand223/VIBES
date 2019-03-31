@@ -2,7 +2,6 @@
 //  ResturantTableViewController.swift
 //  Vibes
 //
-//  Created by Yazeed ALZahrani on 2/21/19.
 //  Copyright © 2019 Abdul Jabbar. All rights reserved.
 //
 
