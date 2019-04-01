@@ -77,65 +77,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4O-k1-995">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4O-k1-995">
                                 <rect key="frame" x="148" y="677" width="79" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="تسجيل خروج">
                                     <color key="titleColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="signOut:" destination="OhO-6S-fet" eventType="touchUpInside" id="c2G-0f-xdA"/>
+                                    <action selector="signOut:" destination="OhO-6S-fet" eventType="touchUpInside" id="a7y-dd-pNf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="اسم المستخدم :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDO-ww-4Zk">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="اسم المستخدم :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDO-ww-4Zk">
                                 <rect key="frame" x="237" y="256" width="122" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78M-aV-Qpv">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78M-aV-Qpv">
                                 <rect key="frame" x="240" y="529" width="58" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="تعديل">
                                     <color key="titleColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="changebutton:" destination="OhO-6S-fet" eventType="touchUpInside" id="zto-r1-QlF"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="البريد الإلكتروني :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbm-hQ-o7e">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="البريد الإلكتروني :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zbm-hQ-o7e">
                                 <rect key="frame" x="240" y="352" width="117" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="رقم المرور :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8e-Fq-hWU">
-                                <rect key="frame" x="281" y="434" width="76" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RI0-aa-cs1">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RI0-aa-cs1">
                                 <rect key="frame" x="27" y="287" width="332" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pkD-sj-tLM">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pkD-sj-tLM">
                                 <rect key="frame" x="27" y="381" width="332" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lQs-ZE-gfX">
-                                <rect key="frame" x="27" y="463" width="332" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -147,28 +130,72 @@
                                     <constraint firstAttribute="width" constant="100" id="LTf-zQ-33k"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsA-LJ-VG7">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QsA-LJ-VG7">
                                 <rect key="frame" x="94" y="529" width="44" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <color key="tintColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="إلغاء">
                                     <color key="titleColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h2s-sv-z3t">
+                                <rect key="frame" x="141" y="639" width="105" height="30"/>
+                                <state key="normal" title="تعديل كلمة المرور"/>
+                                <connections>
+                                    <action selector="b:" destination="OhO-6S-fet" eventType="touchUpInside" id="myK-cS-pqM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="RI0-aa-cs1" firstAttribute="top" secondItem="bDO-ww-4Zk" secondAttribute="bottom" constant="8" id="0eU-uj-X7R"/>
+                            <constraint firstItem="pkD-sj-tLM" firstAttribute="leading" secondItem="lln-Lu-FiB" secondAttribute="leading" constant="27" id="1dg-5B-dXU"/>
+                            <constraint firstItem="lln-Lu-FiB" firstAttribute="trailing" secondItem="pkD-sj-tLM" secondAttribute="trailing" constant="55" id="2S0-jV-pwc"/>
+                            <constraint firstItem="RI0-aa-cs1" firstAttribute="top" secondItem="bDO-ww-4Zk" secondAttribute="bottom" constant="8" id="2U9-FQ-hhW"/>
+                            <constraint firstItem="RI0-aa-cs1" firstAttribute="leading" secondItem="lln-Lu-FiB" secondAttribute="leading" constant="27" id="7Qf-HA-ZId"/>
+                            <constraint firstItem="lln-Lu-FiB" firstAttribute="trailing" secondItem="S4O-k1-995" secondAttribute="trailing" constant="187" id="7tC-ev-oop"/>
                             <constraint firstItem="AE0-mM-MEa" firstAttribute="top" secondItem="lln-Lu-FiB" secondAttribute="top" constant="47" id="9tV-bi-eLc"/>
+                            <constraint firstItem="bDO-ww-4Zk" firstAttribute="top" secondItem="AE0-mM-MEa" secondAttribute="bottom" constant="65" id="CNM-Q9-w42"/>
+                            <constraint firstItem="h2s-sv-z3t" firstAttribute="top" secondItem="78M-aV-Qpv" secondAttribute="bottom" constant="68" id="Ekx-M4-0TF"/>
+                            <constraint firstItem="S4O-k1-995" firstAttribute="top" secondItem="h2s-sv-z3t" secondAttribute="bottom" constant="8" id="FL7-Rf-Mci"/>
+                            <constraint firstItem="78M-aV-Qpv" firstAttribute="leading" secondItem="QsA-LJ-VG7" secondAttribute="trailing" constant="102" id="Gec-lX-xf4"/>
+                            <constraint firstItem="78M-aV-Qpv" firstAttribute="top" secondItem="pkD-sj-tLM" secondAttribute="bottom" constant="118" id="JpZ-XJ-TF5"/>
+                            <constraint firstItem="lln-Lu-FiB" firstAttribute="bottom" secondItem="S4O-k1-995" secondAttribute="bottom" constant="106" id="JzT-0y-ORt"/>
+                            <constraint firstItem="78M-aV-Qpv" firstAttribute="top" secondItem="pkD-sj-tLM" secondAttribute="bottom" constant="118" id="KFw-7l-AHi"/>
+                            <constraint firstItem="S4O-k1-995" firstAttribute="leading" secondItem="lln-Lu-FiB" secondAttribute="leading" constant="148" id="MVV-O4-i84"/>
+                            <constraint firstItem="lln-Lu-FiB" firstAttribute="trailing" secondItem="zbm-hQ-o7e" secondAttribute="trailing" constant="57" id="QS5-Ee-aJw"/>
+                            <constraint firstItem="zbm-hQ-o7e" firstAttribute="leading" secondItem="lln-Lu-FiB" secondAttribute="leading" constant="240" id="UzA-CH-Dyi"/>
+                            <constraint firstItem="h2s-sv-z3t" firstAttribute="leading" secondItem="lln-Lu-FiB" secondAttribute="leading" constant="141" id="Wte-S7-eJo"/>
+                            <constraint firstItem="QsA-LJ-VG7" firstAttribute="top" secondItem="pkD-sj-tLM" secondAttribute="bottom" constant="118" id="X69-Vs-DHA"/>
+                            <constraint firstItem="bDO-ww-4Zk" firstAttribute="leading" secondItem="lln-Lu-FiB" secondAttribute="leading" constant="237" id="Xgm-D0-bMH"/>
+                            <constraint firstItem="zbm-hQ-o7e" firstAttribute="top" secondItem="RI0-aa-cs1" secondAttribute="bottom" constant="35" id="YZh-mj-t3g"/>
+                            <constraint firstItem="S4O-k1-995" firstAttribute="top" secondItem="h2s-sv-z3t" secondAttribute="bottom" constant="8" id="YvU-Y4-qaq"/>
+                            <constraint firstItem="pkD-sj-tLM" firstAttribute="top" secondItem="zbm-hQ-o7e" secondAttribute="bottom" constant="8" id="a8K-Yt-llE"/>
+                            <constraint firstItem="QsA-LJ-VG7" firstAttribute="leading" secondItem="lln-Lu-FiB" secondAttribute="leading" constant="94" id="bLn-2f-Qpa"/>
+                            <constraint firstItem="lln-Lu-FiB" firstAttribute="trailing" secondItem="78M-aV-Qpv" secondAttribute="trailing" constant="116" id="czk-dj-Ngb"/>
                             <constraint firstItem="AE0-mM-MEa" firstAttribute="leading" secondItem="lln-Lu-FiB" secondAttribute="leading" constant="137" id="frC-rF-mOK"/>
+                            <constraint firstItem="78M-aV-Qpv" firstAttribute="leading" secondItem="QsA-LJ-VG7" secondAttribute="trailing" constant="102" id="gkm-HK-bxl"/>
+                            <constraint firstItem="h2s-sv-z3t" firstAttribute="top" secondItem="78M-aV-Qpv" secondAttribute="bottom" constant="68" id="h9b-CD-sEc"/>
                             <constraint firstItem="lln-Lu-FiB" firstAttribute="trailing" secondItem="AE0-mM-MEa" secondAttribute="trailing" constant="138" id="hYu-LU-ENg"/>
+                            <constraint firstItem="lln-Lu-FiB" firstAttribute="trailing" secondItem="h2s-sv-z3t" secondAttribute="trailing" constant="168" id="kMN-cJ-Khw"/>
+                            <constraint firstItem="lln-Lu-FiB" firstAttribute="trailing" secondItem="RI0-aa-cs1" secondAttribute="trailing" constant="55" id="nI3-t9-DaU"/>
+                            <constraint firstItem="lln-Lu-FiB" firstAttribute="bottom" secondItem="QsA-LJ-VG7" secondAttribute="bottom" constant="242" id="o8q-MV-2lG"/>
+                            <constraint firstItem="lln-Lu-FiB" firstAttribute="trailing" secondItem="bDO-ww-4Zk" secondAttribute="trailing" constant="55" id="r9U-QV-R0a"/>
+                            <constraint firstItem="pkD-sj-tLM" firstAttribute="top" secondItem="zbm-hQ-o7e" secondAttribute="bottom" constant="8" id="rr2-OE-8bH"/>
                             <constraint firstItem="RI0-aa-cs1" firstAttribute="top" secondItem="AE0-mM-MEa" secondAttribute="bottom" constant="96" id="ubK-Up-52p"/>
+                            <constraint firstItem="zbm-hQ-o7e" firstAttribute="top" secondItem="RI0-aa-cs1" secondAttribute="bottom" constant="35" id="xVx-vy-Vn1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lln-Lu-FiB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="profile" selectedImage="profile" id="4Cm-uG-1QM">
                         <color key="badgeColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="b" destination="h2s-sv-z3t" id="X30-1f-ln2"/>
+                        <outlet property="button" destination="78M-aV-Qpv" id="gvK-VK-6Mc"/>
+                        <outlet property="email" destination="pkD-sj-tLM" id="ORB-Rd-0Mf"/>
+                        <outlet property="userName" destination="RI0-aa-cs1" id="tI4-Ia-1KA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EW2-S7-cul" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -287,10 +314,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="GXb-aR-5tG">
-                                <rect key="frame" x="0.0" y="0.0" width="482" height="896"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUM-GS-k1i">
-                                <rect key="frame" x="16" y="748" width="450" height="30"/>
+                                <rect key="frame" x="16" y="748" width="382" height="30"/>
                                 <state key="normal" title="تسجيل دخول ؟">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -300,22 +327,22 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3fN-V8-fnM">
-                                <rect key="frame" x="20" y="317" width="442" height="214"/>
+                                <rect key="frame" x="20" y="317" width="374" height="214"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="الإيميل ؟" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zGi-2K-KWn">
-                                        <rect key="frame" x="0.0" y="0.0" width="442" height="114"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="114"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="إسم المستخدم ؟" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qjt-fN-wNk">
-                                        <rect key="frame" x="0.0" y="134" width="442" height="30"/>
+                                        <rect key="frame" x="0.0" y="134" width="374" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="باسورد ؟" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cmi-zz-aM0">
-                                        <rect key="frame" x="0.0" y="184" width="442" height="30"/>
+                                        <rect key="frame" x="0.0" y="184" width="374" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
@@ -329,14 +356,14 @@
                                 </constraints>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ProfileImage" translatesAutoresizingMaskIntoConstraints="NO" id="KtY-Yd-BSC">
-                                <rect key="frame" x="137" y="106" width="207" height="100"/>
+                                <rect key="frame" x="137" y="106" width="139" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="Yao-VG-BKM"/>
                                     <constraint firstAttribute="height" constant="100" id="gb6-fK-Fqd"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4J8-dx-Pt6">
-                                <rect key="frame" x="161" y="607" width="155" height="36"/>
+                                <rect key="frame" x="161" y="607" width="87" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="تخطي">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -346,7 +373,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cAY-F3-pED">
-                                <rect key="frame" x="16" y="540" width="442" height="39"/>
+                                <rect key="frame" x="16" y="540" width="374" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="تسجيل حساب جديد">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -411,7 +438,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-Wh-OL0">
-                                <rect key="frame" x="16" y="226" width="343" height="173"/>
+                                <rect key="frame" x="16" y="226" width="382" height="173"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PostImage" translatesAutoresizingMaskIntoConstraints="NO" id="hsO-6T-5hf">
                                         <rect key="frame" x="8" y="36" width="100" height="100"/>
@@ -421,7 +448,7 @@
                                         </constraints>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Irp-6O-W1Y">
-                                        <rect key="frame" x="118" y="36" width="217" height="100"/>
+                                        <rect key="frame" x="118" y="36" width="256" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -440,7 +467,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLE-hV-IRb">
-                                <rect key="frame" x="30" y="440" width="315" height="138"/>
+                                <rect key="frame" x="30" y="440" width="354" height="138"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="شارك">
                                     <color key="titleColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1933,7 +1960,7 @@
     </scenes>
     <resources>
         <image name="PostImage" width="840" height="600"/>
-        <image name="ProfileImage" width="75" height="75"/>
+        <image name="ProfileImage" width="100" height="100"/>
         <image name="about" width="25" height="25"/>
         <image name="blackTwitter" width="567" height="567"/>
         <image name="blueTwitter" width="435" height="435"/>
@@ -1942,14 +1969,14 @@
         <image name="greenTwitter" width="441" height="441"/>
         <image name="home-1" width="25" height="25"/>
         <image name="instagram" width="399" height="399"/>
-        <image name="login" width="482.5" height="719"/>
+        <image name="login" width="965" height="1438"/>
         <image name="logo" width="282" height="415"/>
         <image name="orangeTwitter" width="405" height="405"/>
         <image name="profile" width="25" height="25"/>
         <image name="redTwitter" width="441" height="441"/>
         <image name="tweet" width="256" height="256"/>
         <image name="website" width="288" height="279"/>
-        <image name="welc" width="482.5" height="719"/>
+        <image name="welc" width="482" height="719"/>
         <image name="yellowTwitter" width="450" height="450"/>
         <image name="سعيد" width="25" height="25"/>
         <image name="مريح" width="25" height="23"/>

@@ -35,9 +35,9 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     
     //locationManager
     private var locationManager:CLLocationManager!
-    
     //save last location for limit the Google places api request
     private var lastLocation:CLLocation?
+    
     
     //save reference of current pins
     private var pins = [MKPointAnnotation]()
@@ -62,18 +62,17 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         locationManager = CLLocationManager()
         locationManager.delegate = self
         
+        
         //set my location accurcy to best
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         
-        
-        
         //show my location
         mapview.showsUserLocation = true
-        
         mapview.delegate = self
-        
         self.hideKeyboardWhenTappedAround()
+        
+        
         
         let leftView = UILabel(frame: CGRect(x: 10, y: 0, width: 7, height: 26))
         leftView.backgroundColor = .clear
@@ -364,7 +363,15 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         
         print("latitude \(coordn.latitude)")
         print("longitude \(coordn.longitude)")
-        let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.latitude),\(coordn.longitude)&section=food&v=20160607&intent=\(name)&limit=20&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
+        
+        
+        
+let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.latitude),\(coordn.longitude)&section=food&v=20160607&intent=\(name)&limit=20&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
+        
+        
+        
+        
+        
         DispatchQueue.global(qos: .background).async {
             
             let data = URLSession.shared.query(address: url)
@@ -761,6 +768,8 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         return rating
     }
     
+    
+    
     @IBAction func segmentAction(_ sender: Any) {
         searchBar.text = ""
         switch segmentedControl.selectedSegmentIndex
@@ -788,6 +797,8 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         }
         tableView.reloadData()
     }
+    
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         SVProgressHUD.dismiss()
