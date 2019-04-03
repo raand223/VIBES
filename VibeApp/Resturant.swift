@@ -532,7 +532,7 @@ extension Resturant:UICollectionViewDelegate,UICollectionViewDataSource,UICollec
         
         let cell = self.restCollectionView.dequeueReusableCell(withReuseIdentifier: "RestListCell", for: indexPath) as? RestListCell
         
-        cell?.lblRestName.text = self.resturantDetails[indexPath.row].resturantName
+        cell?.configureUI(resturant: self.resturantDetails[indexPath.row])
         
         return cell!
     }
