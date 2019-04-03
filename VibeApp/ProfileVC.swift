@@ -7,7 +7,7 @@ import FirebaseDatabase
 import SVProgressHUD
 import SDWebImage
 
-class ProfileVC: UIViewController {
+class ProfileVC: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var b: UIButton!
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var userName: UITextField!
@@ -40,7 +40,8 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        userName.delegate = self
+        email.delegate = self
         let bottomLayeremail = CALayer()
         bottomLayeremail.frame = CGRect(x: 0, y: 29, width: 335, height: 0.6)
         bottomLayeremail.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -135,7 +136,10 @@ class ProfileVC: UIViewController {
         self.dismiss(animated: false, completion: nil)
         
     }
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 
