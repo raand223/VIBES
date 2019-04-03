@@ -1960,7 +1960,7 @@
     </scenes>
     <resources>
         <image name="PostImage" width="840" height="600"/>
-        <image name="ProfileImage" width="100" height="100"/>
+        <image name="ProfileImage" width="75" height="75"/>
         <image name="about" width="25" height="25"/>
         <image name="blackTwitter" width="567" height="567"/>
         <image name="blueTwitter" width="435" height="435"/>
@@ -1969,14 +1969,14 @@
         <image name="greenTwitter" width="441" height="441"/>
         <image name="home-1" width="25" height="25"/>
         <image name="instagram" width="399" height="399"/>
-        <image name="login" width="965" height="1438"/>
+        <image name="login" width="482.5" height="719"/>
         <image name="logo" width="282" height="415"/>
         <image name="orangeTwitter" width="405" height="405"/>
         <image name="profile" width="25" height="25"/>
         <image name="redTwitter" width="441" height="441"/>
         <image name="tweet" width="256" height="256"/>
         <image name="website" width="288" height="279"/>
-        <image name="welc" width="482" height="719"/>
+        <image name="welc" width="482.5" height="719"/>
         <image name="yellowTwitter" width="450" height="450"/>
         <image name="سعيد" width="25" height="25"/>
         <image name="مريح" width="25" height="23"/>

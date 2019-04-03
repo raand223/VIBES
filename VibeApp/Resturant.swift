@@ -13,7 +13,7 @@ import CoreLocation
 import Alamofire
 import FoursquareAPIClient
 import Async
-
+import SVProgressHUD
 
 class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate {
     
@@ -60,8 +60,14 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
         mapview.showsUserLocation = true
         
         mapview.delegate = self
-        
-        self.findNearestResturantsForSquareApi(coord: mapview.centerCoordinate)
+        SVProgressHUD.show(withStatus: "إنتظر قليلًا...")
+        self.findNearestResturantsForSquareApi(name: "food") {
+            DispatchQueue.main.async {
+                self.restCollectionView.reloadData()
+                SVProgressHUD.dismiss()
+            }
+            
+        }
     }
     
     // this method shows the pin and details view in AccessoryView
@@ -292,107 +298,178 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
 //    }
 //    
     
-    func findNearestResturantsForSquareApi(coord:CLLocationCoordinate2D) -> [Details] {
+    func findNearestResturantsForSquareApi(name:String, completion: @escaping ()-> Void) {
         
         var fName:String = ""
+        var fResturantID = ""
         var fType:String = ""
         var fDistance:Double = 0.0
         var fRatingz:Double = 0.0
         var fTotalRatings:Int = 0
         var fReviewText:String = ""
         var fPhoto:String = ""
-        var fResturantID:String = ""
+        var fLongtitude = 0.0
+        var fLatitude = 0.0
+        var fCheckInCount = 0
+        var fCurrency = ""
+        var fTwitterAccount = ""
+        var fPhoneNumber = ""
+        
         var coordn = CLLocationCoordinate2D()
         let currentLocation = locationManager.location
         coordn.latitude =  CLLocationDegrees(exactly: currentLocation?.coordinate.latitude ?? 24.770837)!
         coordn.longitude = CLLocationDegrees(exactly:currentLocation?.coordinate.longitude ?? 46.679192)!
-        let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.latitude),\(coordn.longitude)&section=food&v=20160607&intent=coffee&limit=20&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
         
-        let data = URLSession.shared.query(address: url)
+        print("latitude \(coordn.latitude)")
+        print("longitude \(coordn.longitude)")
         
-        if data == nil {
+        
+        
+        let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.latitude),\(coordn.longitude)&section=food&v=20160607&intent=\(name)&limit=20&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
+        
+        
+        
+        
+        
+        DispatchQueue.global(qos: .background).async {
             
-            let alert = UIAlertController(title: NSLocalizedString("Error!", comment: ""), message: NSLocalizedString("There is a problem during fetching info or internet issue.", comment: ""), preferredStyle: .alert)
+            let data = URLSession.shared.query(address: url)
             
-            let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel) { (action) in
-            }
-        }else {
-            if let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
+            if data == nil {
                 
-                //print(String(data: data!, encoding: .utf8)!)
+                let alert = UIAlertController(title: NSLocalizedString("Error!", comment: ""), message: NSLocalizedString("There is a problem during fetching info or internet issue.", comment: ""), preferredStyle: .alert)
                 
-                if let actorArray = jsonDict!.value(forKey: "response") as? NSDictionary {
-                    //print(actorArray)
+                let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel) { (action) in
+                }
+            }else {
+                if let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
                     
-                    if let actorArray = actorArray.value(forKey: "group") as? NSDictionary {
+                    //print(String(data: data!, encoding: .utf8)!)
+                    
+                    if let actorArray = jsonDict!.value(forKey: "response") as? NSDictionary {
+                        //print(actorArray)
                         
-                        if let itmes = actorArray.value(forKey: "results") as? NSArray {
-                            for i in itmes{
-                                if let actorDict = i as? NSDictionary {
-                                    if let venue = actorDict.value(forKey: "venue") as? NSDictionary {
-                                        
-                                        if let resturantID = venue.value(forKey: "id") as? String{
-                                            fResturantID = resturantID
-                                            
-                                        }
-                                        if let name = venue.value(forKey: "name") as? String{
-                                            fName = name
-                                            
-                                        }
-                                        if let location = venue.value(forKey: "location") as? NSDictionary {
-                                            
-                                            if let distance = location.value(forKey: "distance") as? Double {
-                                                fDistance = distance/1000
+                        if let actorArray = actorArray.value(forKey: "group") as? NSDictionary {
+                            
+                            if let itmes = actorArray.value(forKey: "results") as? NSArray {
+                                for i in itmes{
+                                    if let actorDict = i as? NSDictionary {
+                                        if let venue = actorDict.value(forKey: "venue") as? NSDictionary {
+                                            if let name = venue.value(forKey: "name") as? String{
+                                                fName = name
+                                                
                                             }
-                                        }
-                                        if let categories = venue.value(forKey: "categories") as? NSArray{
                                             
-                                            if let details = categories[0] as? NSDictionary{
-                                                if let type = details.value(forKey: "pluralName") as? String{
-                                                    fType = type
-                                                    
+                                            if let resturantID = venue.value(forKey: "id") as? String{
+                                                fResturantID = resturantID
+                                                
+                                            }
+                                            
+                                            if let contact = venue.value(forKey: "contact") as? NSDictionary{
+                                                
+                                                if let twitterAccount = contact.value(forKey: "twitter") as? String {
+                                                    fTwitterAccount = twitterAccount
+                                                }
+                                                
+                                                if let phoneNumber = contact.value(forKey: "phone") as? String {
+                                                    fPhoneNumber = phoneNumber
+                                                }
+                                            }
+                                            if let status = venue.value(forKey: "stats") as? NSDictionary{
+                                                
+                                                if let checkInCount = status.value(forKey: "checkinsCount") as? Int {
+                                                    fCheckInCount = checkInCount
                                                 }
                                             }
                                             
                                             
+                                            if let price = venue.value(forKey: "price") as? NSDictionary{
+                                                
+                                                if let priceMessege = price.value(forKey: "message") as? String {
+                                                    fCurrency = priceMessege
+                                                }
+                                            }
+                                            
+                                            if let location = venue.value(forKey: "location") as? NSDictionary {
+                                                
+                                                if let distance = location.value(forKey: "distance") as? Double {
+                                                    fDistance = distance/1000
+                                                }
+                                                if let latitude = location.value(forKey: "lat") as? Double {
+                                                    fLatitude = latitude
+                                                }
+                                                if let longtitude = location.value(forKey: "lng") as? Double {
+                                                    fLongtitude = longtitude
+                                                }
+                                            }
+                                            if let categories = venue.value(forKey: "categories") as? NSArray{
+                                                
+                                                if let details = categories[0] as? NSDictionary{
+                                                    if let type = details.value(forKey: "pluralName") as? String{
+                                                        fType = type
+                                                        
+                                                    }
+                                                }
+                                                
+                                                
+                                            }
+                                            if let rating = venue.value(forKey: "rating") as? Double {
+                                                fRatingz = Double(rating/2)
+                                            }
+                                            if let likesCount = venue.value(forKey: "ratingSignals") as? Int {
+                                                fTotalRatings = likesCount
+                                            }
                                         }
-
-                                        
-                                        if let rating = venue.value(forKey: "rating") as? Double {
-                                            fRatingz = Double(rating/2)
-                                        }
-                                        if let likesCount = venue.value(forKey: "ratingSignals") as? Int {
-                                            fTotalRatings = likesCount
-                                        }
-                                    }
-                                    if let snippets = actorDict.value(forKey: "snippets") as? NSDictionary {
-                                        if let itmes = snippets.value(forKey: "items") as? NSArray {
-                                            for i in itmes{
-                                                if let tipsDict = i as? NSDictionary{
-                                                    if let details = tipsDict.value(forKey: "detail") as? NSDictionary{
-                                                        if let object = details.value(forKey: "object") as? NSDictionary{
-                                                            if let text = object.value(forKey: "text") as? String{
-                                                                fReviewText = text
-                                                                
-                                                                
+                                        if let snippets = actorDict.value(forKey: "snippets") as? NSDictionary {
+                                            if let itmes = snippets.value(forKey: "items") as? NSArray {
+                                                for i in itmes{
+                                                    if let tipsDict = i as? NSDictionary{
+                                                        if let details = tipsDict.value(forKey: "detail") as? NSDictionary{
+                                                            if let object = details.value(forKey: "object") as? NSDictionary{
+                                                                if let text = object.value(forKey: "text") as? String{
+                                                                    fReviewText = text
+                                                                    
+                                                                    
+                                                                }
                                                             }
                                                         }
                                                     }
                                                 }
                                             }
                                         }
-                                    }
-                                    if let photos = actorDict.value(forKey: "photo") as? NSDictionary {
-                                        if let suffix = photos.value(forKey: "suffix") as? String{
-                                            //print(suffix)
-                                            let suffixx = suffix.replacingOccurrences(of: "\\", with: "")
-                                            //print(suffixx)
-                                            //https://igx.4sqi.net/img/general/300x500\(suffixx)
-                                            let photoUrl = "https://igx.4sqi.net/img/general/300x500\(suffixx)"
-                                            fPhoto = photoUrl
-                                            
-                                            self.resturantDetails.append(Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: nil, tweetRating: nil, feeling: "", langtitude: 0.0, longtitude: 0.0, checkInCount: 1, currency: "", resturantID: fResturantID))
-                                            
+                                        if let photos = actorDict.value(forKey: "photo") as? NSDictionary {
+                                            if let suffix = photos.value(forKey: "suffix") as? String{
+                                                //print(suffix)
+                                                let suffixx = suffix.replacingOccurrences(of: "\\", with: "")
+                                                //print(suffixx)
+                                                //https://igx.4sqi.net/img/general/300x500\(suffixx)
+                                                let photoUrl = "https://igx.4sqi.net/img/general/414x176\(suffixx)"
+                                                fPhoto = photoUrl
+                                                
+                                                
+                                                let imageData = URLSession.shared.query(address:fPhoto)
+                                                var finalImage = UIImage(named: "logo")!
+                                                if let imageData = imageData {
+                                                    if let image = UIImage(data: imageData){
+                                                        finalImage = image
+                                                    }
+                                                }
+                                                let dataRate = URLSession.shared.query(address: self.getRateUrl(name: fName))
+                                                let rating = self.getRating(data: dataRate!)
+                                                
+                                                let resturant = Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: finalImage, tweetRating: rating, feeling: "", langtitude: fLatitude, longtitude: fLongtitude, checkInCount: fCheckInCount, currency: fCurrency, resturantID: fResturantID)
+                                                
+                                                if fTwitterAccount != "" {
+                                                    resturant.twitterAccount = fTwitterAccount
+                                                }
+                                                if fPhoneNumber != "" {
+                                                    resturant.contactNumber = fPhoneNumber
+                                                }
+                                                self.resturantDetails.append(resturant)
+                                                
+                                                
+                                                
+                                            }
                                         }
                                     }
                                 }
@@ -401,12 +478,31 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
                     }
                 }
             }
+            completion()
         }
-        
         //print(resturantDetails)
-        self.restCollectionView.reloadData()
-        return resturantDetails;
+    
     }
+
+    
+    func getRateUrl(name: String) -> String{
+        if let newName  = name.slice(from: "(", to: ")") {
+            
+            let encodedString = newName.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]{} ").inverted) as! String
+            return "https://imyazeed.pythonanywhere.com/getRate/\(encodedString)"
+        }else{
+            
+            let encodedString = name.addingPercentEncoding(withAllowedCharacters: CharacterSet(charactersIn: "!*'();:@&=+$,|./?%#[]{} ").inverted) as! String
+            print(encodedString)
+            return "https://imyazeed.pythonanywhere.com/getRate/\(encodedString)"
+        }
+    }
+    func getRating(data: Data) -> Rating{
+        let decoder = JSONDecoder()
+        let rating = try! decoder.decode(Rating.self, from: data)
+        return rating
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let resturantVC = segue.destination as! ResturantsViewController

@@ -498,44 +498,6 @@ let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.lati
                                                 let dataRate = URLSession.shared.query(address: self.getRateUrl(name: fName))
                                                 let rating = self.getRating(data: dataRate!)
                                                 
-                                                
-                                                //                                                let hourData = URLSession.shared.query(address: "https://api.foursquare.com/v2/venues/\(fResturantID)/hours?v=20160607&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L")
-                                                //
-                                                //                                                 if let HourjsonDict = try? JSONSerialization.jsonObject(with: hourData!, options: .allowFragments) as? NSDictionary {
-                                                //
-                                                //                                                     if let response = HourjsonDict!.value(forKey: "response") as? NSDictionary {
-                                                //
-                                                //
-                                                //                                                        if let hours = response.value(forKey: "hours") as? NSDictionary {
-                                                //
-                                                //                                                            if let timeFrame = hours.value(forKey: "timeframes") as? NSArray {
-                                                //                                                                if let frame = timeFrame[0] as? NSDictionary{
-                                                //                                                                    if let open = frame.value(forKey: "open") as? NSArray{
-                                                //
-                                                //
-                                                //
-                                                //                                                                        if let finalHour = open[0] as? NSDictionary {
-                                                //                                                                            if let start = finalHour.value(forKey: "start") as? String{
-                                                //
-                                                //                                                                                fStartHour = start
-                                                //                                                                            }
-                                                //                                                                            if let end = finalHour.value(forKey: "end") as? String{
-                                                //
-                                                //                                                                                fEndHour = end
-                                                //                                                                            }
-                                                //                                                                        }
-                                                //
-                                                //                                                                    }
-                                                //                                                                }
-                                                //                                                            }
-                                                //                                                        }
-                                                //                                                    }
-                                                //
-                                                //                                                }
-                                                
-                                                
-                                                
-                                                
                                                 let resturant = Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: finalImage, tweetRating: rating, feeling: "", langtitude: fLatitude, longtitude: fLongtitude, checkInCount: fCheckInCount, currency: fCurrency, resturantID: fResturantID)
                                                 
                                                 if fTwitterAccount != "" {
