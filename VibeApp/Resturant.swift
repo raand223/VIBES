@@ -505,21 +505,33 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let resturantVC = segue.destination as! ResturantsViewController
         
-        if segue.identifier == "breakfast"{
-            resturantVC.category = ResturantCategory.breakfast.rawValue
-        }else if segue.identifier == "lunch" {
-            resturantVC.category = ResturantCategory.lunch.rawValue
-        }else if segue.identifier == "dinner" {
-            resturantVC.category = ResturantCategory.dinner.rawValue
+        if segue.identifier == "trendResturant" {
+            let restDetailsVC = segue.destination as! ResturantDetailsTableViewController
+            let indexPaths : NSArray = restCollectionView.indexPathsForSelectedItems! as NSArray
+            let indexx : IndexPath = indexPaths[0] as! IndexPath
+            
+            restDetailsVC.resturant = resturantDetails[indexx.row];
+            
+        }else{
+            
+            let resturantVC = segue.destination as! ResturantsViewController
+            
+            if segue.identifier == "breakfast"{
+                resturantVC.category = ResturantCategory.breakfast.rawValue
+            }else if segue.identifier == "lunch" {
+                resturantVC.category = ResturantCategory.lunch.rawValue
+            }else if segue.identifier == "dinner" {
+                resturantVC.category = ResturantCategory.dinner.rawValue
+            }
+            else{
+                resturantVC.category = ResturantCategory.coffee.rawValue
+            }
         }
-        else{
-            resturantVC.category = ResturantCategory.coffee.rawValue
-        }
-    }
+       
+    
 }
-
+}
 
 
 extension Resturant:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -537,6 +549,8 @@ extension Resturant:UICollectionViewDelegate,UICollectionViewDataSource,UICollec
         return cell!
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+      collectionView.deselectItem(at: indexPath, animated: true)
+    }
     
 }

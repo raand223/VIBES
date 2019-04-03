@@ -810,7 +810,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wgj-f5-Bf3">
                                                     <rect key="frame" x="0.0" y="0.0" width="96" height="74"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -829,6 +829,7 @@
                                         <connections>
                                             <outlet property="imgrest" destination="Nwl-9z-PoC" id="8nT-kh-Fen"/>
                                             <outlet property="lblRestName" destination="Wgj-f5-Bf3" id="e3D-HC-573"/>
+                                            <segue destination="l3H-3k-U2W" kind="show" identifier="trendResturant" id="3o8-ea-P9T"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1997,7 +1998,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="ZGO-hv-uTi"/>
         <segue reference="Qlk-rC-Xol"/>
-        <segue reference="jsS-7R-Ayy"/>
+        <segue reference="3o8-ea-P9T"/>
+        <segue reference="r9G-Bm-bBH"/>
         <segue reference="RVh-cU-Cgh"/>
         <segue reference="LiQ-kt-X5X"/>
         <segue reference="Ykz-g5-tyo"/>
