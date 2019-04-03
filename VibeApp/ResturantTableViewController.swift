@@ -23,7 +23,7 @@ class ResturantTableViewController: UITableViewController , UISearchResultsUpdat
     
     static var sh = ResturantTableViewController()
     var resturantDetails:[Details] = []
-    // from here
+    // from
     var filtereRes = [Details]()
     let searchController = UISearchController(searchResultsController: nil)
     
