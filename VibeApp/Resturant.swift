@@ -14,9 +14,11 @@ import Alamofire
 import FoursquareAPIClient
 import Async
 import SVProgressHUD
+import FirebaseAuth
 
 class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate {
     
+    @IBOutlet weak var regesterButton: UIBarButtonItem!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -44,7 +46,9 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
         
         self.navigationController?.navigationBar.topItem?.title = " "
         
-        
+        if Auth.auth().currentUser == nil {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "التسجيل", style: .done, target: self, action: #selector(register(_:)))
+        }
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -531,6 +535,12 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
        
     
 }
+    
+    
+    @objc func register(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
