@@ -44,7 +44,7 @@ class Details {
     var resturantName:String = ""
     var resturantRating:Double
     var totalRating:Int
-    var reviewsText:String
+    var reviewsText:[String]
     var photoLink:String
     var resturantType: String
     var distance: Double
@@ -63,12 +63,12 @@ class Details {
 
 
     
-    init(resturantName: String, resturantRating: Double, totalRating: Int, reviewsText: String, photoLink: String, resturantType: String,  distance: Double,photo: UIImage?,tweetRating: Rating?,feeling: String, langtitude: Double, longtitude: Double,checkInCount: Int,currency: String,resturantID: String){
+    init(resturantName: String, resturantRating: Double, totalRating: Int, photoLink: String, resturantType: String,  distance: Double,photo: UIImage?,tweetRating: Rating?,feeling: String, langtitude: Double, longtitude: Double,checkInCount: Int,currency: String,resturantID: String){
         self.resturantId = resturantID
         self.resturantName = resturantName
         self.resturantRating = resturantRating
         self.totalRating = totalRating
-        self.reviewsText = reviewsText
+        self.reviewsText = [String]()
         self.photoLink = photoLink
         self.resturantType = resturantType
         self.distance = distance

@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
-
+import Firebase
 class ListTableViewController: UIViewController {
     
     @IBOutlet weak var ResName: UILabel!
@@ -93,3 +93,9 @@ extension ListTableViewController: UITableViewDataSource{
     }
 }
 
+let db_base = Database.database().reference()
+class DataService {
+    
+    static  let  instance = DataService()
+    var REF_Resturant = db_base.child("Resturant")
+}

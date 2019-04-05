@@ -29,7 +29,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     var haveOpeningHour = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(resturant.resturantId)
         setupHeaderImage()
          self.updateContents()
         DispatchQueue.global(qos: .background).async {
@@ -95,7 +95,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         feelingPercentage.text = "\(resturant.feelingRating)%"
         priceLabel.text = NSLocalizedString(resturant.currency, comment: "")
         chickInNumberLabel.text = String(resturant.checkInCount)
-        resturantReview.text = resturant.reviewsText
+        resturantReview.text = resturant.reviewsText[0]
         
         if let phoneNumber = resturant.contactNumber {
             if phoneNumber != "" {
@@ -259,6 +259,9 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
             let ratingVC = segue.destination as! RatingViewController
             
             ratingVC.resturantRating = resturant.tweetRating
+        }else if segue.identifier == "commentSegue" {
+            let commentVC = segue.destination as! CommentsTableViewController
+            commentVC.resturant = resturant
         }
     }
 }

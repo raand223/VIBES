@@ -498,13 +498,16 @@ let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.lati
                                                 let dataRate = URLSession.shared.query(address: self.getRateUrl(name: fName))
                                                 let rating = self.getRating(data: dataRate!)
                                                 
-                                                let resturant = Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, reviewsText: fReviewText, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: finalImage, tweetRating: rating, feeling: "", langtitude: fLatitude, longtitude: fLongtitude, checkInCount: fCheckInCount, currency: fCurrency, resturantID: fResturantID)
+                                                let resturant = Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: finalImage, tweetRating: rating, feeling: "", langtitude: fLatitude, longtitude: fLongtitude, checkInCount: fCheckInCount, currency: fCurrency, resturantID: fResturantID)
                                                 
                                                 if fTwitterAccount != "" {
                                                     resturant.twitterAccount = fTwitterAccount
                                                 }
                                                 if fPhoneNumber != "" {
                                                     resturant.contactNumber = fPhoneNumber
+                                                }
+                                                if fReviewText != "" {
+                                                    resturant.reviewsText.append(fReviewText)
                                                 }
                                                 self.resturantDetails.append(resturant)
                                                 
