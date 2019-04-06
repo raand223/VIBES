@@ -487,14 +487,20 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
             let request = URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
                 
                 if error == nil{
-                    let image = UIImage(data: data!)
-                    self.resturantImage.append(image!)
-                    if self.resturantImage.count - 1 == self.imagesURLlist.count {
-                        DispatchQueue.main.async {
-                            self.collectionView.reloadData()
-                            SVProgressHUD.dismiss()
+                    
+                    guard let data = data else {
+                        return
+                    }
+                    if let image = UIImage(data: data) {
+                        self.resturantImage.append(image)
+                        if self.resturantImage.count - 1 == self.imagesURLlist.count {
+                            DispatchQueue.main.async {
+                                self.collectionView.reloadData()
+                                SVProgressHUD.dismiss()
+                            }
                         }
                     }
+                    
                     
                     
                 }else {
