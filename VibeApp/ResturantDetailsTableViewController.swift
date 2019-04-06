@@ -26,9 +26,15 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     @IBOutlet weak var resturantReview: UITextView!
     @IBOutlet weak var openingHourLabel: UILabel!
     @IBOutlet weak var phoneCell: UITableViewCell!
+     var LikeButton: UIBarButtonItem!
+    
+    
     var haveOpeningHour = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        LikeButton = UIBarButtonItem(title: "إعجاب", style: .plain, target: self, action: #selector(likeResturant))
+        navigationItem.rightBarButtonItem = LikeButton
+        configureLikedResturant()
         print(resturant.resturantId)
         setupHeaderImage()
          self.updateContents()
@@ -74,7 +80,6 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     func updateContents() {
         resturantNameLabel.text = resturant.resturantName
         resturantTypeLabel.text = resturant.resturantType
-        
         switch resturant.feeling {
         case "منبهر":
             FeelingLAbel.text = "\(resturant.feeling!) 😍"
@@ -110,6 +115,22 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         
     }
     
+    func configureLikedResturant() {
+        let isLiked = LikedResturant.shared.resturantList.contains { (details) -> Bool in
+            details.resturantId == resturant.resturantId
+        }
+        
+        if isLiked {
+          LikeButton.title = "إزالة الإعجاب"
+        }else{
+        LikeButton.title = "إعجاب"
+        }
+    }
+    
+    
+   @objc func likeResturant() {
+        
+    }
     func UpdateOpeningHour() {
         if let resturantStartDate = resturant.startHours {
             

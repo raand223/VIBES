@@ -21,6 +21,7 @@ class RestDetailsCell: UITableViewCell {
     @IBOutlet weak var ratePercent: UILabel!
     @IBOutlet weak var RatingResult: UILabel!
     @IBOutlet weak var FeelingEmoji: UILabel!
+    @IBOutlet weak var likedImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,6 +61,15 @@ class RestDetailsCell: UITableViewCell {
         distanceLbl.attributedText = NSMutableAttributedString(string: "\(String(round(resturant.distance * 10) / 10)) كم", attributes: LabelTextAttributes)
         RatingResult.text = resturant.feeling
         ratePercent.text = "\(String(resturant.feelingRating))%"
+        
+        
+        
+       let isLiked = LikedResturant.shared.resturantList.contains { (details) -> Bool in
+            details.resturantId == resturant.resturantId
+        }
+        
+        likedImage.isHidden = !isLiked
+        
         
         switch resturant.feeling {
         case "منبهر":

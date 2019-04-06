@@ -80,17 +80,13 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         
         
         //self.secondstimer = Timer.scheduledTimer(timeInterval:5, target: self, selector: #selector(self.UpdateSecondsTimer), userInfo: nil, repeats: true)
-        SVProgressHUD.show(withStatus: "إنتظر قليلًا...")
+       
         
         if isLikedVC {
-            self.findLikedResturant {
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    SVProgressHUD.dismiss()
-                }
-            }
+            resturantDetails = LikedResturant.shared.resturantList
         }
         else {
+             SVProgressHUD.show(withStatus: "إنتظر قليلًا...")
         self.findNearestResturantsForSquareApi(name: category ?? "lunch") {
             DispatchQueue.main.async {
                 self.tableView.reloadData()

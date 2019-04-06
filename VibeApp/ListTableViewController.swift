@@ -106,3 +106,8 @@ class DataService {
     var REF_Resturant = db_base.child("Resturant")
     var REF_Users = db_base.child("Users")
 }
+
+class LikedResturant {
+    static let shared = LikedResturant()
+    var resturantList = [Details]()
+}
