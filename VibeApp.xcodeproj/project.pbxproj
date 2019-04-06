@@ -32,6 +32,7 @@
 		96A284992237B9F40031A547 /* RestDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A284982237B9F40031A547 /* RestDetailsCell.swift */; };
 		BB27B7E82257D776001DD498 /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB27B7E72257D776001DD498 /* CommentsTableViewController.swift */; };
 		BB27B7EA2258C3B9001DD498 /* GeneralTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB27B7E92258C3B9001DD498 /* GeneralTabBar.swift */; };
+		BB27B7EC22591647001DD498 /* restImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB27B7EB22591647001DD498 /* restImageCell.swift */; };
 		BB2AE0AA224AAA1200998D93 /* ResturantDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2AE0A9224AAA1200998D93 /* ResturantDetailsTableViewController.swift */; };
 		BB2AE0AC224AAD0200998D93 /* UIView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2AE0AB224AAD0200998D93 /* UIView+Blur.swift */; };
 		BB34131D224700D8002EC6A6 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34131C224700D8002EC6A6 /* Rating.swift */; };
@@ -78,6 +79,7 @@
 		991E1C84722D73658903F369 /* Pods-VibeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VibeApp.debug.xcconfig"; path = "Target Support Files/Pods-VibeApp/Pods-VibeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BB27B7E72257D776001DD498 /* CommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		BB27B7E92258C3B9001DD498 /* GeneralTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTabBar.swift; sourceTree = "<group>"; };
+		BB27B7EB22591647001DD498 /* restImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = restImageCell.swift; sourceTree = "<group>"; };
 		BB2AE0A9224AAA1200998D93 /* ResturantDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantDetailsTableViewController.swift; sourceTree = "<group>"; };
 		BB2AE0AB224AAD0200998D93 /* UIView+Blur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Blur.swift"; sourceTree = "<group>"; };
 		BB34131C224700D8002EC6A6 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				BB2AE0A9224AAA1200998D93 /* ResturantDetailsTableViewController.swift */,
 				BB27B7E72257D776001DD498 /* CommentsTableViewController.swift */,
 				BB27B7E92258C3B9001DD498 /* GeneralTabBar.swift */,
+				BB27B7EB22591647001DD498 /* restImageCell.swift */,
 			);
 			path = VibeApp;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				52A8D790221B2F9400E9BF77 /* HomeCell.swift in Sources */,
 				F037433A2223EFDB00E10344 /* resturantCell.swift in Sources */,
 				52A8D77C2216FFB500E9BF77 /* CameraVC.swift in Sources */,
+				BB27B7EC22591647001DD498 /* restImageCell.swift in Sources */,
 				BB27B7EA2258C3B9001DD498 /* GeneralTabBar.swift in Sources */,
 				7726A0C72225ABDD0065A425 /* ListModel.swift in Sources */,
 				F03743422223F6F700E10344 /* Location.swift in Sources */,

@@ -12,10 +12,31 @@ import SVProgressHUD
 import MapKit
 import FirebaseDatabase
 import Firebase
+import FirebaseStorage
 import FirebaseAuth
-class ResturantDetailsTableViewController: UITableViewController, MKMapViewDelegate {
+class ResturantDetailsTableViewController: UITableViewController, MKMapViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return resturantImage.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! restImageCell
+        cell.configureUI(image: resturantImage[indexPath.row])
+        return cell
+    }
+    
+    
     
     var resturant:Details!
+    var resturantImage = [UIImage]()
+    var imagesURLlist = [String]()
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     weak var headerImageView: UIView?
     @IBOutlet weak var phoneNumberLabel: UILabel!
     
@@ -36,6 +57,12 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     var haveOpeningHour = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        
+        resturantImage.append(resturant.photo!)
+        
         if Auth.auth().currentUser != nil {
             LikeButton = UIBarButtonItem(title: "إعجاب", style: .plain, target: self, action: #selector(likeResturant))
             navigationItem.rightBarButtonItem = LikeButton
@@ -50,6 +77,15 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
                 DispatchQueue.main.async {
                     self.UpdateOpeningHour()
                 }
+            }
+        }
+        
+        SVProgressHUD.show()
+        
+        getImagesURL {
+            self.FillArrayImage {
+                self.collectionView.reloadData()
+                SVProgressHUD.dismiss()
             }
         }
         
@@ -115,7 +151,6 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
                 phoneCell.selectionStyle = .default
             }else {
                 phoneNumberLabel.text = "لايوجد"
-                phoneNumberLabel.textColor = UIColor.black
                 phoneCell.selectionStyle = .none
             }
         }
@@ -140,7 +175,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         
         if isLiked {
             DataService.instance.REF_Users.child(userID!).child("Likes").child(resturant.resturantId).removeValue()
-             LikedResturant.shared.resturantList = LikedResturant.shared.resturantList.filter{$0.resturantId != resturant.resturantId}
+            LikedResturant.shared.resturantList = LikedResturant.shared.resturantList.filter{$0.resturantId != resturant.resturantId}
         }else{
             LikedResturant.shared.resturantList.append(resturant)
             DataService.instance.REF_Users.child(userID!).child("Likes").child(resturant.resturantId).setValue(resturant.resturantId)
@@ -164,7 +199,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     }
     func setupHeaderImage() {
         
-//        5318232d498e6841bd3d878b
+        //        5318232d498e6841bd3d878b
         let imageView = UIImageView()
         imageView.image = resturant.photo!
         imageView.contentMode = .scaleAspectFit
@@ -268,7 +303,27 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 3 && indexPath.row == 1 {
+        if indexPath.section == 2 && indexPath.row == 1 {
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            
+            
+            let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            actionSheet.addAction(UIAlertAction(title: "اختيار صورة", style: .default, handler: { (action:UIAlertAction) in
+                imagePickerController.sourceType = .photoLibrary
+                self.present(imagePickerController, animated: true, completion: nil)
+            }))
+            
+            actionSheet.addAction(UIAlertAction(title: "التقاط صورة", style: .default, handler: { (action:UIAlertAction) in
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            }))
+            actionSheet.addAction(UIAlertAction(title: "إلغاء", style: .cancel, handler: nil))
+            
+            self.present(actionSheet, animated: true, completion: nil)
+        }
+        if indexPath.section == 4 && indexPath.row == 1 {
             
             
             UIApplication.shared.open(NSURL(string:
@@ -278,7 +333,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
             
         }
         
-        if indexPath.section == 4 && indexPath.row == 0 && phoneNumberLabel.text != "لايوجد"{
+        if indexPath.section == 5 && indexPath.row == 0 && phoneNumberLabel.text != "لايوجد"{
             if let url = URL(string: "tel://\(phoneNumberLabel.text!)"),
                 UIApplication.shared.canOpenURL(url) {
                 if #available(iOS 10, *) {
@@ -294,6 +349,35 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            uploadImage(num: 0, image: image) {
+                 self.resturantImage.append(image)
+                self.collectionView.reloadData()
+            }
+           
+            
+        }
+        imagePickerControllerDidCancel(picker)
+    }
+    
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+//            originalImage.image = image
+//            configureNavigationBarItems()
+//            imagePickerControllerDidCancel(picker)
+//
+//        }
+//    }
+    
+
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showRate"{
             let ratingVC = segue.destination as! RatingViewController
@@ -303,5 +387,83 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
             let commentVC = segue.destination as! CommentsTableViewController
             commentVC.resturant = resturant
         }
+    }
+    
+    
+    
+    
+    func uploadImage(num:Int,image: UIImage, completion: @escaping () -> Void){
+        
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+        let randomId = DataService.instance.REF_Users.childByAutoId().key
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference().child("Resturant").child(resturant.resturantId).child("Image").child(randomId!)
+        
+        guard let imageData = UIImageJPEGRepresentation(image, 0.25) else { return }
+        
+        
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpg"
+ 
+        storageRef.putData(imageData, metadata: metaData) { metaData, error in
+            if error == nil, metaData != nil {
+                storageRef.downloadURL(completion: { (url : URL?, error : Error?) in
+                    let profileImge = url?.absoluteString
+                    DataService.instance.REF_Resturant.child(self.resturant.resturantId).child("Images").childByAutoId().setValue(profileImge!)
+                    completion()
+                })
+                    
+                
+                completion()
+        }
+    }
+}
+    
+    
+    
+    func getImagesURL(completion: @escaping () -> Void) {
+        
+        DataService.instance.REF_Resturant.child(resturant.resturantId).child("Images").observeSingleEvent(of: .value) { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
+            return}
+            
+            if snapshot.count > 0 {
+                for url in snapshot {
+                    if let item = url.value as? String{
+                        self.imagesURLlist.append(item)
+                    }
+                }
+              completion()
+            }else {
+                SVProgressHUD.dismiss()
+                completion()
+            }
+        }
+
+    }
+        
+    func FillArrayImage(completion: @escaping () -> Void) {
+        
+        for url in imagesURLlist {
+           
+            
+            let request = URLSession.shared.dataTask(with: URL(string: url)!) { (data, response, error) in
+                
+                if error == nil{
+                    let image = UIImage(data: data!)
+                    self.resturantImage.append(image!)
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
+                    }
+                    
+                }
+            }
+            
+            request.resume()
+        }
+        
+       completion()
+        
     }
 }
