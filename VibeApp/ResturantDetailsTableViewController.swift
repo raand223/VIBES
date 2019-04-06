@@ -60,8 +60,10 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        if let photo = resturant.photo {
+            resturantImage.append(photo)
+        }
         
-        resturantImage.append(resturant.photo!)
         
         if Auth.auth().currentUser != nil {
             LikeButton = UIBarButtonItem(title: "إعجاب", style: .plain, target: self, action: #selector(likeResturant))
@@ -86,7 +88,6 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
             self.FillArrayImage {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
-                    SVProgressHUD.dismiss()
                 }
                 
             }
@@ -488,10 +489,16 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
                 if error == nil{
                     let image = UIImage(data: data!)
                     self.resturantImage.append(image!)
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
+                    if self.resturantImage.count - 1 == self.imagesURLlist.count {
+                        DispatchQueue.main.async {
+                            self.collectionView.reloadData()
+                            SVProgressHUD.dismiss()
+                        }
                     }
                     
+                    
+                }else {
+                     SVProgressHUD.dismiss()
                 }
             }
             
