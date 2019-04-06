@@ -10,6 +10,9 @@ import ParallaxHeader
 import SnapKit
 import SVProgressHUD
 import MapKit
+import FirebaseDatabase
+import Firebase
+import FirebaseAuth
 class ResturantDetailsTableViewController: UITableViewController, MKMapViewDelegate {
     
     var resturant:Details!
@@ -26,7 +29,8 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     @IBOutlet weak var resturantReview: UITextView!
     @IBOutlet weak var openingHourLabel: UILabel!
     @IBOutlet weak var phoneCell: UITableViewCell!
-     var LikeButton: UIBarButtonItem!
+    var isLiked = false
+    var LikeButton: UIBarButtonItem!
     
     
     var haveOpeningHour = false
@@ -37,25 +41,25 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         configureLikedResturant()
         print(resturant.resturantId)
         setupHeaderImage()
-         self.updateContents()
+        self.updateContents()
         DispatchQueue.global(qos: .background).async {
-        self.getHour {
-            DispatchQueue.main.async {
-                self.UpdateOpeningHour()
+            self.getHour {
+                DispatchQueue.main.async {
+                    self.UpdateOpeningHour()
+                }
             }
-        }
         }
         
         var annotations = [MKPointAnnotation]()
         let lat = CLLocationDegrees(resturant.langtitude)
         let long = CLLocationDegrees(resturant.longtitude)
         
-         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
         annotation.title = resturant.resturantName
-//        annotation.subtitle = mediaURL
+        //        annotation.subtitle = mediaURL
         annotations.append(annotation)
         self.map.addAnnotations(annotations)
         
@@ -104,48 +108,60 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         
         if let phoneNumber = resturant.contactNumber {
             if phoneNumber != "" {
-            phoneNumberLabel.text = phoneNumber
-                 phoneCell.selectionStyle = .default
+                phoneNumberLabel.text = phoneNumber
+                phoneCell.selectionStyle = .default
             }else {
                 phoneNumberLabel.text = "لايوجد"
                 phoneNumberLabel.textColor = UIColor.black
-                 phoneCell.selectionStyle = .none
+                phoneCell.selectionStyle = .none
             }
         }
         
     }
     
     func configureLikedResturant() {
-        let isLiked = LikedResturant.shared.resturantList.contains { (details) -> Bool in
+        isLiked = LikedResturant.shared.resturantList.contains { (details) -> Bool in
             details.resturantId == resturant.resturantId
         }
         
         if isLiked {
-          LikeButton.title = "إزالة الإعجاب"
+            LikeButton.title = "إزالة الإعجاب"
         }else{
-        LikeButton.title = "إعجاب"
+            LikeButton.title = "إعجاب"
         }
     }
     
     
-   @objc func likeResturant() {
+    @objc func likeResturant() {
+        let userID = Auth.auth().currentUser?.uid
         
+        if isLiked {
+            DataService.instance.REF_Users.child(userID!).child("Likes").child(resturant.resturantId).removeValue()
+             LikedResturant.shared.resturantList = LikedResturant.shared.resturantList.filter{$0.resturantId != resturant.resturantId}
+        }else{
+            LikedResturant.shared.resturantList.append(resturant)
+            DataService.instance.REF_Users.child(userID!).child("Likes").child(resturant.resturantId).setValue(resturant.resturantId)
+        }
+        
+        isLiked = !isLiked
+        configureLikedResturant()
     }
+    
     func UpdateOpeningHour() {
         if let resturantStartDate = resturant.startHours {
             
             if resturantStartDate != "" {
-              openingHourLabel.text = getTimeFormat()
-               
+                openingHourLabel.text = getTimeFormat()
+                
             }else{
                 openingHourLabel.text = "لا يوجد"
-               
+                
             }
         }
     }
     func setupHeaderImage() {
         
-        
+//        5318232d498e6841bd3d878b
         let imageView = UIImageView()
         imageView.image = resturant.photo!
         imageView.contentMode = .scaleAspectFit
@@ -230,7 +246,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     }
     
     func getTimeFormat() -> String {
-    
+        
         var startHours = resturant.startHours!
         var endHours = resturant.EndHours!
         
@@ -243,7 +259,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         
         startHours.insert(":", at: startHours.index(startHours.startIndex, offsetBy: 2))
         endHours.insert(":", at: endHours.index(endHours.startIndex, offsetBy: 2))
-    
+        
         return "\(startHours) - \(endHours)"
     }
     
@@ -254,9 +270,9 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
             
             UIApplication.shared.open(NSURL(string:
                 "comgooglemaps://?saddr=&daddr=\(resturant.langtitude),\(resturant.longtitude)&directionsmode=driving")! as URL, options: [:], completionHandler: nil)
-    
             
-           
+            
+            
         }
         
         if indexPath.section == 4 && indexPath.row == 0 && phoneNumberLabel.text != "لايوجد"{
@@ -272,7 +288,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
             }
         }
         
-         tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

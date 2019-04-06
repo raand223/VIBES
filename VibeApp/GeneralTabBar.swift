@@ -11,11 +11,21 @@ import FirebaseAuth
 import Firebase
 import FirebaseDatabase
 import SVProgressHUD
+import MapKit
 class GeneralTabBar: UITabBarController {
 
+    private var locationManager:CLLocationManager = CLLocationManager()
+    var location:CLLocation!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        var coordn = CLLocationCoordinate2D()
+        let currentLocation = locationManager.location
+        coordn.latitude =  CLLocationDegrees(exactly: currentLocation?.coordinate.latitude ?? 24.770837)!
+        coordn.longitude = CLLocationDegrees(exactly:currentLocation?.coordinate.longitude ?? 46.679192)!
+        location = CLLocation(latitude: coordn.latitude, longitude: coordn.longitude)
         
         self.findLikedResturant {
             
@@ -137,15 +147,19 @@ class GeneralTabBar: UITabBarController {
                     
                     if let location = venue.value(forKey: "location") as? NSDictionary {
                         
-                        if let distance = location.value(forKey: "distance") as? Double {
-                            fDistance = distance/1000
-                        }
                         if let latitude = location.value(forKey: "lat") as? Double {
                             fLatitude = latitude
                         }
                         if let longtitude = location.value(forKey: "lng") as? Double {
                             fLongtitude = longtitude
                         }
+                        
+                        if let distance = location.value(forKey: "distance") as? Double {
+                            fDistance = distance/1000
+                        }else {
+                            fDistance = userDistance(lat: fLatitude, long: fLongtitude)/1000
+                        }
+                        
                     }
                     if let categories = venue.value(forKey: "categories") as? NSArray{
                         
@@ -188,6 +202,8 @@ class GeneralTabBar: UITabBarController {
                         if let groups = tips.value(forKey: "groups") as? NSArray {
                             if let tipsDict = groups[1] as? NSDictionary{
                                 if let items = tipsDict.value(forKey: "items") as? NSArray{
+                                    if items.count > 0 {
+                                        
                                     
                                     if let object = items[0] as? NSDictionary{
                                         if let text = object.value(forKey: "text") as? String{
@@ -196,6 +212,10 @@ class GeneralTabBar: UITabBarController {
                                             
                                         }
                                     }
+                                    }else {
+                                        fReviewText = "good"
+                                    }
+                                    
                                 }
                             }
                             
@@ -245,7 +265,10 @@ class GeneralTabBar: UITabBarController {
     
     
     
-    
+    func userDistance(lat: Double, long: Double) -> Double {
+       let loc2 = CLLocation(latitude: lat, longitude: long)
+        return location.distance(from: loc2)
+    }
     
     
 

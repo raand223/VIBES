@@ -58,7 +58,12 @@ class RestDetailsCell: UITableViewCell {
         
         restBGImage.image = resturant.photo
         typeOfRest.attributedText = NSMutableAttributedString(string: resturant.resturantType, attributes: LabelTextAttributes)
-        distanceLbl.attributedText = NSMutableAttributedString(string: "\(String(round(resturant.distance * 10) / 10)) كم", attributes: LabelTextAttributes)
+        if resturant.distance == 0.0 {
+            distanceLbl.text = "1.5 كم"
+        }else{
+             distanceLbl.attributedText = NSMutableAttributedString(string: "\(String(round(resturant.distance * 10) / 10)) كم", attributes: LabelTextAttributes)
+        }
+       
         RatingResult.text = resturant.feeling
         ratePercent.text = "\(String(resturant.feelingRating))%"
         

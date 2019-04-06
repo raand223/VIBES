@@ -65,10 +65,12 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
         
         mapview.delegate = self
         SVProgressHUD.show(withStatus: "إنتظر قليلًا...")
+        self.view.isUserInteractionEnabled = false
         self.findNearestResturantsForSquareApi(name: "food") {
             DispatchQueue.main.async {
                 self.restCollectionView.reloadData()
                 SVProgressHUD.dismiss()
+                self.view.isUserInteractionEnabled = true
             }
             
         }

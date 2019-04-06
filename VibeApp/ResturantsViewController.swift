@@ -149,7 +149,11 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        super.viewWillAppear(animated)
+        if isLikedVC {
+            resturantDetails = LikedResturant.shared.resturantList
+        }
+        tableView.reloadData()
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         
