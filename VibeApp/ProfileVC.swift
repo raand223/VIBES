@@ -132,7 +132,7 @@ class ProfileVC: UIViewController,UITextFieldDelegate {
         print("usser try to log out")
         
         let storayBoard = UIStoryboard(name: "Start", bundle: nil)
-        
+        LikedResturant.shared.resturantList.removeAll()
         self.dismiss(animated: false, completion: nil)
         
     }
