@@ -36,9 +36,12 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     var haveOpeningHour = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        LikeButton = UIBarButtonItem(title: "إعجاب", style: .plain, target: self, action: #selector(likeResturant))
-        navigationItem.rightBarButtonItem = LikeButton
-        configureLikedResturant()
+        if Auth.auth().currentUser != nil {
+            LikeButton = UIBarButtonItem(title: "إعجاب", style: .plain, target: self, action: #selector(likeResturant))
+            navigationItem.rightBarButtonItem = LikeButton
+            configureLikedResturant()
+        }
+        
         print(resturant.resturantId)
         setupHeaderImage()
         self.updateContents()
