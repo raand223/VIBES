@@ -437,7 +437,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ieb-Wh-OL0">
-                                <rect key="frame" x="16" y="202" width="343" height="173"/>
+                                <rect key="frame" x="16" y="158" width="382" height="173"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PostImage" translatesAutoresizingMaskIntoConstraints="NO" id="hsO-6T-5hf">
                                         <rect key="frame" x="8" y="36" width="100" height="100"/>
@@ -447,7 +447,7 @@
                                         </constraints>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Irp-6O-W1Y">
-                                        <rect key="frame" x="118" y="36" width="217" height="100"/>
+                                        <rect key="frame" x="118" y="36" width="256" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -466,7 +466,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLE-hV-IRb">
-                                <rect key="frame" x="30" y="416" width="315" height="36"/>
+                                <rect key="frame" x="30" y="372" width="354" height="129"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="شارك">
                                     <color key="titleColor" red="0.87843137250000003" green="0.58039215690000001" blue="0.58431372550000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -585,7 +585,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IAF-ed-lYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1562.4000000000001" y="-683.49753694581284"/>
+            <point key="canvasLocation" x="4119" y="-25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="WeQ-eD-AYe">
@@ -597,12 +597,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Ufo-8r-dKd" kind="relationship" relationship="rootViewController" id="zcZ-V0-JLq"/>
+                        <segue destination="2P7-p6-2U6" kind="relationship" relationship="rootViewController" id="Ugn-vX-cyg"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y28-yJ-aiW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-642" y="-683"/>
+            <point key="canvasLocation" x="3094" y="-25"/>
         </scene>
         <!--HomeVC-->
         <scene sceneID="scN-ut-c5A">
@@ -1111,7 +1111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lmm-Zx-aDY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2847.826086956522" y="1532.1428571428571"/>
+            <point key="canvasLocation" x="2784" y="1533"/>
         </scene>
         <!--Resturant Details Table View Controller-->
         <scene sceneID="eXD-CM-YEt">
@@ -1536,7 +1536,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VNG-dm-KOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4411.594202898551" y="1532.608695652174"/>
+            <point key="canvasLocation" x="4412" y="1533"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="mHS-3J-zYD">
@@ -1789,7 +1789,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Djf-Jy-x5h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2848.8000000000002" y="2225.615763546798"/>
+            <point key="canvasLocation" x="3635" y="2365"/>
         </scene>
         <!--Rating View Controller-->
         <scene sceneID="5fB-qR-gye">
@@ -2034,7 +2034,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X3s-Ul-fPb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3594" y="2385"/>
+            <point key="canvasLocation" x="4412" y="2393"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J5r-sT-Tm5">
@@ -2081,12 +2081,12 @@
         <image name="منبهر" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZGO-hv-uTi"/>
-        <segue reference="Zur-Wl-qkm"/>
+        <segue reference="vpo-oX-JyW"/>
+        <segue reference="KrC-wh-nPL"/>
         <segue reference="ZxK-Fu-gma"/>
-        <segue reference="r9G-Bm-bBH"/>
+        <segue reference="Ugn-vX-cyg"/>
         <segue reference="RVh-cU-Cgh"/>
-        <segue reference="LiQ-kt-X5X"/>
+        <segue reference="GA6-Ow-nWy"/>
         <segue reference="Ykz-g5-tyo"/>
         <segue reference="WkG-M7-ip0"/>
     </inferredMetricsTieBreakers>

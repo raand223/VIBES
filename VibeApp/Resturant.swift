@@ -534,6 +534,8 @@ class Resturant: UIViewController,  MKMapViewDelegate,CLLocationManagerDelegate 
             else{
                 resturantVC.category = ResturantCategory.coffee.rawValue
             }
+            
+            resturantVC.isLikedVC = false 
         }
        
     

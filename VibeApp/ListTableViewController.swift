@@ -20,13 +20,14 @@ class ListTableViewController: UIViewController {
     
     var ref: DatabaseReference?
     var ResFavList = [ListModel]()
+    var likedResturanta = [Details]()
     var keyArray:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ListTableView.dataSource = self
-        loadList()
-        
+//        loadList()
+        getLikesResturant()
         ref = Database.database().reference()
         
     }
@@ -73,6 +74,11 @@ class ListTableViewController: UIViewController {
             }
         })
     }
+    
+    func getLikesResturant(){
+        let userID = Auth.auth().currentUser?.uid
+        DataService.instance.REF_Users.child(userID!).child("Likes").childByAutoId().setValue("506a9744e4b05499f5d3309d")
+    }
 }
 extension ListTableViewController: UITableViewDataSource{
     
@@ -98,4 +104,5 @@ class DataService {
     
     static  let  instance = DataService()
     var REF_Resturant = db_base.child("Resturant")
+    var REF_Users = db_base.child("Users")
 }

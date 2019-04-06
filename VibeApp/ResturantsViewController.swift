@@ -14,7 +14,8 @@ import Alamofire
 import FoursquareAPIClient
 import Async
 import SVProgressHUD
-
+import FirebaseAuth
+import FirebaseDatabase
 enum ResturantCategory: String {
     case breakfast = "breakfast"
     case lunch = "lunch"
@@ -27,7 +28,7 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     
     
     var category: String?
-    
+    var isLikedVC = true
     @IBOutlet weak var mapview: MKMapView!
     var spinner = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
@@ -80,6 +81,16 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
         
         //self.secondstimer = Timer.scheduledTimer(timeInterval:5, target: self, selector: #selector(self.UpdateSecondsTimer), userInfo: nil, repeats: true)
         SVProgressHUD.show(withStatus: "إنتظر قليلًا...")
+        
+        if isLikedVC {
+            self.findLikedResturant {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    SVProgressHUD.dismiss()
+                }
+            }
+        }
+        else {
         self.findNearestResturantsForSquareApi(name: category ?? "lunch") {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -87,6 +98,7 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
             }
             
         }
+    }
     }
     
     func setupSegmentController() {
@@ -119,20 +131,25 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     }
     func setupNavigationBarTitle() {
         
-        var navTitle = ""
-        switch category {
-        case ResturantCategory.breakfast.rawValue:
-            navTitle = "الإفطار"
-        case ResturantCategory.lunch.rawValue:
-            navTitle = "الغداء"
-        case ResturantCategory.dinner.rawValue:
-            navTitle = "العشاء"
-        case ResturantCategory.coffee.rawValue:
-            navTitle = "المقاهي"
-        default:
-            break
+        if isLikedVC {
+            self.navigationItem.title = "الاعجابات"
+        }else {
+            var navTitle = ""
+            switch category {
+            case ResturantCategory.breakfast.rawValue:
+                navTitle = "الإفطار"
+            case ResturantCategory.lunch.rawValue:
+                navTitle = "الغداء"
+            case ResturantCategory.dinner.rawValue:
+                navTitle = "العشاء"
+            case ResturantCategory.coffee.rawValue:
+                navTitle = "المقاهي"
+            default:
+                break
+            }
+            self.title = navTitle
         }
-        self.title = navTitle
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -370,8 +387,6 @@ let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.lati
         
         
         
-        
-        
         DispatchQueue.global(qos: .background).async {
             
             let data = URLSession.shared.query(address: url)
@@ -381,6 +396,10 @@ let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.lati
                 let alert = UIAlertController(title: NSLocalizedString("Error!", comment: ""), message: NSLocalizedString("There is a problem during fetching info or internet issue.", comment: ""), preferredStyle: .alert)
                 
                 let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel) { (action) in
+                }
+                alert.addAction(okAction)
+                DispatchQueue.main.async {
+                    self.show(alert, sender: nil)
                 }
             }else {
                 if let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary {
@@ -524,10 +543,211 @@ let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.lati
             }
             completion()
         }
-        //print(resturantDetails)
         
     }
     
+    func findLikedResturant(completion: @escaping ()-> Void) {
+        let userID = Auth.auth().currentUser?.uid
+        DataService.instance.REF_Users.child(userID!).child("Likes").observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let snapshot = snapshot.children.allObjects as? [DataSnapshot] else {
+                SVProgressHUD.dismiss()
+                return }
+            
+            
+            if snapshot.count > 0 {
+                
+                for restID in snapshot {
+                     if let restID = restID.value as? String{
+                        self.getResturantFromForSquareByID(resturantID: restID)
+                    }
+                }
+                
+                completion()
+            }
+            
+            
+        }) { (error) in
+          SVProgressHUD.dismiss()
+            completion()
+        }
+    }
+    
+    func getResturantFromForSquareByID(resturantID: String){
+        
+        let url = "https://api.foursquare.com/v2/venues/\(resturantID)?v=20160607&client_id=ZMSMIQAE0PIKGYAUHBM4IMSFFQA4WXEZNG5FYUHGBABFPE3C&client_secret=KYOC41BAQCFKGM5FN0SUASNR5JAK1B4KMR204M3CEPQEL4GO&oauth_token=NKRP0KY5ZDZIBMCU3TZS4BMP4ZMIQZBQPLBTCPXSIGPWFJ1L"
+        
+//        DispatchQueue.global(qos: .background).async {
+        
+            let data = URLSession.shared.query(address: url)
+            if data == nil {
+                
+                let alert = UIAlertController(title: NSLocalizedString("Error!", comment: ""), message: NSLocalizedString("There is a problem during fetching info or internet issue.", comment: ""), preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel) { (action) in
+                }
+                alert.addAction(okAction)
+                DispatchQueue.main.async {
+                 self.show(alert, sender: nil)
+                }
+            }else {
+                let returant = self.parseResturantData(data: data!)
+               self.resturantDetails.append(returant!)
+            }
+        
+        
+    }
+    
+    
+    
+    
+    
+    func parseResturantData(data: Data) -> Details?{
+        var fName:String = ""
+        var fResturantID = ""
+        var fType:String = ""
+        var fDistance:Double = 0.0
+        var fRatingz:Double = 0.0
+        var fTotalRatings:Int = 0
+        var fReviewText:String = ""
+        var fPhoto:String = ""
+        var fLongtitude = 0.0
+        var fLatitude = 0.0
+        var fCheckInCount = 0
+        var fCurrency = ""
+        var fTwitterAccount = ""
+        var fPhoneNumber = ""
+        var fImage = UIImage(named: "logo")!
+        if let jsonDic = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
+            if let response = jsonDic!.value(forKey: "response") as? NSDictionary {
+                
+                if let venue = response.value(forKey: "venue") as? NSDictionary {
+                    if let name = venue.value(forKey: "name") as? String{
+                        fName = name
+                        
+                    }
+                    
+                    if let resturantID = venue.value(forKey: "id") as? String{
+                        fResturantID = resturantID
+                        
+                    }
+                    
+                    if let contact = venue.value(forKey: "contact") as? NSDictionary{
+                        
+                        if let twitterAccount = contact.value(forKey: "twitter") as? String {
+                            fTwitterAccount = twitterAccount
+                        }
+                        
+                        if let phoneNumber = contact.value(forKey: "phone") as? String {
+                            fPhoneNumber = phoneNumber
+                        }
+                    }
+                    if let status = venue.value(forKey: "stats") as? NSDictionary{
+                        
+                        if let checkInCount = status.value(forKey: "checkinsCount") as? Int {
+                            fCheckInCount = checkInCount
+                        }
+                    }
+                    
+                    
+                    if let price = venue.value(forKey: "price") as? NSDictionary{
+                        
+                        if let priceMessege = price.value(forKey: "message") as? String {
+                            fCurrency = priceMessege
+                        }
+                    }
+                    
+                    if let location = venue.value(forKey: "location") as? NSDictionary {
+                        
+                        if let distance = location.value(forKey: "distance") as? Double {
+                            fDistance = distance/1000
+                        }
+                        if let latitude = location.value(forKey: "lat") as? Double {
+                            fLatitude = latitude
+                        }
+                        if let longtitude = location.value(forKey: "lng") as? Double {
+                            fLongtitude = longtitude
+                        }
+                    }
+                    if let categories = venue.value(forKey: "categories") as? NSArray{
+                        
+                        if let details = categories[0] as? NSDictionary{
+                            if let type = details.value(forKey: "pluralName") as? String{
+                                fType = type
+                                
+                            }
+                        }
+                        
+                        
+                    }
+                    if let rating = venue.value(forKey: "rating") as? Double {
+                        fRatingz = Double(rating/2)
+                    }
+                    if let likesCount = venue.value(forKey: "ratingSignals") as? Int {
+                        fTotalRatings = likesCount
+                    }
+                    if let photos = venue.value(forKey: "bestPhoto") as? NSDictionary {
+                        if let suffix = photos.value(forKey: "suffix") as? String{
+                            //print(suffix)
+                            let suffixx = suffix.replacingOccurrences(of: "\\", with: "")
+                            //print(suffixx)
+                            //https://igx.4sqi.net/img/general/300x500\(suffixx)
+                            let photoUrl = "https://fastly.4sqi.net/img/general/414x176\(suffixx)"
+                            fPhoto = photoUrl
+                            
+                            
+                            let imageData = URLSession.shared.query(address:fPhoto)
+                           
+                            if let imageData = imageData {
+                                if let image = UIImage(data: imageData){
+                                    fImage = image
+                                }
+                            }
+                        }
+                    }
+                    
+                    if let tips = venue.value(forKey: "tips") as? NSDictionary {
+                        if let groups = tips.value(forKey: "groups") as? NSArray {
+                            if let tipsDict = groups[1] as? NSDictionary{
+                                if let items = tipsDict.value(forKey: "items") as? NSArray{
+                                    
+                                    if let object = items[0] as? NSDictionary{
+                                        if let text = object.value(forKey: "text") as? String{
+                                            fReviewText = text
+                                            
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                }
+              
+                
+                let dataRate = URLSession.shared.query(address: self.getRateUrl(name: fName))
+                let rating = self.getRating(data: dataRate!)
+                
+                let resturant = Details(resturantName: fName, resturantRating: fRatingz, totalRating: fTotalRatings, photoLink: fPhoto, resturantType: fType, distance: fDistance, photo: fImage, tweetRating: rating, feeling: "", langtitude: fLatitude, longtitude: fLongtitude, checkInCount: fCheckInCount, currency: fCurrency, resturantID: fResturantID)
+                
+                if fTwitterAccount != "" {
+                    resturant.twitterAccount = fTwitterAccount
+                }
+                if fPhoneNumber != "" {
+                    resturant.contactNumber = fPhoneNumber
+                }
+                if fReviewText != "" {
+                    resturant.reviewsText.append(fReviewText)
+                }
+                return resturant
+            }
+            
+        }
+       return nil
+    }
+    
+
+ 
     
     //This will call when user location changed
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
