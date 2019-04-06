@@ -33,6 +33,7 @@
 		BB27B7E82257D776001DD498 /* CommentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB27B7E72257D776001DD498 /* CommentsTableViewController.swift */; };
 		BB27B7EA2258C3B9001DD498 /* GeneralTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB27B7E92258C3B9001DD498 /* GeneralTabBar.swift */; };
 		BB27B7EC22591647001DD498 /* restImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB27B7EB22591647001DD498 /* restImageCell.swift */; };
+		BB27B7EE22594A9A001DD498 /* ImagePreviewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB27B7ED22594A9A001DD498 /* ImagePreviewerVC.swift */; };
 		BB2AE0AA224AAA1200998D93 /* ResturantDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2AE0A9224AAA1200998D93 /* ResturantDetailsTableViewController.swift */; };
 		BB2AE0AC224AAD0200998D93 /* UIView+Blur.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB2AE0AB224AAD0200998D93 /* UIView+Blur.swift */; };
 		BB34131D224700D8002EC6A6 /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB34131C224700D8002EC6A6 /* Rating.swift */; };
@@ -80,6 +81,7 @@
 		BB27B7E72257D776001DD498 /* CommentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsTableViewController.swift; sourceTree = "<group>"; };
 		BB27B7E92258C3B9001DD498 /* GeneralTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTabBar.swift; sourceTree = "<group>"; };
 		BB27B7EB22591647001DD498 /* restImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = restImageCell.swift; sourceTree = "<group>"; };
+		BB27B7ED22594A9A001DD498 /* ImagePreviewerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewerVC.swift; sourceTree = "<group>"; };
 		BB2AE0A9224AAA1200998D93 /* ResturantDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResturantDetailsTableViewController.swift; sourceTree = "<group>"; };
 		BB2AE0AB224AAD0200998D93 /* UIView+Blur.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Blur.swift"; sourceTree = "<group>"; };
 		BB34131C224700D8002EC6A6 /* Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				BB27B7E72257D776001DD498 /* CommentsTableViewController.swift */,
 				BB27B7E92258C3B9001DD498 /* GeneralTabBar.swift */,
 				BB27B7EB22591647001DD498 /* restImageCell.swift */,
+				BB27B7ED22594A9A001DD498 /* ImagePreviewerVC.swift */,
 			);
 			path = VibeApp;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				F03743402223F6F200E10344 /* Resturant.swift in Sources */,
 				BB2AE0AC224AAD0200998D93 /* UIView+Blur.swift in Sources */,
 				BB27B7E82257D776001DD498 /* CommentsTableViewController.swift in Sources */,
+				BB27B7EE22594A9A001DD498 /* ImagePreviewerVC.swift in Sources */,
 				BBBF199E224B2E6700FACC01 /* RatingViewController.swift in Sources */,
 				52A8D7782216FF0600E9BF77 /* SingUpVC.swift in Sources */,
 				52A8D7622216FCCD00E9BF77 /* AppDelegate.swift in Sources */,

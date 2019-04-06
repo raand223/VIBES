@@ -84,8 +84,11 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         
         getImagesURL {
             self.FillArrayImage {
-                self.collectionView.reloadData()
-                SVProgressHUD.dismiss()
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    SVProgressHUD.dismiss()
+                }
+                
             }
         }
         
@@ -349,6 +352,28 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        
+        if indexPath.section == 2 && indexPath.row == 1 {
+            if Auth.auth().currentUser == nil {
+                cell.isHidden = true
+            }
+            
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 2 && indexPath.row == 1 {
+            if Auth.auth().currentUser == nil {
+               return 0
+            }else{
+                 return super.tableView(tableView, heightForRowAt: indexPath)
+            }
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
@@ -357,9 +382,11 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            SVProgressHUD.show()
             uploadImage(num: 0, image: image) {
                  self.resturantImage.append(image)
                 self.collectionView.reloadData()
+                SVProgressHUD.dismiss()
             }
            
             
@@ -386,6 +413,11 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
         }else if segue.identifier == "commentSegue" {
             let commentVC = segue.destination as! CommentsTableViewController
             commentVC.resturant = resturant
+        }else if segue.identifier == "imagePreivew" {
+            let previewrVC = segue.destination as! ImagePreviewerVC
+            let indexPaths : NSArray = collectionView.indexPathsForSelectedItems! as NSArray
+            let indexx : IndexPath = indexPaths[0] as! IndexPath
+            previewrVC.resturantImage = resturantImage[indexx.row]
         }
     }
     
@@ -414,9 +446,11 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
                     completion()
                 })
                     
+               
                 
+            } else {
                 completion()
-        }
+            }
     }
 }
     
@@ -444,6 +478,7 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
     }
         
     func FillArrayImage(completion: @escaping () -> Void) {
+        
         
         for url in imagesURLlist {
            

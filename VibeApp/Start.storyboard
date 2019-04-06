@@ -497,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wXX-LR-UhL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5574" y="2285"/>
+            <point key="canvasLocation" x="5741" y="2267"/>
         </scene>
         <!--List Table View Controller-->
         <scene sceneID="H1D-6c-tFF">
@@ -707,7 +707,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5t-Nh-zys" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5574" y="1533"/>
+            <point key="canvasLocation" x="5070" y="1992"/>
         </scene>
         <!--First View Controller-->
         <scene sceneID="CLv-WR-hJe">
@@ -1331,9 +1331,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="98.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oyx-fl-4Hp">
-                                                    <rect key="frame" x="0.0" y="11.666666666666629" width="414" height="74"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Oyx-fl-4Hp">
+                                                    <rect key="frame" x="20" y="11" width="374" height="77"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="a06-g9-Kgr">
                                                         <size key="itemSize" width="96" height="74"/>
@@ -1343,7 +1342,7 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="25h-Bk-r2z" customClass="restImageCell" customModule="VibeApp" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="96" height="74"/>
+                                                            <rect key="frame" x="0.0" y="1.6666666666666667" width="96" height="74"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                                 <rect key="frame" x="0.0" y="0.0" width="96" height="74"/>
@@ -1362,11 +1361,18 @@
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="restImage" destination="zRe-yR-3o8" id="ohe-e4-qMF"/>
+                                                                <segue destination="IPo-jM-5o3" kind="show" identifier="imagePreivew" id="ObU-QC-3aO"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
                                                 </collectionView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Oyx-fl-4Hp" firstAttribute="leading" secondItem="f7l-Dr-ypy" secondAttribute="leadingMargin" id="PSa-02-Xpv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Oyx-fl-4Hp" secondAttribute="bottom" id="XDk-cE-z71"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Oyx-fl-4Hp" secondAttribute="trailing" id="c2f-pT-IeU"/>
+                                                <constraint firstItem="Oyx-fl-4Hp" firstAttribute="top" secondItem="f7l-Dr-ypy" secondAttribute="topMargin" id="mOY-eW-1co"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
@@ -1600,7 +1606,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VNG-dm-KOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4412" y="1533"/>
+            <point key="canvasLocation" x="4372" y="1643"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="mHS-3J-zYD">
@@ -2119,6 +2125,35 @@
             </objects>
             <point key="canvasLocation" x="1112" y="1644"/>
         </scene>
+        <!--Image PreviewerVC-->
+        <scene sceneID="pnn-h5-f7N">
+            <objects>
+                <viewController id="IPo-jM-5o3" customClass="ImagePreviewerVC" customModule="VibeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AgN-er-bkR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xO0-YJ-SpN">
+                                <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="xO0-YJ-SpN" firstAttribute="bottom" secondItem="sjX-6r-cSP" secondAttribute="bottom" id="LfM-4X-YbS"/>
+                            <constraint firstItem="xO0-YJ-SpN" firstAttribute="trailing" secondItem="sjX-6r-cSP" secondAttribute="trailing" id="PP1-EJ-GCH"/>
+                            <constraint firstItem="xO0-YJ-SpN" firstAttribute="top" secondItem="sjX-6r-cSP" secondAttribute="top" id="sW8-ln-2sd"/>
+                            <constraint firstItem="xO0-YJ-SpN" firstAttribute="leading" secondItem="sjX-6r-cSP" secondAttribute="leading" id="vUK-Ka-m4M"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sjX-6r-cSP"/>
+                    </view>
+                    <connections>
+                        <outlet property="image" destination="xO0-YJ-SpN" id="Vga-4t-CCb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aj9-yE-jVi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4834.7826086956529" y="875.54347826086962"/>
+        </scene>
     </scenes>
     <resources>
         <image name="PostImage" width="840" height="600"/>
@@ -2147,8 +2182,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="vpo-oX-JyW"/>
         <segue reference="Zur-Wl-qkm"/>
-        <segue reference="3o8-ea-P9T"/>
-        <segue reference="jsS-7R-Ayy"/>
+        <segue reference="ZxK-Fu-gma"/>
+        <segue reference="Ugn-vX-cyg"/>
         <segue reference="Rkx-Je-YnP"/>
         <segue reference="GA6-Ow-nWy"/>
         <segue reference="Ykz-g5-tyo"/>
