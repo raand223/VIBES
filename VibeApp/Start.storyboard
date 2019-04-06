@@ -1475,7 +1475,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="RtS-Ra-NA8">
+                        <view key="tableFooterView" hidden="YES" contentMode="scaleToFill" id="RtS-Ra-NA8">
                             <rect key="frame" x="0.0" y="117.33333333333334" width="414" height="89"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -1523,6 +1523,7 @@
                     </tableView>
                     <connections>
                         <outlet property="commentTextField" destination="ou6-5m-Wez" id="pup-oz-B2l"/>
+                        <outlet property="sendView" destination="RtS-Ra-NA8" id="L8a-wJ-Mng"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VNG-dm-KOM" userLabel="First Responder" sceneMemberID="firstResponder"/>

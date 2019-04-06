@@ -10,8 +10,11 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import SVProgressHUD
+import FirebaseAuth
 class CommentsTableViewController: UITableViewController,UITextFieldDelegate {
-
+    
+    @IBOutlet weak var sendView: UIView!
+    
     var resturant:Details!
     var commentsList: [String] = [String]()
     @IBOutlet weak var commentTextField: UITextField!
@@ -22,6 +25,10 @@ class CommentsTableViewController: UITableViewController,UITextFieldDelegate {
         commentsList.append(resturant.reviewsText[0])
         SVProgressHUD.show()
         getComment()
+        
+         if Auth.auth().currentUser != nil {
+            sendView.isHidden = false
+        }
     }
 
     // MARK: - Table view data source

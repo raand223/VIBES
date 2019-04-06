@@ -200,6 +200,7 @@ class GeneralTabBar: UITabBarController {
                     
                     if let tips = venue.value(forKey: "tips") as? NSDictionary {
                         if let groups = tips.value(forKey: "groups") as? NSArray {
+                            if groups.count > 1 {
                             if let tipsDict = groups[1] as? NSDictionary{
                                 if let items = tipsDict.value(forKey: "items") as? NSArray{
                                     if items.count > 0 {
@@ -217,6 +218,10 @@ class GeneralTabBar: UITabBarController {
                                     }
                                     
                                 }
+                                
+                            }
+                            }else{
+                                 fReviewText = "good"
                             }
                             
                         }
