@@ -2,7 +2,11 @@
 <Workspace
    version = "1.0">
    <FileRef
+<<<<<<< HEAD
       location = "group:/Users/ali_dh/Desktop/&#x643;&#x648;&#x62f; &#x641;&#x627;&#x64a;&#x628;&#x632; &#x627;&#x644;&#x627;&#x62e;&#x64a;&#x631; &#x627;&#x644;&#x635;&#x62d;/VIBES-master/VIBES.xcodeproj">
+=======
+      location = "group:VibeApp.xcodeproj">
+>>>>>>> c4932ff8bfc88a31b25c9a86818637f1dc169700
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
