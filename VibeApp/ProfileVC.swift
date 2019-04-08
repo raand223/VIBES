@@ -73,7 +73,7 @@ class ProfileVC: UIViewController,UITextFieldDelegate {
             
         }
         
-        button.layer.borderWidth = 2
+    
         
     }
     
