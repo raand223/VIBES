@@ -20,4 +20,5 @@ class restImageCell: UICollectionViewCell {
     func configureUI(image: UIImage) {
         restImage.image = image
     }
+    // test
 }
