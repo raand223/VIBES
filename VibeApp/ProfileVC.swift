@@ -33,8 +33,11 @@ class ProfileVC: UIViewController,UITextFieldDelegate {
                 }
             })
         }
+       let cancel = UIAlertAction(title: "إلغاء", style: .default)
         prompt.addTextField(configurationHandler: nil)
         prompt.addAction(okAction)
+        prompt.addAction(cancel)
+
         present(prompt, animated: true, completion: nil)
     }
     
@@ -96,7 +99,7 @@ class ProfileVC: UIViewController,UITextFieldDelegate {
             let userEmail = user.child("email")
             userEmail.setValue(self.email.text!)
             
-            
+             SVProgressHUD.showSuccess(withStatus:" تم تعديل بياناتك" )
             
         })
         

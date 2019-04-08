@@ -14,11 +14,8 @@
 		52A8D7742216FCE700E9BF77 /* Start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52A8D7732216FCE700E9BF77 /* Start.storyboard */; };
 		52A8D7762216FD0A00E9BF77 /* SingInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8D7752216FD0A00E9BF77 /* SingInVC.swift */; };
 		52A8D7782216FF0600E9BF77 /* SingUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8D7772216FF0600E9BF77 /* SingUpVC.swift */; };
-		52A8D77A2216FF7700E9BF77 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8D7792216FF7700E9BF77 /* HomeVC.swift */; };
-		52A8D77C2216FFB500E9BF77 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8D77B2216FFB500E9BF77 /* CameraVC.swift */; };
 		52A8D7862217226F00E9BF77 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8D7852217226F00E9BF77 /* AuthModel.swift */; };
 		52A8D78E221B2CDF00E9BF77 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8D78D221B2CDF00E9BF77 /* PostModel.swift */; };
-		52A8D790221B2F9400E9BF77 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8D78F221B2F9400E9BF77 /* HomeCell.swift */; };
 		52A8D793221B3ECD00E9BF77 /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A8D792221B3ECD00E9BF77 /* users.swift */; };
 		7726A0C3222579150065A425 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726A0C2222579150065A425 /* ListTableViewController.swift */; };
 		7726A0C72225ABDD0065A425 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726A0C62225ABDD0065A425 /* ListModel.swift */; };
@@ -41,8 +38,6 @@
 		BBBF199E224B2E6700FACC01 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBBF199D224B2E6700FACC01 /* RatingViewController.swift */; };
 		F0013DBB2222C3F40087E1CB /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0013DBA2222C3F40087E1CB /* SplashViewController.swift */; };
 		F03743362223CDE600E10344 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03743352223CDE600E10344 /* HomeViewController.swift */; };
-		F037433A2223EFDB00E10344 /* resturantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03743392223EFDB00E10344 /* resturantCell.swift */; };
-		F037433E2223F6EC00E10344 /* ResturantTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037433D2223F6EC00E10344 /* ResturantTableViewController.swift */; };
 		F03743402223F6F200E10344 /* Resturant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F037433F2223F6F200E10344 /* Resturant.swift */; };
 		F03743422223F6F700E10344 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03743412223F6F700E10344 /* Location.swift */; };
 		F0EB6BF32222AC00002037E8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F0EB6BF22222AC00002037E8 /* GoogleService-Info.plist */; };
@@ -60,11 +55,8 @@
 		52A8D7732216FCE700E9BF77 /* Start.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Start.storyboard; sourceTree = "<group>"; };
 		52A8D7752216FD0A00E9BF77 /* SingInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInVC.swift; sourceTree = "<group>"; };
 		52A8D7772216FF0600E9BF77 /* SingUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpVC.swift; sourceTree = "<group>"; };
-		52A8D7792216FF7700E9BF77 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
-		52A8D77B2216FFB500E9BF77 /* CameraVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
 		52A8D7852217226F00E9BF77 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		52A8D78D221B2CDF00E9BF77 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
-		52A8D78F221B2F9400E9BF77 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		52A8D792221B3ECD00E9BF77 /* users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
 		7726A0C2222579150065A425 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		7726A0C62225ABDD0065A425 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
@@ -92,8 +84,6 @@
 		BBBF199D224B2E6700FACC01 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		F0013DBA2222C3F40087E1CB /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F03743352223CDE600E10344 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		F03743392223EFDB00E10344 /* resturantCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = resturantCell.swift; sourceTree = "<group>"; };
-		F037433D2223F6EC00E10344 /* ResturantTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResturantTableViewController.swift; sourceTree = "<group>"; };
 		F037433F2223F6F200E10344 /* Resturant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resturant.swift; sourceTree = "<group>"; };
 		F03743412223F6F700E10344 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		F0EB6BF22222AC00002037E8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -141,23 +131,18 @@
 				52A8D7852217226F00E9BF77 /* AuthModel.swift */,
 				7726A0C52225AB9D0065A425 /* ListModel */,
 				52A8D791221B37BC00E9BF77 /* Post Model */,
-				52A8D78F221B2F9400E9BF77 /* HomeCell.swift */,
 				52A8D7732216FCE700E9BF77 /* Start.storyboard */,
-				52A8D7792216FF7700E9BF77 /* HomeVC.swift */,
 				96A284962237B9A10031A547 /* ResturantsViewController.swift */,
 				96A284982237B9F40031A547 /* RestDetailsCell.swift */,
 				96A2848E2237B64B0031A547 /* Constants.swift */,
 				96A2848C2237B61B0031A547 /* RestListCell.swift */,
 				77D2DF73222D32740035AB14 /* ProfileVC.swift */,
-				52A8D77B2216FFB500E9BF77 /* CameraVC.swift */,
 				52A8D7752216FD0A00E9BF77 /* SingInVC.swift */,
 				F03743412223F6F700E10344 /* Location.swift */,
 				52A8D7772216FF0600E9BF77 /* SingUpVC.swift */,
-				F03743392223EFDB00E10344 /* resturantCell.swift */,
 				F037433F2223F6F200E10344 /* Resturant.swift */,
 				52A8D7612216FCCD00E9BF77 /* AppDelegate.swift */,
 				F0013DBA2222C3F40087E1CB /* SplashViewController.swift */,
-				F037433D2223F6EC00E10344 /* ResturantTableViewController.swift */,
 				7726A0C2222579150065A425 /* ListTableViewController.swift */,
 				F03743352223CDE600E10344 /* HomeViewController.swift */,
 				52A8D7682216FCCD00E9BF77 /* Assets.xcassets */,
@@ -355,7 +340,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52A8D77A2216FF7700E9BF77 /* HomeVC.swift in Sources */,
 				BB2AE0AA224AAA1200998D93 /* ResturantDetailsTableViewController.swift in Sources */,
 				52A8D793221B3ECD00E9BF77 /* users.swift in Sources */,
 				7726A0C3222579150065A425 /* ListTableViewController.swift in Sources */,
@@ -364,9 +348,6 @@
 				F03743362223CDE600E10344 /* HomeViewController.swift in Sources */,
 				96A284972237B9A10031A547 /* ResturantsViewController.swift in Sources */,
 				96A284992237B9F40031A547 /* RestDetailsCell.swift in Sources */,
-				52A8D790221B2F9400E9BF77 /* HomeCell.swift in Sources */,
-				F037433A2223EFDB00E10344 /* resturantCell.swift in Sources */,
-				52A8D77C2216FFB500E9BF77 /* CameraVC.swift in Sources */,
 				BB27B7EC22591647001DD498 /* restImageCell.swift in Sources */,
 				BB27B7EA2258C3B9001DD498 /* GeneralTabBar.swift in Sources */,
 				7726A0C72225ABDD0065A425 /* ListModel.swift in Sources */,
@@ -383,7 +364,6 @@
 				52A8D7862217226F00E9BF77 /* AuthModel.swift in Sources */,
 				BB34131D224700D8002EC6A6 /* Rating.swift in Sources */,
 				F0013DBB2222C3F40087E1CB /* SplashViewController.swift in Sources */,
-				F037433E2223F6EC00E10344 /* ResturantTableViewController.swift in Sources */,
 				96A2848D2237B61B0031A547 /* RestListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
