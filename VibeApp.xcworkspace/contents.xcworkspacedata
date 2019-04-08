@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/ali_dh/Desktop/&#x643;&#x648;&#x62f; &#x641;&#x627;&#x64a;&#x628;&#x632; &#x627;&#x644;&#x627;&#x62e;&#x64a;&#x631; &#x627;&#x644;&#x635;&#x62d;/VIBES-master/VIBES.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
