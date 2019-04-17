@@ -81,11 +81,11 @@ class RestDetailsCell: UITableViewCell {
             FeelingEmoji.text = "😍"
         case "سعيد":
             FeelingEmoji.text = "😂"
-        case "مريح":
+        case "راضي":
             FeelingEmoji.text = "😌"
         case "نادم":
             FeelingEmoji.text = "🙁"
-        case "حزين":
+        case "مستاء":
             FeelingEmoji.text = "😢"
         case "غاضب":
             FeelingEmoji.text = "😡"

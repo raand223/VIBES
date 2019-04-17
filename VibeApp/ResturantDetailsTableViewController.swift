@@ -132,11 +132,11 @@ class ResturantDetailsTableViewController: UITableViewController, MKMapViewDeleg
             FeelingLAbel.text = "\(resturant.feeling!) 😍"
         case "سعيد":
             FeelingLAbel.text = "\(resturant.feeling!) 😂"
-        case "مريح":
+        case "راضي":
             FeelingLAbel.text = "\(resturant.feeling!) 😌"
         case "نادم":
             FeelingLAbel.text = "\(resturant.feeling!) 🙁"
-        case "حزين":
+        case "مستاء":
             FeelingLAbel.text = "\(resturant.feeling!) 😢"
         case "غاضب":
             FeelingLAbel.text = "\(resturant.feeling!) 😡"

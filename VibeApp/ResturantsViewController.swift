@@ -98,14 +98,14 @@ class ResturantsViewController: UIViewController,UITextFieldDelegate, UITableVie
     }
     
     func setupSegmentController() {
-        let relaxImage = UIImage.textEmbededImage(image: UIImage(named: "مريح")!, string: "مرتاح", color: UIColor.black)
+        let relaxImage = UIImage.textEmbededImage(image: UIImage(named: "مريح")!, string: "راضي", color: UIColor.black)
         segmentedControl.setImage(relaxImage, forSegmentAt: 0)
         
         let loveImage = UIImage.textEmbededImage(image: UIImage(named: "منبهر")!, string: "منبهر", color: UIColor.black)
-        segmentedControl.setImage(loveImage, forSegmentAt: 1)
+        segmentedControl.setImage(loveImage, forSegmentAt: 2)
         
-        let happyImage = UIImage.textEmbededImage(image: UIImage(named: "سعيد")!, string: "مستانس", color: UIColor.black)
-        segmentedControl.setImage(happyImage, forSegmentAt: 2)
+        let happyImage = UIImage.textEmbededImage(image: UIImage(named: "سعيد")!, string: "سعيد", color: UIColor.black)
+        segmentedControl.setImage(happyImage, forSegmentAt: 1)
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         segmentedControl.selectedSegmentIndex = 3
@@ -964,18 +964,19 @@ let url = "https://api.foursquare.com/v2/search/recommendations?ll=\(coordn.lati
             
         case 2:
             isFiltered = true
-            filtereResturant = resturantDetails.filter {  resturant -> Bool in
-                resturant.feeling == "سعيد"
+            filtereResturant =  resturantDetails.filter {  resturant -> Bool in
+                resturant.feeling == "منبهر"
+
             }
         case 1:
             isFiltered = true
-            filtereResturant =  resturantDetails.filter {  resturant -> Bool in
-                resturant.feeling == "منبهر"
+            filtereResturant = resturantDetails.filter {  resturant -> Bool in
+                resturant.feeling == "سعيد"
             }
         case 0:
             isFiltered = true
             filtereResturant =  resturantDetails.filter {  resturant -> Bool in
-                resturant.feeling == "مريح"
+                resturant.feeling == "راضي"
             }
         default:
             break
