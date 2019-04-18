@@ -1,10 +1,3 @@
-//
-//  Constants.swift
-//  NearBy_Place_Finder
-//
-//  Created by AJ on 3/10/18.
-//  Copyright © 2018 AJ. All rights reserved.
-//
 
 
 // Google Places API URL

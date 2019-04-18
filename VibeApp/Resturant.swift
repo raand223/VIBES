@@ -1,10 +1,4 @@
-//
-//  Resturant.swift
-//  NearBy_Place_Finder
-//
-//  Created by AJ on 3/11/18.
-//  Copyright © 2018 AJ. All rights reserved.
-//
+
 
 
 import UIKit

@@ -1,10 +1,3 @@
-//
-//  SplashViewController.swift
-//  VibesFirstDemo
-//
-//  Created by Shahad Aldkhaiel on 21/05/1440 AH.
-//  Copyright © 1440 ShahadAldkhaiel. All rights reserved.
-//
 
 import UIKit
 import FirebaseAuth

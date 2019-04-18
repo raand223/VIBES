@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  Vibes
-//
-//  Created by Abdul Jabbar on 15/02/2019.
-//  Copyright © 2019 Abdul Jabbar. All rights reserved.
-//
 
 import UIKit
 

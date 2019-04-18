@@ -1,9 +1,4 @@
-//
-//  ResturantDetailsTableViewController.swift
-//  VibeApp
-//
-//  Copyright © 2019 MacBook Pro. All rights reserved.
-//
+
 
 import UIKit
 import ParallaxHeader

@@ -1,10 +1,4 @@
-//
-//  ResturantsViewController.swift
-//  Vibes
-//
-//  Created by Umair Ahmad on 06/03/2019.
-//  Copyright © 2019 Abdul Jabbar. All rights reserved.
-//
+
 
 import UIKit
 import TwitterKit

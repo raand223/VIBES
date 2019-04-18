@@ -1,10 +1,4 @@
-//
-//  UIView+Blur.swift
-//  Blur
-//
-//  Created by Roman Sorochak <roman.sorochak@gmail.com> on 6/27/17.
-//  Copyright © 2017 MagicLab. All rights reserved.
-//
+
 
 import UIKit
 

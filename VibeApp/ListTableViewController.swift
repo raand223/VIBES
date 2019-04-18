@@ -1,10 +1,3 @@
-//
-//  ListTableViewController.swift
-//  VibeApp
-//
-//  Created by Shahad Aldkhaiel on 21/06/1440 AH.
-//  Copyright © 1440 MacBook Pro. All rights reserved.
-//
 
 import UIKit
 import FirebaseAuth
